@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.jaeho.mybatis.mapper.BoardMapper">
+	<!-- 게시판 추가하기 -->
+	<insert id="insertBoard" parameterType="BoardDTO">
+		INSERT INTO board (b_title,b_writer,b_detail,b_date)
+		VALUES(#{b_title},#{b_writer},#{b_detail},SYSDATE())
+	</insert>
+
+
+</mapper>
