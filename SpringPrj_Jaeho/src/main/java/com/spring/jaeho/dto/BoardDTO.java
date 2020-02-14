@@ -1,14 +1,15 @@
 package com.spring.jaeho.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BoardDTO {
-	private int b_no; //게시글번호
-	private String b_title; //제목
-	private String b_detail; //본문내용
-	private String b_writer; //작성자
-	private Date b_date;//작성날짜
-	private int b_count;//조회수?
+	private int b_no; // 게시글번호
+	private String b_title; // 제목
+	private String b_detail; // 본문내용
+	private String b_writer; // 작성자
+	private Timestamp b_date;// 작성날짜
+	private int b_count;// 조회수?
 
 	public int getB_no() {
 		return b_no;
@@ -42,11 +43,11 @@ public class BoardDTO {
 		this.b_writer = b_writer;
 	}
 
-	public Date getB_date() {
+	public Timestamp getB_date() {
 		return b_date;
 	}
 
-	public void setB_date(Date b_date) {
+	public void setB_date(Timestamp b_date) {
 		this.b_date = b_date;
 	}
 
@@ -56,6 +57,12 @@ public class BoardDTO {
 
 	public void setB_count(int b_count) {
 		this.b_count = b_count;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardDTO [b_no=" + b_no + ", b_title=" + b_title + ", b_detail=" + b_detail + ", b_writer=" + b_writer
+				+ ", b_date=" + b_date + ", b_count=" + b_count + "]";
 	}
 
 }

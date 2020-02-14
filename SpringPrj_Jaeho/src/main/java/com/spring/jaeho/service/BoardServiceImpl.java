@@ -1,5 +1,7 @@
 package com.spring.jaeho.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,24 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO dao;
 
 	@Override
-	public void insertBoard(BoardDTO dto) throws Exception {
+	public void insertBoard(BoardDTO dto) throws Exception { // 삽입
 		dao.insertBoard(dto);
+	}
 
+	@Override
+	public List<BoardDTO> listBoard() throws Exception { // 게시글 목록
+
+		return dao.listBoard();
+	}
+
+	@Override
+	public BoardDTO detailBoard(int b_no) throws Exception {
+
+		return dao.detailBoard(b_no);
+	}
+	@Override
+	public void deleteboard(int b_no) throws Exception {
+	   dao.delete(b_no);
+		
 	}
 }
