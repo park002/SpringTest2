@@ -37,8 +37,11 @@
 			<td><div style="height: 300px; margin: 10px; display: inline-block">${boardContent.b_detail}</div></td>
 		</tr>
 	</table>                                                                         
-	<input type="button" value="글 목록" style="float: right;" onclick="location.href='listAll'"> 
-		<input type="button" value="글 삭제" style="float: right;" onclick="location.href='listAll'"> 
+	<button type="button"  style="float: right;" onclick="location.href='listAll'">글 목록 </button>
+    <button type ="button"  style="float: right;" onclick="location.href='/jaeho/board/updateBoardForm?b_no=${boardContent.b_no}'">글 수정 </button>
+ 
+	  <a href="/jaeho/board/delete?b_no=${boardContent.b_no}">글삭제</a>
+	  
 </div>
 </body>
 </html>

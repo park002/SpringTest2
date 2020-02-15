@@ -24,14 +24,20 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardDTO> listBoard() throws Exception {
 		return sqlSession.selectList(namespace + ".listBoard");
 	}
+
 	@Override
 	public BoardDTO detailBoard(int b_no) throws Exception {
-		return sqlSession.selectOne(namespace+".detailBoard", b_no);
+		return sqlSession.selectOne(namespace + ".detailBoard", b_no);
 	}
+
 	@Override
 	public void delete(int b_no) throws Exception {
-		 sqlSession.delete(namespace+".delete",b_no);
-		 
-		
+		sqlSession.delete(namespace + ".delete", b_no);
+	}
+
+	@Override
+	public void update(BoardDTO dto) throws Exception {
+		sqlSession.update(namespace + ".update", dto);
+
 	}
 }

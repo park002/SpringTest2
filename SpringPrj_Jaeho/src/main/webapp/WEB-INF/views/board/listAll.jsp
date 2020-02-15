@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	var result = '${msg}';
 
 	if (result == '성공') {
@@ -16,7 +16,7 @@
 	} else {
 		alert(result + '게시판등록 실패입니다.');
 	}
-</script>
+</script> -->
 </head>
 <body>
 	
