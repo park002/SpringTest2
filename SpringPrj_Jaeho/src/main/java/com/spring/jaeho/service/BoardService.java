@@ -12,6 +12,8 @@ public interface BoardService {
 	 public void deleteboard(int b_no) throws Exception;
 	 //글 수정하기
 	 public void updateboard(BoardDTO dto) throws Exception;
+	 //조회수 +1
+	 public void updateCount(int b_no) throws Exception;
 	 
 
 }

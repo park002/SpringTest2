@@ -40,4 +40,9 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update(namespace + ".update", dto);
 
 	}
+	@Override
+	public void updateCount(int b_no) throws Exception {
+      sqlSession.update(namespace +".updateCount", b_no);
+		
+	}
 }

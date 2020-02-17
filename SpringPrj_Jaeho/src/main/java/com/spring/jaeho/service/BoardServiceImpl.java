@@ -39,4 +39,9 @@ public class BoardServiceImpl implements BoardService {
 		dao.update(dto);
 		
 	}
+	@Override
+	public void updateCount(int b_no) throws Exception {
+	    dao.updateCount(b_no);
+		
+	}
 }

@@ -36,6 +36,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET) // 글목록
 	public void listAll(Model model) throws Exception {
+		
 		// System.out.println(service.listBoard());
 		model.addAttribute("boardList", service.listBoard());
 		System.out.println("전체 목록 페이지 listAll() 성공");
@@ -45,6 +46,8 @@ public class BoardController {
 	public String detailBoard(Model model, @RequestParam("b_no") int b_no) throws Exception {
 		System.out.println("게시글 번호=>" + b_no + "번의 상세 페이지");
 		model.addAttribute("boardContent", service.detailBoard(b_no));
+		service.updateCount(b_no);
+	
 		return "board/BoardContent";
 	}
 
@@ -66,7 +69,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/updateBoard", method = RequestMethod.POST)
-	public String updateBoard( BoardDTO dto) throws Exception {
+	public String updateBoard(BoardDTO dto) throws Exception {
 		service.updateboard(dto);
 		System.out.println("updateBoard() 성공적");
 		return "redirect:/board/listAll";

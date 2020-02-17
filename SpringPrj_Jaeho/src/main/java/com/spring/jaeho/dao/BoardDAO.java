@@ -8,7 +8,7 @@ public interface BoardDAO {
 	// 삽입
 	public void insertBoard(BoardDTO dto) throws Exception;
 
-	// 글목록보기
+	// 글목록보기, 페이징처리 
 	public List<BoardDTO> listBoard() throws Exception;
 
 	// 글상세보기
@@ -19,5 +19,7 @@ public interface BoardDAO {
 
 	// 글수정하기
 	public void update(BoardDTO dto) throws Exception;
-
+    // 조회수 증가
+	public void updateCount(int b_no) throws Exception;
+	
 }
