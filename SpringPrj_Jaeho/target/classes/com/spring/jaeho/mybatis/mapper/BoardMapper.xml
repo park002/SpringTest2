@@ -12,9 +12,15 @@
 	</insert>
 	<!--게시판 리스트 출력 -->
 	<select id="listBoard" resultType="BoardDTO">
-		SELECT * FROM board ORDER BY b_no DESC
-
+		SELECT * FROM board LIMIT
+		${pageBegin-1},#{pageScale}
+		<!-- #{startList},#{listSize} -->
 	</select>
+	<!--전체 글의 행개수 읽어오기  -->
+	  <select id="getBoardListCnt" resultType="int">
+	  SELECT count(*) AS count
+	  FROM board
+	  </select>
 	<!-- 게시판 상세보기 -->
 	<select id="detailBoard" resultType="BoardDTO">
 		SELECT * FROM board WHERE
@@ -29,30 +35,16 @@
 	<!--게시글 수정 -->
 	<update id="update">
 		UPDATE board SET b_title =#{b_title},
-		b_detail = #{b_detail},
+		b_detail =
+		#{b_detail},
 		b_writer=#{b_writer},
 		b_date = now()
 		WHERE b_no = #{b_no};
 	</update>
 	<!-- 조회수 증가 -->
 	<update id="updateCount" parameterType="int">
-		UPDATE board SET b_count = b_count+1
+		UPDATE board SET b_count
+		= b_count+1
 		WHERE b_no = #{b_no}
 	</update>
-
-
-	<!--sql code 조각 -->
-	<!--반복되는 sql의 일부를 sql태그를 이용하여 따로 빼둘 수 있다 -->
-	<sql id="search">
-		<choose>
-			<!-- 검색옵션이 전체 검색 일 경우 -->
-           <when test="searchOption == 'all' ">
-             WHERE writer like '%'||#{keyword}||'%'
-             OR content 
-           
-           </when>
-		</choose>
-
-	</sql>
-
 </mapper>
