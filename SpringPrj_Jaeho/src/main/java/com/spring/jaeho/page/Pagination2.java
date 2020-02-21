@@ -65,13 +65,14 @@ public class Pagination2 {
 		if(nextPage >= totPage) nextPage = totPage;
 	}
 
-	public static int getPageScale() {
+	public static int getPageScale() { //mybatis는 getter를 찾아서 호출한다 .
 		return PAGE_SCALE;
 	}
 	
 	public void setPageRange(){
 	// WHERE rn BETWEEN #{start} AND #{end}
 		// 시작번호 = (현재페이지-1)*페이지당 게시물수 +1
+		// 1,11,21,31,41, ,,,
 		pageBegin = (curPage-1)*PAGE_SCALE+1;
 		// 끝번호 = 시작번호+페이지당 게시물수 -1
 		//view딴 에서 쓰라고 만들어짐
