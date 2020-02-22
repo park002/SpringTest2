@@ -1,6 +1,7 @@
 package com.spring.jaeho.dao;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.jaeho.dto.BoardDTO;
+
+import com.spring.jaeho.page.Pagination;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -23,7 +26,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> listBoard(int start, int end,String searchOption,String keyword) throws Exception {
+	public List<BoardDTO> listBoard(int start,int end,String searchOption, String keyword) throws Exception {
 		// System.out.println("SELECT * FROM board LIMIT#{pageBegin},#{pageScale}\n"
 		// +pagination.getPageBegin() + ", " +pagination.getPageScale());
 		// #{start} #{end} 에 입력 될 값을 맵에 저장
@@ -32,8 +35,7 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("end", end);
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		
-		return sqlSession.selectList(namespace + ".listBoard", map);
+		return sqlSession.selectList(namespace + ".listBoard",map);
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 총 게시글 개수 확인
 	@Override
-	public int getBoardListCnt(String searchOption,String keyword) throws Exception {
+	public int getBoardListCnt(String searchOption, String keyword) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);

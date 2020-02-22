@@ -1,11 +1,11 @@
 package com.spring.jaeho.page;
 
 // 페이지 나누기 관련 작업 클래스
-public class Pagination2 {
+public class Pagination {
 	// 페이지당 게시물 수
 	public static final int PAGE_SCALE = 5;
 	// 화면당 페이지 수
-	public static final int BLOCK_SCALE = 3;
+	public static final int BLOCK_SCALE = 5;
 	private int curPage; // 현재 페이수
 	private int prevPage; // 이전 페이지
 	private int nextPage; // 다음 페이지
@@ -24,7 +24,7 @@ public class Pagination2 {
 	
 	// 생성자
 	// BoardPager(레코드 갯수, 현재 페이지 번호)
-	public Pagination2(int count, int curPage){
+	public Pagination(int count, int curPage){
 		curBlock = 1; // 현재 페이지 블록 번호
 		this.curPage = curPage; // 현재 페이지 설정
 		setTotPage(count); // 전체 페이지 갯수 계산

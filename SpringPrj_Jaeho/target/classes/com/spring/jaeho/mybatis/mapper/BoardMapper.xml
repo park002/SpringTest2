@@ -12,39 +12,42 @@
 	</insert>
 	<!--게시판 리스트 출력 -->
 	<select id="listBoard" resultType="BoardDTO">
-		<!-- SELECT * FROM board ORDER BY b_no DESC LIMIT ${pageBegin-1},#{pageScale} -->
-		<!-- SELECT * FROM board ORDER BY b_no DESC LIMIT ${start},#{end} -->
 		SELECT * FROM board
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if
-				test="searchOption =='title'">
-				AND b_title LIKE CONCAT('%',#{keyword},'%')
+				test="searchOption=='writer' and keyword != null and keyword != '' ">
+				AND b_writer like CONCAT('%', #{keyword}, '%')
 			</if>
 			<if
-				test="searchOption=='content'">
-				AND b_detail LIKE CONCAT('%',#{keyword},'%')
+				test="searchOption=='content' and keyword != null and keyword != '' ">
+				AND b_detail like CONCAT('%', #{keyword}, '%')
 			</if>
 			<if
-				test="searchOption=='writer'">
-				AND b_writer LIKE CONCAT('%',#{keyword},'%')
+				test="searchOption=='title' and keyword != null and keyword != '' ">
+				AND b_title like CONCAT('%', #{keyword}, '%')
 			</if>
 		</trim>
-		LIMIT #{start},#{end}
+		ORDER BY b_no DESC
+		LIMIT ${start-1},#{end}
+		<!-- SELECT * FROM board LIMIT ${pageBegin-1},#{pageScale} -->
+
 	</select>
 	<!--전체 글의 행개수 읽어오기 -->
 	<select id="getBoardListCnt" resultType="int">
 		SELECT count(*) AS count
 		FROM board
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-				<if test="searchOption=='title'">
-					AND b_title LIKE CONCAT('%',#{keyword},'%')
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchOption=='writer'">
+					AND b_writer like CONCAT('%', #{keyword}, '%')
 				</if>
 				<if test="searchOption=='content'">
-					AND b_detail LIKE CONCAT('%',#{keyword},'%')
+					AND b_detail like CONCAT('%', #{keyword}, '%')
 				</if>
-				<if test="searchOption=='writer'">
-					AND b_writer LIKE CONCAT('%',#{keyword},'%')
+				<if test="searchOption=='title'">
+					AND b_title like CONCAT('%', #{keyword}, '%')
 				</if>
+			</if>
 		</trim>
 	</select>
 	<!-- 게시판 상세보기 -->

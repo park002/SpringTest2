@@ -4,34 +4,43 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 목록</title>
 </head>
 <script>
+    $(document).ready(function(){
+    	$("#btnWrite").click(function(){
+				//페이지 주소 이동
+				location.href="${pageContext.request.contextPath}/board/createform";
+    	});
+    		});
+
 	function list(page) {
 		location.href = "${pageContext.request.contextPath}/board/listAll?curPage="
 				+ page
 	}
 </script>
 <body>
-	<h2>검색스</h2>
+	<h2>검색</h2>
 	<form name="form1" method="get" action="/jaeho/board/listAll">
 		<select name="searchOption">
-			<!--검색 조건을 검색 처리후  결과 화면을 보여주기위해 c:out 출력 태그사용  -->
-			<option value="title" <c:out value="${map.searchOption == 'title' ? 'selected' : '' }"/>>제목</option>
-			<option value="content" <c:out value="${map.searchOption == 'content' ? 'selected' : '' }"/>>내용</option>
-            <option value="writer" <c:out value="${map.searchOption == 'writer' ? 'selected' : '' }"/>>작성자</option>
-		</select> 
-         <input name="keyword" value="${map.keyword}">
-         <input type="submit" value="조회">
-         <button type="button" id="btnWrite">글쓰기</button>
+			<!--검색 조건을 검색처리 후  결과화면을 보여주기위해 c:out 출력 태그 사용  -->
+			<option value="writer"
+				<c:out value="${map.searchOption == 'writer' ? 'selected':''}" />>작성자</option>
+			<option value="content"
+				<c:out value="${map.searchOption == 'content' ? 'selected':''}"/>>내용</option>
+			<option value="title"
+				<c:out value="${map.searchOption== 'title' ? 'selected':''}"/>>제목</option>
+		</select> <input name="keyword" value="${map.keyword}"> <input
+			type="submit" value="조회">
+		<button type="button" id="btnWrite">글 쓰기</button>
 	</form>
-	
-	
-	<input type="button" onclick="location.href='/jaeho/board/createform'"
-		value="글 작성">
+	${map.count}개의 게시물이 있습니다
+	<!-- 	<input type="button" onclick="location.href='/jaeho/board/createform'"
+		value="글 작성"> -->
 	<table class="table table-board" border="1px" width="80%"
 		align="center">
 		<tr>
@@ -82,7 +91,5 @@
 			</td>
 		</tr>
 	</table>
-
-
 </body>
 </html>

@@ -2,19 +2,21 @@ package com.spring.jaeho.dao;
 
 import java.util.List;
 
+
 import com.spring.jaeho.dto.BoardDTO;
-import com.spring.jaeho.page.Pagination2;
-import com.spring.jaeho.page.Pagination3;
+
+import com.spring.jaeho.page.Pagination;
+
 
 public interface BoardDAO {
 	// 삽입
 	public void insertBoard(BoardDTO dto) throws Exception;
 
 	// 글목록보기, 페이징처리
-	public List<BoardDTO> listBoard(int start,int end,String searchOption,String keyword) throws Exception;
+	public List<BoardDTO> listBoard(int start,int end,String searchOption, String keyword) throws Exception;
 
 	// 총게시글 개수 확인
-	public int getBoardListCnt(String searchOption,String keyword) throws Exception;
+	public int getBoardListCnt(String searchOption, String keyword) throws Exception;
 
 	// 글상세보기
 	public BoardDTO detailBoard(int b_no) throws Exception;
