@@ -22,7 +22,6 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
-
 	@RequestMapping(value = "/createform", method = RequestMethod.GET)
 	public String createGET(BoardDTO dto) throws Exception {
 		System.out.println(" /board/create 입니다. GET방식");
