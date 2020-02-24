@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.jaeho.mybatis.mapper.ReplyMapper">
+<!-- 댓글삽입 -->
+	<insert id="insertReply" parameterType="ReplyDTO">
+		INSERT INTO reply (b_no,b_detail,b_writer,b_date)
+		VALUES (#{b_no},#{b_detail},#{b_writer},SYSDATE())
+	</insert>
+
+</mapper>

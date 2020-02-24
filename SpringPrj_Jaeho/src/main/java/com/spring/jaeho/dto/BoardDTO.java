@@ -10,6 +10,16 @@ public class BoardDTO {
 	private String b_writer; // 작성자
 	private Timestamp b_date;// 작성날짜
 	private int b_count;// 조회수
+	private int recnt; //댓글의 수 추가 **
+	
+
+	public int getRecnt() {
+		return recnt;
+	}
+
+	public void setRecnt(int recnt) {
+		this.recnt = recnt;
+	}
 
 	public int getB_no() {
 		return b_no;

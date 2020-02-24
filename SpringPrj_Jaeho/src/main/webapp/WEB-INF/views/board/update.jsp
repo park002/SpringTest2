@@ -11,6 +11,7 @@
 </head> 
 <body>
 
+
 <form:form action="/jaeho/board/updateBoard" method="POST" commandName="upboard" >
 <table style="width:500px; border:1px solid black">
 <form:input type="hidden" path="b_no" />
@@ -20,7 +21,7 @@
 </tr>
 <tr>
 <td>작성자</td>
-<td><form:input type="text" path="b_writer" /> </td>
+<td><form:input type="text" path="b_writer" /></td>
 </tr>
 <tr>
 <td>글내용</td>

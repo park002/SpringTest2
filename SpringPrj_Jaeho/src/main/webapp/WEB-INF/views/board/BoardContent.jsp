@@ -3,10 +3,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 상세보기</title>
+<script>
+$(document).ready	(function(){
+	//댓글 쓰기 버튼 클릭 이벤트 (ajax) 처리
+	$("#btnReply").click(function(){
+		var b_detail=$("#b_detail").val();
+		var b_no = "${boardContent.b_no}"
+		var b_writer ="${boardContent.b_writer}"
+		var param = "b_detail="+b_detail+"&b_no="+b_no+"&b_writer="+b_writer;
+		$.ajax({
+			type: "get",
+			url:"${pageContext.request.contextPath}/reply/insert",
+			data:param,
+			success: function(){
+				alert('댓글이 등록되었습니다.');
+			}
+		});
+	});
+	
+	
+	
+	$("#btnList").click(function(){
+		location.href="${pageContext.request.contextPath}/board/listAll"
+	});
+	
+	$("#btnDelete").click(function(){
+		if(confirm('정말 삭제하시겠습니까?')) {
+			document.form1.action="${pageContext.request.contextPath}/board/delete";
+			document.form1.submit();
+		}
+	});
+		
+		$("#btnUpdate").click(function(){
+			var b_title=$("#b_title").val();
+			var b_detail=$("#b_detail").val();
+			var b_writer=$("#b_writer").val();
+			
+			if(b_title=="") {
+				alert('제목을 입력하세요');
+				document.form1.b_title.focus();
+				return;
+			}
+			if(b_detail=="") {
+				alert('내용을 입력하세요');
+				document.form1.b_detail.focus();
+				return;
+			}
+			if(b_writer=="") {
+				alert('작성자를 입력하세요');
+				document.form1.b_writer.focus();
+				return;
+			}
+			document.form1.action="${pageContext.request.contextPath}/board/updateBoardForm";
+			document.form1.submit();
+			
+	});
+	});
+</script>
 </head>
 <style>
 	h2 { text-align: center;}
@@ -20,9 +78,41 @@
 </style>
 <body>
 	<%-- <td><a href="delete?mId=${dto.mId}">X</a></td> --%>
-<h2>글 상세보기</h2>
+<h2>게시글 보기 </h2>
 <br><br><br>
-<div id="outter">
+<form name="form1" method="get">
+<div>
+ 작성일자:<fmt:formatDate value="${boardContent.b_date}" pattern="yyyy.MM.dd HH:mm" />
+</div>
+<div>
+조회수 : ${boardContent.b_count}
+</div>
+<div>
+제목<input name="b_title" id="b_title" size="80" value="${boardContent.b_title}">
+</div>
+내용<textarea name="b_detail" id="b_detail" rows="4" cols="80" placeholder="내용을 입력하세요">${boardContent.b_detail}</textarea>
+<div>
+작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}"placeholder="이름을 입력하세요">
+</div>
+<div style="width:650px; text-align:center;">
+<input type="hidden" name="b_no" value="${boardContent.b_no}">
+<button type="button" id="btnUpdate">수정</button>
+<button type="button" id="btnDelete">삭제</button>
+<button type="button" id="btnList">목록</button>
+</div>
+</form>
+<div style="width:650px; text-align:center;">
+<br>
+<textarea rows="5" clos="80" id="b_detail" placeholder="댓글을 작성해주세요"></textarea>
+<br>
+<button type="button" id="btnReply">댓글 작성</button>
+</div>
+
+<!--댓글 목록 출력할 위치   -->
+<div id="listReply"></div>
+<!--  --> <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
+
+<%-- <div id="outter">
 	<table border="1">
 		<tr>
 			<td>제목: ${boardContent.b_title}</td>
@@ -37,11 +127,10 @@
 			<td><div style="height: 300px; margin: 10px; display: inline-block">${boardContent.b_detail}</div></td>
 		</tr>
 	</table>                                                                         
-	<button type="button"  style="float: right;" onclick="location.href='listAll'">글 목록 </button>
+	 <button type="button"  style="float: right;" onclick="location.href='listAll'">글 목록 </button>
     <button type ="button"  style="float: right;" onclick="location.href='/jaeho/board/updateBoardForm?b_no=${boardContent.b_no}'">글 수정 </button>
- 
-	  <a href="/jaeho/board/delete?b_no=${boardContent.b_no}">글삭제</a>
-	  
-</div>
+
+	  <a href="/jaeho/board/delete?b_no=${boardContent.b_no}">글삭제</a> 
+	  </div> --%>
 </body>
 </html>
