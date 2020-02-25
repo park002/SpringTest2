@@ -10,21 +10,68 @@
 <title>글 상세보기</title>
 <script>
 $(document).ready	(function(){
+	//listReply();
+	 //댓글목록불러오기
 	//댓글 쓰기 버튼 클릭 이벤트 (ajax) 처리
+	listReply2();
 	$("#btnReply").click(function(){
-		var b_detail=$("#b_detail").val();
+		var replytext =$("#replytext").val();
 		var b_no = "${boardContent.b_no}"
-		var b_writer ="${boardContent.b_writer}"
-		var param = "b_detail="+b_detail+"&b_no="+b_no+"&b_writer="+b_writer;
+		var b_writer = "${boardContent.b_writer}"
+		var param ="replytext="+replytext+"&b_no="+b_no+"&b_writer="+b_writer;
 		$.ajax({
 			type: "get",
+			contentType:"application/json",
 			url:"${pageContext.request.contextPath}/reply/insert",
 			data:param,
 			success: function(){
 				alert('댓글이 등록되었습니다.');
+				//listReply();
+				listReply2();
 			}
 		});
 	});
+	 
+	function listReply(){
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/reply/listReply?b_no=${boardContent.b_no}",
+			success:function(result){ //result=> ajax로 request보냈을때 돌아오는 response
+				$("#listReply").html(result);
+			}
+		});
+	}
+	function listReply2() {
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/reply/listJson?b_no=${boardContent.b_no}",
+			success:function(result){//result=> ajax로 request보냈을때 돌아오는 response
+				console.log(result);
+				var output="<table>";
+				for(var i in result) {
+					output+="<tr>";
+					output+="<td>"+result[i].b_writer;
+					output+="("+changeDate(result[i].b_date)+")<br>";
+					output+=result[i].replytext+"</td>";
+					output+="<tr>";
+				}
+				output+="</table>";
+				$("#listReply").html(output);
+			}
+		})
+	}
+	
+	function changeDate(date){ //날짜 변환 함수 작성 timestamp
+		let unix_timestamp = 1549312452
+		var date = new Date(unix_timestamp * 1000);
+		var hours = date.getHours();
+		var minutes = "0" + date.getMinutes();
+		var seconds = "0" + date.getSeconds();
+		var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+		//console.log(formattedTime);
+		return formattedTime;
+	}
+	
 	
 	
 	
@@ -63,6 +110,7 @@ $(document).ready	(function(){
 			document.form1.submit();
 			
 	});
+	
 	});
 </script>
 </head>
@@ -82,7 +130,8 @@ $(document).ready	(function(){
 <br><br><br>
 <form name="form1" method="get">
 <div>
- 작성일자:<fmt:formatDate value="${boardContent.b_date}" pattern="yyyy.MM.dd HH:mm" />
+
+ 작성일자:<fmt:formatDate value="${boardContent.b_date}" pattern="yyyy-MM-dd HH:mm:ss" />
 </div>
 <div>
 조회수 : ${boardContent.b_count}
@@ -103,13 +152,15 @@ $(document).ready	(function(){
 </form>
 <div style="width:650px; text-align:center;">
 <br>
-<textarea rows="5" clos="80" id="b_detail" placeholder="댓글을 작성해주세요"></textarea>
+<textarea rows="5" clos="80" id="replytext" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
 <button type="button" id="btnReply">댓글 작성</button>
 </div>
 
 <!--댓글 목록 출력할 위치   -->
-<div id="listReply"></div>
+<div id="listReply">
+
+</div>
 <!--  --> <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
 
 <%-- <div id="outter">

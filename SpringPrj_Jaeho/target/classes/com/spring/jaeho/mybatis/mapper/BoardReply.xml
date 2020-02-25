@@ -3,10 +3,18 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.jaeho.mybatis.mapper.ReplyMapper">
-<!-- 댓글삽입 -->
+	<!-- 댓글삽입 -->
 	<insert id="insertReply" parameterType="ReplyDTO">
-		INSERT INTO reply (b_no,b_detail,b_writer,b_date)
-		VALUES (#{b_no},#{b_detail},#{b_writer},SYSDATE())
+		INSERT INTO reply
+		(b_no,replytext,b_writer,b_date,b_edit)
+		VALUES
+		(#{b_no},#{replytext},#{b_writer},now(),now())
 	</insert>
+	<!--댓글리스트 -->
+	<select id="listReply" resultType="ReplyDTO">
+		SELECT * FROM reply WHERE
+		b_no=#{b_no}
+		ORDER BY b_date DESC
+	</select>
 
 </mapper>

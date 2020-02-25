@@ -12,15 +12,24 @@ import oracle.sql.TIMESTAMP;
 public class ReplyDTO {
 	private int r_no; // 댓글 번호
 	private int b_no; // 게시글 번호
-	private String b_detail;// 댓글 내용
+	private String replytext;// 댓글 내용
 	private String b_writer; // 댓글작성자
 	private TIMESTAMP b_date; // 댓글작성일
 	private TIMESTAMP b_edit; // 댓글 수정일
 //private String b_secret_reply;// 댓글 숨김 유무
 //	private String write; // 게시글 작성자.db추가 아직안함
 
+	
 	public int getR_no() {
 		return r_no;
+	}
+
+	public String getReplytext() {
+		return replytext;
+	}
+
+	public void setReplytext(String replytext) {
+		this.replytext = replytext;
 	}
 
 	public void setR_no(int r_no) {
@@ -35,13 +44,7 @@ public class ReplyDTO {
 		this.b_no = b_no;
 	}
 
-	public String getB_detail() {
-		return b_detail;
-	}
 
-	public void setB_detail(String b_detail) {
-		this.b_detail = b_detail;
-	}
 
 	public String getB_writer() {
 		return b_writer;
@@ -69,8 +72,9 @@ public class ReplyDTO {
 
 	@Override
 	public String toString() {
-		return "ReplyDTO [r_no=" + r_no + ", b_no=" + b_no + ", b_detail=" + b_detail + ", b_writer=" + b_writer
+		return "ReplyDTO [r_no=" + r_no + ", b_no=" + b_no + ", replytext=" + replytext + ", b_writer=" + b_writer
 				+ ", b_date=" + b_date + ", b_edit=" + b_edit + "]";
 	}
+
 
 }
