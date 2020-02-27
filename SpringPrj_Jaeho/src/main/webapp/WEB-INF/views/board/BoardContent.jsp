@@ -4,6 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- <script src="/jaeho/resources/js/moment.js"></script>  -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
+
+<%-- <script src="<c:url value="/resources/js/moment.js" />"></script> --%>	
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,6 +17,7 @@
 <script>
 $(document).ready	(function(){
 	//listReply();
+
 	 //댓글목록불러오기
 	//댓글 쓰기 버튼 클릭 이벤트 (ajax) 처리
 	listReply2();
@@ -36,7 +43,7 @@ $(document).ready	(function(){
 		$.ajax({
 			type:"get",
 			url:"${pageContext.request.contextPath}/reply/listReply?b_no=${boardContent.b_no}",
-			success:function(result){ //result=> ajax로 request보냈을때 돌아오는 response
+			success:function(result){ //result=> ajax로 request보냈을때 돌아오는 response에 대한 매개변수
 				$("#listReply").html(result);
 			}
 		});
@@ -50,7 +57,7 @@ $(document).ready	(function(){
 				var output="<table>";
 				for(var i in result) {
 					output+="<tr>";
-					output+="<td>"+result[i].b_writer;
+					output+="<td>작성자:"+result[i].b_writer;
 					output+="("+changeDate(result[i].b_date)+")<br>";
 					output+=result[i].replytext+"</td>";
 					output+="<tr>";
@@ -61,18 +68,10 @@ $(document).ready	(function(){
 		})
 	}
 	
-	function changeDate(date){ //날짜 변환 함수 작성 timestamp
-		let unix_timestamp = 1549312452
-		var date = new Date(unix_timestamp * 1000);
-		var hours = date.getHours();
-		var minutes = "0" + date.getMinutes();
-		var seconds = "0" + date.getSeconds();
-		var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-		//console.log(formattedTime);
-		return formattedTime;
-	}
-	
-	
+ 	function changeDate(date) {
+		var moment2=moment().format('MMMM Do YYYY');
+		 return moment2; 
+ 	} 
 	
 	
 	$("#btnList").click(function(){

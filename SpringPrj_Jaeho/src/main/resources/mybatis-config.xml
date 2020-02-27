@@ -6,6 +6,7 @@
 <configuration>
     <typeAliases>
         <package name="com.spring.jaeho.dto"/> <!--dto  전까지만 적자   -->
+       <package name="com.spring.jaeho.memberdto"/> 
     </typeAliases>
 </configuration>
 
