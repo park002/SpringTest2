@@ -24,6 +24,7 @@ public class MemberDTO {
 	private boolean m_userEmailChecked;
 	private String m_tel;
 
+	
 	public String getM_id() {
 		return m_id;
 	}
