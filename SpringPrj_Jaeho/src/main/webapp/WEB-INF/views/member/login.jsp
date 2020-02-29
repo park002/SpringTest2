@@ -272,11 +272,12 @@ body .container .content .signup-cont {
 		    <article class="login_header">
               <h1>로그인</h1>
 			        <div class="tabs">
-                <span class="tab"><a>발품에 오신것을 환영합니다.</a></span>
+                <span class="tab"><a>델루나에 오신것을 환영합니다.</a></span>
 			        </div>
 			        <div class="content">
 				            <div class="signin-cont cont">
-					                <form action="login.do" method="post" enctype="multipart/form-data">
+				            
+					                <form action="/jaeho/member/login" method="post">
 						                    <input type="text" name="m_id" id="email" class="inpt"  placeholder="Your ID">
 
 						                    <input type="password" name="m_password" id="password" class="inpt"  placeholder="Your password">
@@ -285,6 +286,7 @@ body .container .content .signup-cont {
 						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
                                     <input type="submit" value="로그인" class="submit">
+                                    
                                     <a href="index.jsp"><input type="button" value="메인" class="submit"></a><br><br>
                                       <a href="searchIdpass.jsp" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
                                       <a href="agreePage.jsp" class="more">아직 회원이 아니신가요?</a>

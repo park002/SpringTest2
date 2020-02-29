@@ -1,4 +1,4 @@
-package com.spring.MailController;
+package com.spring.Mail;
 import java.security.MessageDigest;
 
 public class SHA256 {
@@ -7,7 +7,7 @@ public class SHA256 {
 		StringBuffer result = new StringBuffer();
 		try {
 			MessageDigest digest =MessageDigest.getInstance("SHA-256"); //SHA-256으로 알고리즘 적용
-			byte [] salt="hello!".getBytes(); //해킹안당하려고 salt 적용
+			byte [] salt="hello!".getBytes(); //해킹방지 salt 적용
 			digest.reset();
 			digest.update(salt);
 			byte [] chars = digest.digest(input.getBytes("UTF-8")); //실제로 hash 에 적용한값을 chars 변수에 담는다
