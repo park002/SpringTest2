@@ -15,7 +15,7 @@ public interface MemberService {
 	public boolean setUserEmailChecked(String code);
 	
 	//회원로그인
-	public boolean login(MemberDTO dto,HttpSession session);
+	public boolean login(MemberDTO dto);
 	
 	//회원 id가 이메일 인증이 되었는지 안되었는지.
 	public int getUserEmailChecked(MemberDTO dto);

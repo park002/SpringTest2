@@ -46,7 +46,7 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 	@Override
-	public boolean login(MemberDTO dto,HttpSession session) {
+	public boolean login(MemberDTO dto) {
 		boolean logincheck = dao.login(dto);
 		
 		return logincheck;

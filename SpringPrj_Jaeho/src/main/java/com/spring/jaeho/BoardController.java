@@ -3,6 +3,10 @@ package com.spring.jaeho;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.spring.jaeho.dto.BoardDTO;
+import com.spring.jaeho.memberdto.MemberDTO;
 import com.spring.jaeho.page.Pagination;
 import com.spring.jaeho.service.BoardService;
 
@@ -39,7 +45,9 @@ public class BoardController {
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET) // 글목록 ,페이징 처리
 	public ModelAndView listAll(@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(required = false, defaultValue = "title") String searchOption,
-			@RequestParam(required = false) String keyword) throws Exception {
+			@RequestParam(required = false) String keyword,HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+		String member = (String) session.getAttribute("m_id"); //연결유지 getAttribute 메소드가 Object 타입 이므로 형변환 해준다
 		// 레코드 갯수 계산
 		int count = service.getBoardListCnt(searchOption, keyword);
 		// Pagination2 pagination = new Pagination2(); // 게시글 전체 갯수, 현재 페이지번호
@@ -55,6 +63,7 @@ public class BoardController {
 		map.put("boardPager", pagination);
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
+		map.put("m_id", member);
 		// map.put("boardPager", search);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
