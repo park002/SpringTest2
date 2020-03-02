@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td>작성자</td>
-<td><form:input type="text" path="b_writer" /></td>
+<td><form:input type="text" path="b_writer" readonly /></td>
 </tr>
 <tr>
 <td>글내용</td>

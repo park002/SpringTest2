@@ -9,7 +9,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
 
 <%-- <script src="<c:url value="/resources/js/moment.js" />"></script> --%>	
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,11 +20,11 @@ $(document).ready	(function(){
 	 //댓글목록불러오기
 	//댓글 쓰기 버튼 클릭 이벤트 (ajax) 처리
 	listReply2();
+	 
 	$("#btnReply").click(function(){
-		var replytext =$("#replytext").val();
-		var b_no = "${boardContent.b_no}"
-		var b_writer = "${boardContent.b_writer}"
-		var param ="replytext="+replytext+"&b_no="+b_no+"&b_writer="+b_writer;
+		var replytext =$("#replytext").val(); //댓글내용
+		var b_no = "${boardContent.b_no}" //게시글번호
+		var param ="replytext="+replytext+"&b_no="+b_no;
 		$.ajax({
 			type: "get",
 			contentType:"application/json",
@@ -57,7 +56,7 @@ $(document).ready	(function(){
 				var output="<table>";
 				for(var i in result) {
 					output+="<tr>";
-					output+="<td>작성자:"+result[i].b_writer;
+					output+="<td>작성자:"+result[i].replyer;  //////////////////////////////
 					output+="("+changeDate(result[i].b_date)+")<br>";
 					output+=result[i].replytext+"</td>";
 					output+="<tr>";
@@ -105,11 +104,10 @@ $(document).ready	(function(){
 				document.form1.b_writer.focus();
 				return;
 			}
-			document.form1.action="${pageContext.request.contextPath}/board/updateBoardForm";
+			alert('작성하신대로 수정 하시겠습니까?');
+			document.form1.action="${pageContext.request.contextPath}/board/updateBoard";
 			document.form1.submit();
-			
 	});
-	
 	});
 </script>
 </head>
@@ -140,12 +138,16 @@ $(document).ready	(function(){
 </div>
 내용<textarea name="b_detail" id="b_detail" rows="4" cols="80" placeholder="내용을 입력하세요">${boardContent.b_detail}</textarea>
 <div>
-작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}"placeholder="이름을 입력하세요">
+작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}" placeholder="이름을 입력하세요" readonly>
 </div>
 <div style="width:650px; text-align:center;">
 <input type="hidden" name="b_no" value="${boardContent.b_no}">
+<!--본인이 쓴 게시물만 수정,삭제 가능하도록 처리  -->
+<c:if test="${userId == boardContent.b_writer}">
 <button type="button" id="btnUpdate">수정</button>
 <button type="button" id="btnDelete">삭제</button>
+</c:if>
+
 <button type="button" id="btnList">목록</button>
 </div>
 </form>

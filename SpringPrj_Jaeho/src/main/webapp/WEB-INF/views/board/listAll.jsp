@@ -34,11 +34,16 @@
 				<c:out value="${map.searchOption== 'title' ? 'selected':''}"/>>제목</option>
 		</select> <input name="keyword" value="${map.keyword}"> <input
 			type="submit" value="조회">
-		<button type="button" id="btnWrite">글 쓰기</button>
+			
+			<!--로그인한 사용자만 글쓰기 버튼 활성화  -->
+   <c:if test="${userName ne null}">
+           반갑습니다 ${userName}님
+		<button type="button" id="btnWrite">글쓰기</button>
+ </c:if>
 	</form>
 	${map.count}개의 게시물이 있습니다
-   반갑습니다  ${map.m_id} 님
-	<!-- 	<input type="button" onclick="location.href='/jaeho/board/createform'"
+
+   	<!-- 	<input type="button" onclick="location.href='/jaeho/board/createform'"
 		value="글 작성"> -->
 	<table class="table table-board" border="1px" width="80%"
 		align="center">

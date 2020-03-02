@@ -17,10 +17,14 @@
 	</update>
 	
 	<select id="login" parameterType="MemberDTO" resultType="String">
-		SELECT m_id FROM member WHERE m_id=#{m_id} AND m_password=#{m_password}
+		SELECT m_name FROM member WHERE m_id=#{m_id} AND m_password=#{m_password}
 	</select>
 	
 	<select id="getUserEmailChecked" parameterType="MemberDTO" resultType="Integer">
 	   select m_userEmailChecked from member where m_id=#{m_id}
+	</select>
+	
+	<select id="viewMember" parameterType="MemberDTO" resultType="MemberDTO">
+	SELECT  m_id,m_name,m_userEmail  FROM member WHERE m_id=#{m_id} AND m_password=#{m_password}
 	</select>
 </mapper>

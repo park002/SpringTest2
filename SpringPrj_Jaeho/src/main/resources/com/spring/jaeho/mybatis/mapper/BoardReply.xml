@@ -6,9 +6,9 @@
 	<!-- 댓글삽입 -->
 	<insert id="insertReply" parameterType="ReplyDTO">
 		INSERT INTO reply
-		(b_no,replytext,b_writer,b_date,b_edit)
+		(b_no,replytext,replyer,b_date,b_edit)
 		VALUES
-		(#{b_no},#{replytext},#{b_writer},now(),now())
+		(#{b_no},#{replytext},#{replyer},now(),now())
 	</insert>
 	<!--댓글리스트 -->
 	<select id="listReply" resultType="ReplyDTO">

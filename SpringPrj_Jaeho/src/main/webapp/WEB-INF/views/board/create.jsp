@@ -44,11 +44,9 @@ $(document).ready(function(){
 			내용
 			<textarea rows="4" cols="80" name="b_detail"  id ="b_detail" placeholder="내용을 입력해주세요"></textarea>
 		</div>
-		
 		<div>
-			작성자 <input type="text" name="b_writer" id="b_writer" placeholder="작성자">
+			작성자 <input type="text" name="b_writer" id="b_writer" placeholder="작성자" value="${userId}" readonly>
 		</div>
-
 		<div style="with:650px; text-align: center;">
 			<button type="button" id ="btnSave">작성하기</button>
 			<button type="reset">취소</button>

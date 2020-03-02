@@ -17,5 +17,8 @@ public boolean login(MemberDTO dto);
 // id 이메일 인증 여부 
 public int getUserEmailChecked(MemberDTO dto);
 
+//세션에 담아줄 메소드 
+public MemberDTO viewMember(MemberDTO dto);
+
 
 }

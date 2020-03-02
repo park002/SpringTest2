@@ -46,9 +46,14 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 	@Override
-	public boolean login(MemberDTO dto) {
-		boolean logincheck = dao.login(dto);
-		
+	public boolean login(MemberDTO dto,HttpSession session) {
+		boolean logincheck = dao.login(dto); //true false 로 만 받는다 
+		if(logincheck) { //참일 경우 
+			MemberDTO dto2 = viewMember(dto);  //dto 에는 id,password 바인딩 되어 있다 .
+			session.setAttribute("userId",dto2.getM_id());
+			session.setAttribute("userName",dto2.getM_name());
+			session.setAttribute("userEmail", dto2.getM_userEmail());
+		}
 		return logincheck;
 		
 	}
@@ -56,6 +61,11 @@ public class MemberServiceImpl implements MemberService {
 	public int getUserEmailChecked(MemberDTO dto) {
 		   Integer EmailCheck=dao.getUserEmailChecked(dto);
 		return EmailCheck;
+	}
+	@Override
+	public MemberDTO viewMember(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.viewMember(dto);
 	}
 	
 
