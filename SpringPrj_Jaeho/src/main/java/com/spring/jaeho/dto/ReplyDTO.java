@@ -1,34 +1,29 @@
 package com.spring.jaeho.dto;
 
 import oracle.sql.TIMESTAMP;
+//CREATE TABLE `reply` (
+//		  `r_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '댓글번호',
+//		  `b_no` int(11) NOT NULL COMMENT '게시글번호',
+//		  `replytext` text COMMENT '댓글내용',
+//		  `b_writer` varchar(45) NOT NULL COMMENT '댓글작성자',
+//		  `b_date` timestamp NULL DEFAULT NULL COMMENT '댓글 작성일',
+//		  `b_edit` timestamp NULL DEFAULT NULL COMMENT '댓글 수정일',
+//		  `b_secret_reply` char(1) DEFAULT NULL COMMENT '댓글 숨김여부',
+//		  PRIMARY KEY (`r_no`),
+//		  KEY `reply_board_b_no_fk` (`b_no`),
+//		  CONSTRAINT `reply_board_b_no_fk` FOREIGN KEY (`b_no`) REFERENCES `board` (`b_no`)
+//		) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
-//`r_no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '댓글번호',
-//`b_no` INT NOT NULL COMMENT '게시글번호',
-//`b_detail` TEXT NULL COMMENT '댓글내용',
-//`b_writer` VARCHAR(45) NOT NULL COMMENT '댓글작성자',
-//`b_date` TIMESTAMP NOT NULL COMMENT '댓글 작성일',
-//`b_edit` TIMESTAMP NOT NULL COMMENT '댓글 수정일',
-//`b_secret_reply` CHAR(1) COMMENT '댓글 숨김여부',
 public class ReplyDTO {
-	private int r_no; // 댓글 번호
-	private int b_no; // 게시글 번호
-	private String replytext;// 댓글 내용
-	private String replyer; // 댓글작성자
-	private TIMESTAMP b_date; // 댓글작성일
-	private TIMESTAMP b_edit; // 댓글 수정일
-//private String b_secret_reply;// 댓글 숨김 유무
-//	private String write; // 게시글 작성자.db추가 아직안함
+	private int r_no;
+	private int b_no;
+	private String replytext;
+	private String replyer;
+	private TIMESTAMP b_date;
+	private TIMESTAMP b_edit;
 
 	public int getR_no() {
 		return r_no;
-	}
-
-	public String getReplytext() {
-		return replytext;
-	}
-
-	public void setReplytext(String replytext) {
-		this.replytext = replytext;
 	}
 
 	public void setR_no(int r_no) {
@@ -42,6 +37,15 @@ public class ReplyDTO {
 	public void setB_no(int b_no) {
 		this.b_no = b_no;
 	}
+
+	public String getReplytext() {
+		return replytext;
+	}
+
+	public void setReplytext(String replytext) {
+		this.replytext = replytext;
+	}
+
 
 	public String getReplyer() {
 		return replyer;
@@ -72,5 +76,7 @@ public class ReplyDTO {
 		return "ReplyDTO [r_no=" + r_no + ", b_no=" + b_no + ", replytext=" + replytext + ", replyer=" + replyer
 				+ ", b_date=" + b_date + ", b_edit=" + b_edit + "]";
 	}
+
+	
 
 }

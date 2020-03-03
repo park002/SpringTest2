@@ -11,7 +11,7 @@ public class BoardDTO {
 	private Timestamp b_date;// 작성날짜
 	private String userName; //게시글 회원이름 = 게시글 작성자 
 	private int b_count;// 조회수
-	private int recnt; //댓글의 수 추가 **
+	private int recnt; //댓글의 수
 	
 
 	public String getUserName() {

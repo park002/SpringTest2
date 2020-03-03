@@ -57,7 +57,16 @@
 		<c:forEach items="${map.list}" var="row">
 			<tr>
 				<td>${row.b_no}</td>
-				<td><a href="/jaeho/board/detail?b_no=${row.b_no}">${row.b_title}</a></td>
+				
+				<td>
+				<a href="/jaeho/board/detail?b_no=${row.b_no}">${row.b_title}
+				<c:if test="${row.recnt>0}">
+				<span style="color:red;">(${row.recnt}) </span>
+				</c:if> 
+				</a>
+				</td>
+				
+				
 				<td>${row.b_writer}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 						value="${row.b_date}" /></td>

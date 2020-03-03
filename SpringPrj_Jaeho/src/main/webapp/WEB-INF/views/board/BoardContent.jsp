@@ -155,6 +155,8 @@ $(document).ready	(function(){
 <br>
 <textarea rows="5" clos="80" id="replytext" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
+
+
 <button type="button" id="btnReply">댓글 작성</button>
 </div>
 
@@ -162,27 +164,5 @@ $(document).ready	(function(){
 <div id="listReply">
 
 </div>
-<!--  --> <!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  --><!--  -->
-
-<%-- <div id="outter">
-	<table border="1">
-		<tr>
-			<td>제목: ${boardContent.b_title}</td>
-		</tr>
-		<tr>
-			<td>
-				작성자: ${boardContent.b_writer}
-				<span style="float: right;"><fmt:formatDate value="${boardContent.b_date}" pattern="yyyy.MM.dd HH:mm"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td><div style="height: 300px; margin: 10px; display: inline-block">${boardContent.b_detail}</div></td>
-		</tr>
-	</table>                                                                         
-	 <button type="button"  style="float: right;" onclick="location.href='listAll'">글 목록 </button>
-    <button type ="button"  style="float: right;" onclick="location.href='/jaeho/board/updateBoardForm?b_no=${boardContent.b_no}'">글 수정 </button>
-
-	  <a href="/jaeho/board/delete?b_no=${boardContent.b_no}">글삭제</a> 
-	  </div> --%>
 </body>
 </html>

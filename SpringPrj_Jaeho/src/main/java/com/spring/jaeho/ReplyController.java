@@ -25,7 +25,7 @@ public class ReplyController {
 	public void insertReply(ReplyDTO dto, HttpSession session) {// Ä¿¸Çµå°´Ã¼
 		String userId = (String) session.getAttribute("userId");
 		dto.setReplyer(userId);
-		System.out.println("´ñ±ÛÀÛ¼ºÀÚ ===================>"+dto.getReplyer());
+		//System.out.println("´ñ±ÛÀÛ¼ºÀÚ ===================>"+dto.getReplyer());
 		service.insertReply(dto);
 	}
 
@@ -41,7 +41,7 @@ public class ReplyController {
 	@RequestMapping(value = "/listJson")
 	public List<ReplyDTO> listJson(@RequestParam("b_no") int b_no) {
 		List<ReplyDTO> list = service.listReply(b_no);
-		System.out.println(list);
+		//System.out.println(list);
 		return list;
 
 	}

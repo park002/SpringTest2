@@ -12,7 +12,9 @@
 	</insert>
 	<!--게시판 리스트 출력 -->
 	<select id="listBoard" resultType="BoardDTO">
-		SELECT * FROM board
+		SELECT b_no,b_title,b_detail,b_writer,b_date,b_count,
+		(select count(*) from reply where b_no = b.b_no) AS recnt 
+		 FROM board b
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if
 				test="searchOption=='writer' and keyword != null and keyword != '' ">
