@@ -3,10 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 목록</title>
 </head>
@@ -16,6 +16,7 @@
 				location.href="${pageContext.request.contextPath}/board/createform";
     	});
     		});
+    
 	function list(page) {
 		location.href = "${pageContext.request.contextPath}/board/listAll?curPage="
 				+ page
@@ -75,15 +76,15 @@
 		</c:forEach>
 		<tr>
 			<td colspan="5">
-				<!--처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음] 하이퍼링크를 화면에 출력 --> <c:if
-					test="${map.boardPager.curBlock >1}">
+				<!--처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음] 하이퍼링크를 화면에 출력 --> 
+				<c:if test="${map.boardPager.curBlock >1}">
 					<a href="javascript:list('1')">[처음]</a>
-				</c:if> <!--이전 페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크 화면에 출력  --> <c:if
-					test="${map.boardPager.curBlock >1}">
+				</c:if> 
+				<!--이전 페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크 화면에 출력  -->
+				 <c:if test="${map.boardPager.curBlock >1}">
 					<a href="javascript:list('${map.boardPager.prevPage}')">[이전]</a>
-				</c:if> <!--하나의 블럭에서 반복문 수행  시작페이지부터 끝페이지까지   --> <c:forEach var="num"
-					begin="${map.boardPager.blockBegin}"
-					end="${map.boardPager.blockEnd}">
+				</c:if> <!--하나의 블럭에서 반복문 수행  시작페이지부터 끝페이지까지   -->
+				 <c:forEach var="num" begin="${map.boardPager.blockBegin}" end="${map.boardPager.blockEnd}">
 					<!--현재 페이지면 하이퍼링크 제거  -->
 					<c:choose>
 						<c:when test="${num == map.boardPager.curPage}">

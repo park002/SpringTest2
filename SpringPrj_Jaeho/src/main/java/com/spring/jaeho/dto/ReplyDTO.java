@@ -21,6 +21,16 @@ public class ReplyDTO {
 	private String replyer;
 	private TIMESTAMP b_date;
 	private TIMESTAMP b_edit;
+	private String b_secret_reply; // ºñ¹Ð´ñ±Û
+
+	
+	public String getB_secret_reply() {
+		return b_secret_reply;
+	}
+
+	public void setB_secret_reply(String b_secret_reply) {
+		this.b_secret_reply = b_secret_reply;
+	}
 
 	public int getR_no() {
 		return r_no;
@@ -45,7 +55,6 @@ public class ReplyDTO {
 	public void setReplytext(String replytext) {
 		this.replytext = replytext;
 	}
-
 
 	public String getReplyer() {
 		return replyer;
@@ -74,7 +83,7 @@ public class ReplyDTO {
 	@Override
 	public String toString() {
 		return "ReplyDTO [r_no=" + r_no + ", b_no=" + b_no + ", replytext=" + replytext + ", replyer=" + replyer
-				+ ", b_date=" + b_date + ", b_edit=" + b_edit + "]";
+				+ ", b_date=" + b_date + ", b_edit=" + b_edit + ", b_secret_reply=" + b_secret_reply + "]";
 	}
 
 	

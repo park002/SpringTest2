@@ -3,75 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <!-- <script src="/jaeho/resources/js/moment.js"></script>  -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script> -->
 
 <%-- <script src="<c:url value="/resources/js/moment.js" />"></script> --%>	
 <html>
 <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 상세보기</title>
 <script>
-$(document).ready	(function(){
-	//listReply();
 
-	 //댓글목록불러오기
-	//댓글 쓰기 버튼 클릭 이벤트 (ajax) 처리
-	listReply2();
-	 
-	$("#btnReply").click(function(){
-		var replytext =$("#replytext").val(); //댓글내용
-		var b_no = "${boardContent.b_no}" //게시글번호
-		var param ="replytext="+replytext+"&b_no="+b_no;
-		$.ajax({
-			type: "get",
-			contentType:"application/json",
-			url:"${pageContext.request.contextPath}/reply/insert",
-			data:param,
-			success: function(){
-				alert('댓글이 등록되었습니다.');
-				//listReply();
-				listReply2();
-			}
-		});
-	});
-	 
-	function listReply(){
-		$.ajax({
-			type:"get",
-			url:"${pageContext.request.contextPath}/reply/listReply?b_no=${boardContent.b_no}",
-			success:function(result){ //result=> ajax로 request보냈을때 돌아오는 response에 대한 매개변수
-				$("#listReply").html(result);
-			}
-		});
-	}
-	function listReply2() {
-		$.ajax({
-			type:"get",
-			url:"${pageContext.request.contextPath}/reply/listJson?b_no=${boardContent.b_no}",
-			success:function(result){//result=> ajax로 request보냈을때 돌아오는 response
-				console.log(result);
-				var output="<table>";
-				for(var i in result) {
-					output+="<tr>";
-					output+="<td>작성자:"+result[i].replyer;  //////////////////////////////
-					output+="("+changeDate(result[i].b_date)+")<br>";
-					output+=result[i].replytext+"</td>";
-					output+="<tr>";
-				}
-				output+="</table>";
-				$("#listReply").html(output);
-			}
-		})
-	}
-	
- 	function changeDate(date) {
-		var moment2=moment().format('MMMM Do YYYY');
-		 return moment2; 
- 	} 
-	
+$(document).ready	(function(){
 	
 	$("#btnList").click(function(){
 		location.href="${pageContext.request.contextPath}/board/listAll"
@@ -83,7 +28,7 @@ $(document).ready	(function(){
 			document.form1.submit();
 		}
 	});
-		
+	
 		$("#btnUpdate").click(function(){
 			var b_title=$("#b_title").val();
 			var b_detail=$("#b_detail").val();
@@ -108,7 +53,62 @@ $(document).ready	(function(){
 			document.form1.action="${pageContext.request.contextPath}/board/updateBoard";
 			document.form1.submit();
 	});
-	});
+
+		//댓글입력버튼
+	 	$("#btnReply").click(function(){
+	 		replyJson(); //json형식으로 입력
+	 	});
+
+	////////////////////////////////////////////////////////////////////////
+		//1_2댓글 입력 함수 (json방식)
+	 	function replyJson() {
+	 		var replytext=$("#replytext").val(); //댓글의 내용을 가져온다 
+	 		var b_no ="${boardContent.b_no}" //게시글번호 
+	 		//비밀댓글 체크여부
+	 		var b_secret_reply="n";
+	 		//태그.is(":속성") 체크여부 true/false
+	 		if( $("#secretReply").is(":checked") ){ //체크되있다면 true
+	 			b_secret_reply="y";
+	 		}
+	 		$.ajax({
+	 			type:"post",
+	 			url:"${pageContext.request.contextPath}/reply/insertRest",
+	 			headers: { "Content-Type" : "application/json"},
+	 			dateType:"text",
+	 			//param형식보다 간편 한 것.
+	 			//JSON=>브라우저와 서버사이에서 오고가는 데이터의 형식
+	 			//JSON.stringify() => 자바스크립트의 값을 JSON문자열로 반환한다.
+	 			//서버의 @RequestBody 어노테이션으로 인해 반드시 JSON.stringify(), 그리고 content-Type 지정해야한다 .
+	 			data:JSON.stringify({  // 자바스크립트 객체생성=>{}
+	 				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)
+	 				replytext : replytext,
+	 				b_secret_reply : b_secret_reply
+	 			}),
+	 			success:function(abc){
+	 				console.log(abc); //success 뜬다
+	 				alert('댓글이 등록되었습니다22.');
+	 				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
+	 				listReplyRest("1"); //Rest방식
+	 			},
+	 			error: function() {
+	 				alert('댓글이 등록에 실패했습니다.');
+	 				
+	 			}
+	 		});
+	 	}
+	 	//댓글목록 -Rest방식
+	 	function listReplyRest(num) { // 매개변수 num==1
+	 		$.ajax({
+	 			type:"get",
+	 			url:"${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"+num,
+	 			success:function(result){ //ajax가 request를 보내고 response로 돌아온 값 =>result
+	 				$("#listReply").html(result);
+	 			}
+	 		});
+	 	}
+});
+
+
 </script>
 </head>
 <style>
@@ -138,7 +138,7 @@ $(document).ready	(function(){
 </div>
 내용<textarea name="b_detail" id="b_detail" rows="4" cols="80" placeholder="내용을 입력하세요">${boardContent.b_detail}</textarea>
 <div>
-작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}" placeholder="이름을 입력하세요" readonly>
+작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}" readonly>
 </div>
 <div style="width:650px; text-align:center;">
 <input type="hidden" name="b_no" value="${boardContent.b_no}">
@@ -153,16 +153,18 @@ $(document).ready	(function(){
 </form>
 <div style="width:650px; text-align:center;">
 <br>
-<textarea rows="5" clos="80" id="replytext" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
+<!--로그인 한 회원에게만 댓글 작성폼이 보이게 처리  -->
+<c:if test="${userId ne null}">
+<textarea rows="5" cols="80" id="replytext" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
-
+<!--비밀댓글 체크박스  -->
+<input type="checkbox" id="secretReply">비밀댓글
 
 <button type="button" id="btnReply">댓글 작성</button>
+</c:if>
 </div>
 
 <!--댓글 목록 출력할 위치   -->
-<div id="listReply">
-
-</div>
+<div id="listReply"> </div>
 </body>
 </html>
