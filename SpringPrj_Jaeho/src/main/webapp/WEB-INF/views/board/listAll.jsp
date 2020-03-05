@@ -37,7 +37,7 @@
 			type="submit" value="조회">
 			
 			<!--로그인한 사용자만 글쓰기 버튼 활성화  -->
-   <c:if test="${userName ne null}">
+   <c:if test="${userName ne null}"> 
            반갑습니다 ${userName}님
 		<button type="button" id="btnWrite">글쓰기</button>
  </c:if>
@@ -67,7 +67,6 @@
 				</a>
 				</td>
 				
-				
 				<td>${row.b_writer}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 						value="${row.b_date}" /></td>
@@ -90,7 +89,6 @@
 						<c:when test="${num == map.boardPager.curPage}">
 							<span style="color: red">${num}</span>&nbsp;
 	   </c:when>
-
 						<c:otherwise>
 							<a href="javascript:list('${num}')">${num}</a>&nbsp;
         </c:otherwise>

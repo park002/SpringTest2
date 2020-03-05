@@ -16,8 +16,47 @@
 <title>글 상세보기</title>
 <script>
 
-$(document).ready	(function(){
+	function replyJson() {
+		var replytext=$("#replytext").val(); //댓글의 내용을 가져온다 
+		var b_no ="${boardContent.b_no}" //게시글번호 
+
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath}/reply/insertRest",
+			headers: { "Content-Type" : "application/json"},
+			dateType:"text",
+			//param형식보다 간편 한 것.
+			//JSON=>브라우저와 서버사이에서 오고가는 데이터의 형식
+			//JSON.stringify() => 자바스크립트의 값을 JSON문자열로 반환한다.
+			//서버의 @RequestBody 어노테이션으로 인해 반드시 JSON.stringify(), 그리고 content-Type 지정해야한다 .
+			data:JSON.stringify({  // 자바스크립트 객체생성=>{}
+				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)
+				replytext : replytext,
+			}),
+			success:function(abc){
+				console.log(abc); //success 뜬다
+				alert('댓글이 등록되었습니다22.');
+				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
+				listReplyRest("1"); //Rest방식
+			},
+			error: function() {
+				alert('댓글이 등록에 실패했습니다.');
+				
+			}
+		});
+	}
+	//댓글목록 -Rest방식
+	function listReplyRest(num) { // 매개변수 num==현재페이지
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"+num,
+			success:function(result){ //ajax가 request를 보내고 response로 돌아온 값 =>result
+				$("#listReply").html(result);
+			}
+		});
+	}
 	
+$(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 	$("#btnList").click(function(){
 		location.href="${pageContext.request.contextPath}/board/listAll"
 	});
@@ -53,59 +92,16 @@ $(document).ready	(function(){
 			document.form1.action="${pageContext.request.contextPath}/board/updateBoard";
 			document.form1.submit();
 	});
-
+		
 		//댓글입력버튼
 	 	$("#btnReply").click(function(){
 	 		replyJson(); //json형식으로 입력
 	 	});
+		
 
 	////////////////////////////////////////////////////////////////////////
 		//1_2댓글 입력 함수 (json방식)
-	 	function replyJson() {
-	 		var replytext=$("#replytext").val(); //댓글의 내용을 가져온다 
-	 		var b_no ="${boardContent.b_no}" //게시글번호 
-	 		//비밀댓글 체크여부
-	 		var b_secret_reply="n";
-	 		//태그.is(":속성") 체크여부 true/false
-	 		if( $("#secretReply").is(":checked") ){ //체크되있다면 true
-	 			b_secret_reply="y";
-	 		}
-	 		$.ajax({
-	 			type:"post",
-	 			url:"${pageContext.request.contextPath}/reply/insertRest",
-	 			headers: { "Content-Type" : "application/json"},
-	 			dateType:"text",
-	 			//param형식보다 간편 한 것.
-	 			//JSON=>브라우저와 서버사이에서 오고가는 데이터의 형식
-	 			//JSON.stringify() => 자바스크립트의 값을 JSON문자열로 반환한다.
-	 			//서버의 @RequestBody 어노테이션으로 인해 반드시 JSON.stringify(), 그리고 content-Type 지정해야한다 .
-	 			data:JSON.stringify({  // 자바스크립트 객체생성=>{}
-	 				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)
-	 				replytext : replytext,
-	 				b_secret_reply : b_secret_reply
-	 			}),
-	 			success:function(abc){
-	 				console.log(abc); //success 뜬다
-	 				alert('댓글이 등록되었습니다22.');
-	 				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
-	 				listReplyRest("1"); //Rest방식
-	 			},
-	 			error: function() {
-	 				alert('댓글이 등록에 실패했습니다.');
-	 				
-	 			}
-	 		});
-	 	}
-	 	//댓글목록 -Rest방식
-	 	function listReplyRest(num) { // 매개변수 num==1
-	 		$.ajax({
-	 			type:"get",
-	 			url:"${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"+num,
-	 			success:function(result){ //ajax가 request를 보내고 response로 돌아온 값 =>result
-	 				$("#listReply").html(result);
-	 			}
-	 		});
-	 	}
+		 	listReplyRest("1"); //댓글 목록 불러오기
 });
 
 
@@ -157,14 +153,12 @@ $(document).ready	(function(){
 <c:if test="${userId ne null}">
 <textarea rows="5" cols="80" id="replytext" name="replytext" placeholder="댓글을 작성해주세요"></textarea>
 <br>
-<!--비밀댓글 체크박스  -->
-<input type="checkbox" id="secretReply">비밀댓글
-
 <button type="button" id="btnReply">댓글 작성</button>
 </c:if>
 </div>
+<!--댓글 목록 출력할 위치  -->
 
-<!--댓글 목록 출력할 위치   -->
 <div id="listReply"> </div>
+
 </body>
 </html>

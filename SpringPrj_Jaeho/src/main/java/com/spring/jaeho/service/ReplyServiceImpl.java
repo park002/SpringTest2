@@ -25,22 +25,6 @@ public class ReplyServiceImpl implements ReplyService {
 		
 		List<ReplyDTO> items = dao.listReply(b_no, start, end);
 		String userId = (String) session.getAttribute("userId");
-
-		for (ReplyDTO dto : items) {
-			System.out.println(dto);
-			// 댓글목록중에 비밀댓글이 있는 경우
-			if (dto.getB_secret_reply().equals("y")) {
-				if (userId == null) { // 로그인이 되어있지 않다면.
-					dto.setReplytext("비밀 댓글입니다");
-				} 
-				else {// 로그인상태일경우
-					String writer = dto.getReplyer(); // 댓글작성자 저장
-					if (!userId.equals(writer)) { // userId 와 댓글작성자가 다르다면
-						dto.setReplytext("비밀댓글입니다");
-					}
-				}
-			}
-		}
 		return items;
 	}
 

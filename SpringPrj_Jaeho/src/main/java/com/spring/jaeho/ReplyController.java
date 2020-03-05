@@ -1,5 +1,6 @@
 package com.spring.jaeho;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,9 @@ public class ReplyController {
 
 	@Autowired
 	ReplyService service;
+	
+	
+	
 //
 //	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 //	public void insertReply(ReplyDTO dto, HttpSession session) {// 커맨드객체
@@ -62,27 +66,39 @@ public class ReplyController {
 
 	// json으로 반환하여 목록생성
 	// PathVariable: url에 명시된 변수를 받아온다.
-	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET) //191 1잘들어옴
+	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET) 
 	public ModelAndView replyList(@PathVariable("b_no") int b_no, @PathVariable int curPage, ModelAndView mav,
 			HttpSession session) {
 		// 페이징처리 댓글갯수 구하는 메소드 필요 .
 		int count = service.countReply(b_no);
-		System.out.println("댓글의 수 =====>"+count);
+		
 		ReplyPager replyPager = new ReplyPager(count, curPage);
 		//현재 페이지의 페이지 시작번호
 		int start=replyPager.getPageBegin(); //0 0행부터
 		int end =replyPager.getPageScale(); //5 5개씩 보여주겠다.
-		
 		List<ReplyDTO> list = service.listReply(b_no, start, end, session);
-		
-		mav.setViewName("board/replyList");
+		mav.setViewName("board/replyList");          
 		mav.addObject("list",list);
 		mav.addObject("replyPager",replyPager);
-            //board/replyList.jsp로 포워딩
-		return mav;
+  
+		return mav; //board/replyList.jsp로 포워딩
 
 	}
-
+	
+//	static {
+//		
+//		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
+//		
+//		list.getB_no(); //1
+//		row.getB_no(); //2
+//		
+//		list.get(0).getB_no();
+//		
+//		for(ReplyDTO row : list)
+//			row.getB_no(); //3
+//		
+//	}
+	
 //	@RequestMapping(value = "/listReply", method = RequestMethod.GET)
 //	public ModelAndView listReply(@RequestParam("b_no") int b_no) {
 //		List<ReplyDTO> list = service.listReply(b_no);
