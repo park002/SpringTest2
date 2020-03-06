@@ -1,6 +1,5 @@
 package com.spring.jaeho;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,9 +24,7 @@ public class ReplyController {
 
 	@Autowired
 	ReplyService service;
-	
-	
-	
+
 //
 //	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 //	public void insertReply(ReplyDTO dto, HttpSession session) {// 커맨드객체
@@ -45,7 +42,7 @@ public class ReplyController {
 	@RequestMapping(value = "/insertRest", method = RequestMethod.POST)
 	public ResponseEntity<String> insertRest(@RequestBody ReplyDTO dto, HttpSession session) {
 		ResponseEntity<String> entity = null;
-	
+
 		try {
 			// 세션에 저장된 회원아이디를 댓글작성자에 세팅 .
 			String userId = (String) session.getAttribute("userId");
@@ -66,25 +63,63 @@ public class ReplyController {
 
 	// json으로 반환하여 목록생성
 	// PathVariable: url에 명시된 변수를 받아온다.
-	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET) 
+	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET)
 	public ModelAndView replyList(@PathVariable("b_no") int b_no, @PathVariable int curPage, ModelAndView mav,
 			HttpSession session) {
 		// 페이징처리 댓글갯수 구하는 메소드 필요 .
 		int count = service.countReply(b_no);
-		
+
 		ReplyPager replyPager = new ReplyPager(count, curPage);
-		//현재 페이지의 페이지 시작번호
-		int start=replyPager.getPageBegin(); //0 0행부터
-		int end =replyPager.getPageScale(); //5 5개씩 보여주겠다.
+		// 현재 페이지의 페이지 시작번호
+		int start = replyPager.getPageBegin(); // 0 0행부터
+		int end = replyPager.getPageScale(); // 5 5개씩 보여주겠다.
 		List<ReplyDTO> list = service.listReply(b_no, start, end, session);
-		mav.setViewName("board/replyList");          
-		mav.addObject("list",list);
-		mav.addObject("replyPager",replyPager);
-  
-		return mav; //board/replyList.jsp로 포워딩
+		mav.setViewName("board/replyList");
+		mav.addObject("list", list);
+		mav.addObject("replyPager", replyPager);
+
+		return mav; // board/replyList.jsp로 포워딩
 
 	}
-	
+
+//댓글 상세보기
+	@RequestMapping(value = "/detail/{r_no}", method = RequestMethod.GET)
+	public ModelAndView replyModify(@PathVariable("r_no") int r_no, ModelAndView mav) {
+		ReplyDTO dto = service.replyDetail(r_no);
+		mav.addObject("dto", dto);
+		mav.setViewName("/reply/replyDetail");
+		return mav;
+	}
+
+	// 댓글수정
+	@RequestMapping(value = "/update/{r_no}", method = RequestMethod.PATCH)
+	public ResponseEntity<String> replyModify(@PathVariable("r_no") int r_no, @RequestBody ReplyDTO dto) {
+		ResponseEntity<String> entity = null;
+		try {
+			dto.setR_no(r_no);
+			service.replyModify(dto);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
+	// 댓글삭제
+	@RequestMapping(value = "/delete/{r_no}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> replydelete(@PathVariable("r_no") int r_no) {
+		ResponseEntity<String> entity = null;
+		try {
+			service.replydelete(r_no);
+			entity =new ResponseEntity<String>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
 //	static {
 //		
 //		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
@@ -98,7 +133,7 @@ public class ReplyController {
 //			row.getB_no(); //3
 //		
 //	}
-	
+
 //	@RequestMapping(value = "/listReply", method = RequestMethod.GET)
 //	public ModelAndView listReply(@RequestParam("b_no") int b_no) {
 //		List<ReplyDTO> list = service.listReply(b_no);

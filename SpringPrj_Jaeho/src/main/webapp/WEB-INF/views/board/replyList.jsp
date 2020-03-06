@@ -9,7 +9,8 @@
 		<c:forEach items="${list}" var="row">
 			<tr>
 				<td>${row.replyer}(<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-						value="${row.b_date}" />) <br> ${row.replytext} <br> <!--본인 댓글만 수정버튼 생성 되도록 처리   -->
+						value="${row.b_date}" />) <br> ${row.replytext} <br> 
+						<!--본인 댓글만 수정버튼 생성 되도록 처리   -->
 					<c:if test="${userId == row.replyer}">
 						<input type="button" id="btnModify" value="수정"
 							onclick="showReplyModify('${row.r_no}')">

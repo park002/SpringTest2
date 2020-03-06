@@ -13,6 +13,11 @@ public interface ReplyService {
 	public List<ReplyDTO>listReply(int b_no,int start,int end,HttpSession session);
 	//´ñ±Û°³¼ö
 	public int countReply(int b_no);
+	//´ñ±Û¼öÁ¤
+	public void replyModify(ReplyDTO dto);
+	//´ñ±Û»ó¼¼º¸±â
+	public ReplyDTO replyDetail(int r_no);
+    //´ñ±Û»èÁ¦
+	public void replydelete(int r_no);
 	
-
 }

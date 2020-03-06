@@ -22,4 +22,20 @@
    <select id="countReply" resultType="int">
    SELECT count(*) FROM reply WHERE b_no =#{b_no}
    </select>
+   <!--댓글 수정  -->
+   <update id="replyModify">
+    UPDATE reply
+    SET replytext= #{replytext},
+    b_edit = now()
+    WHERE r_no= #{r_no}
+   </update>
+   
+   <!--댓글 상세보기  -->
+   <select id="replyDetail" resultType="ReplyDTO">
+   SELECT * FROM reply WHERE r_no=#{r_no}
+   </select>
+   <!--댓글삭제  -->
+   <delete id="replydelete">
+   delete from reply where r_no =#{r_no}
+   </delete>
 </mapper>

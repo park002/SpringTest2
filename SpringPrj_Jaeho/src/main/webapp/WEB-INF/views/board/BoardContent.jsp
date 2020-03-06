@@ -35,7 +35,7 @@
 			}),
 			success:function(abc){
 				console.log(abc); //success 뜬다
-				alert('댓글이 등록되었습니다22.');
+				alert('댓글이 등록되었습니다');
 				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
 				listReplyRest("1"); //Rest방식
 			},
@@ -52,6 +52,18 @@
 			url:"${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"+num,
 			success:function(result){ //ajax가 request를 보내고 response로 돌아온 값 =>result
 				$("#listReply").html(result);
+			}
+		});
+	}
+	//댓글수정버튼 클릭 시 전체 댓글 상세내용을 가져온다 
+	function showReplyModify(r_no){
+		$.ajax({
+			type:"GET",
+			url:"${pageContext.request.contextPath}/reply/detail/"+r_no,
+			success:function(result) { //ajax가 request를 보내고 response로 돌아온 값=>result
+				$("#modifyReply").html(result);
+			//태그 css("속성","값")
+			$("#modifyReply").css("visibility","visible");
 			}
 		});
 	}
@@ -92,13 +104,11 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 			document.form1.action="${pageContext.request.contextPath}/board/updateBoard";
 			document.form1.submit();
 	});
-		
 		//댓글입력버튼
 	 	$("#btnReply").click(function(){
 	 		replyJson(); //json형식으로 입력
 	 	});
 		
-
 	////////////////////////////////////////////////////////////////////////
 		//1_2댓글 입력 함수 (json방식)
 		 	listReplyRest("1"); //댓글 목록 불러오기
@@ -106,8 +116,23 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 
 
 </script>
+
+
+
 </head>
 <style>
+
+#modifyReply{
+width:600px;
+height:130px;
+background-color:gray;
+padding:10px;
+z-index:10;
+visibility:hidden;
+
+}
+
+
 	h2 { text-align: center;}
   table { width: 100%;}
   textarea { width: 100%;}
@@ -158,7 +183,10 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 </div>
 <!--댓글 목록 출력할 위치  -->
 
-<div id="listReply"> </div>
+<div id="listReply"> 
+
+</div>
+
 
 </body>
 </html>

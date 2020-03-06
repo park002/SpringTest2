@@ -35,5 +35,19 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int countReply(int b_no) {
 		return sqlSession.selectOne(namespace + ".countReply", b_no);
 	}
+	@Override
+	public void replyModify(ReplyDTO dto) {
+		  sqlSession.update(namespace+".replyModify", dto);
+		
+	}
+	@Override
+	public ReplyDTO replyDetail(int r_no) {
+		return sqlSession.selectOne(namespace+".replyDetail" ,r_no);
+	}
+	@Override
+	public void replydelete(int r_no) {
+		 sqlSession.delete(namespace+".replydelete",r_no);
+		
+	}
 
 }

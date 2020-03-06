@@ -22,7 +22,6 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override // ´ñ±Û¸®½ºÆ®
 	public List<ReplyDTO> listReply(int b_no, int start, int end, HttpSession session) {
-		
 		List<ReplyDTO> items = dao.listReply(b_no, start, end);
 		String userId = (String) session.getAttribute("userId");
 		return items;
@@ -34,4 +33,19 @@ public class ReplyServiceImpl implements ReplyService {
 		return dao.countReply(b_no);
 	}
 
+	@Override
+	public void replyModify(ReplyDTO dto) {
+		dao.replyModify(dto);
+	}
+
+	@Override
+	public ReplyDTO replyDetail(int r_no) {
+		
+		return dao.replyDetail(r_no);
+	}
+	@Override
+	public void replydelete(int r_no) {
+	    dao.replydelete(r_no);
+		
+	}
 }
