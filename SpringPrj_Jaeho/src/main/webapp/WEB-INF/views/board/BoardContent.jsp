@@ -15,11 +15,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 상세보기</title>
 <script>
-
+  
 	function replyJson() {
 		var replytext=$("#replytext").val(); //댓글의 내용을 가져온다 
+		
 		var b_no ="${boardContent.b_no}" //게시글번호 
-
+      
 		$.ajax({
 			type:"post",
 			url:"${pageContext.request.contextPath}/reply/insertRest",
@@ -32,9 +33,10 @@
 			data:JSON.stringify({  // 자바스크립트 객체생성=>{}
 				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)
 				replytext : replytext,
+			
 			}),
 			success:function(abc){
-				console.log(abc); //success 뜬다
+				console.log(abc); // console에 success 뜬다
 				alert('댓글이 등록되었습니다');
 				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
 				listReplyRest("1"); //Rest방식
@@ -51,10 +53,12 @@
 			type:"get",
 			url:"${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"+num,
 			success:function(result){ //ajax가 request를 보내고 response로 돌아온 값 =>result
+				
 				$("#listReply").html(result);
 			}
 		});
 	}
+
 	//댓글수정버튼 클릭 시 전체 댓글 상세내용을 가져온다 
 	function showReplyModify(r_no){
 		$.ajax({
@@ -106,12 +110,15 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 	});
 		//댓글입력버튼
 	 	$("#btnReply").click(function(){
+	 		var replytext=$("#replytext").val();
+	 		if(replytext.replace(/\s | /gi, "").length==0) {
+	 			alert('내용을 입력하세요')
+	 		}
+	 		else  {
 	 		replyJson(); //json형식으로 입력
+	 		}
 	 	});
-		
-	////////////////////////////////////////////////////////////////////////
-		//1_2댓글 입력 함수 (json방식)
-		 	listReplyRest("1"); //댓글 목록 불러오기
+		listReplyRest("1"); //댓글 목록 불러오기
 });
 
 

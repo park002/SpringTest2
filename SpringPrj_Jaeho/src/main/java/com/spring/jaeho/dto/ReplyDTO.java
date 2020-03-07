@@ -1,6 +1,7 @@
 package com.spring.jaeho.dto;
 
-import oracle.sql.TIMESTAMP;
+import java.sql.Timestamp;
+
 //CREATE TABLE `reply` (
 //		  `r_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '댓글번호',
 //		  `b_no` int(11) NOT NULL COMMENT '게시글번호',
@@ -19,8 +20,8 @@ public class ReplyDTO {
 	private int b_no;
 	private String replytext;
 	private String replyer;
-	private TIMESTAMP b_date;
-	private TIMESTAMP b_edit;
+	private Timestamp b_date;
+	private Timestamp b_edit;
 
 	public int getR_no() {
 		return r_no;
@@ -54,19 +55,19 @@ public class ReplyDTO {
 		this.replyer = replyer;
 	}
 
-	public TIMESTAMP getB_date() {
+	public Timestamp getB_date() {
 		return b_date;
 	}
 
-	public void setB_date(TIMESTAMP b_date) {
+	public void setB_date(Timestamp b_date) {
 		this.b_date = b_date;
 	}
 
-	public TIMESTAMP getB_edit() {
+	public Timestamp getB_edit() {
 		return b_edit;
 	}
 
-	public void setB_edit(TIMESTAMP b_edit) {
+	public void setB_edit(Timestamp b_edit) {
 		this.b_edit = b_edit;
 	}
 

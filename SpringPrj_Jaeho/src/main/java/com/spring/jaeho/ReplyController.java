@@ -1,5 +1,6 @@
 package com.spring.jaeho;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,7 +50,10 @@ public class ReplyController {
 			String userId = (String) session.getAttribute("userId");
 			dto.setReplyer(userId);
 			// 댓글입력(삽입) 메소드 호출
+		
 			service.insertReply(dto);
+			
+	
 			// 댓글입력이 성공하면 성공메시지 저장
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
@@ -62,6 +67,7 @@ public class ReplyController {
 	}
 
 	// json으로 반환하여 목록생성
+	//댓글리스트
 	// PathVariable: url에 명시된 변수를 받아온다.
 	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET)
 	public ModelAndView replyList(@PathVariable("b_no") int b_no, @PathVariable int curPage, ModelAndView mav,
@@ -74,10 +80,11 @@ public class ReplyController {
 		int start = replyPager.getPageBegin(); // 0 0행부터
 		int end = replyPager.getPageScale(); // 5 5개씩 보여주겠다.
 		List<ReplyDTO> list = service.listReply(b_no, start, end, session);
-		mav.setViewName("board/replyList");
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+list.get(0).getB_date());
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
-
+		mav.setViewName("board/replyList");
 		return mav; // board/replyList.jsp로 포워딩
 
 	}
@@ -120,6 +127,7 @@ public class ReplyController {
 		return entity;
 	}
 
+	
 //	static {
 //		
 //		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
@@ -146,7 +154,7 @@ public class ReplyController {
 //	@RequestMapping(value = "/listJson")
 //	public List<ReplyDTO> listJson(@RequestParam("b_no") int b_no) {
 //		List<ReplyDTO> list = service.listReply(b_no);
-//		// System.out.println(list);
+//	// System.out.println(list);
 //		return list;
 //	}
 

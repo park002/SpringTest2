@@ -33,8 +33,8 @@
 				<c:out value="${map.searchOption == 'content' ? 'selected':''}"/>>내용</option>
 			<option value="title"
 				<c:out value="${map.searchOption== 'title' ? 'selected':''}"/>>제목</option>
-		</select> <input name="keyword" value="${map.keyword}"> <input
-			type="submit" value="조회">
+		</select> <input name="keyword" value="${map.keyword}"> 
+		                  <input type="submit" value="조회">
 			
 			<!--로그인한 사용자만 글쓰기 버튼 활성화  -->
    <c:if test="${userName ne null}"> 
