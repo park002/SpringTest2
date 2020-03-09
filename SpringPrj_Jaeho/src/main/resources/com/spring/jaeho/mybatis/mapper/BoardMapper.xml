@@ -13,7 +13,7 @@
 	<!--게시판 리스트 출력 -->
 	<select id="listBoard" resultType="BoardDTO">
 		SELECT b_no,b_title,b_detail,b_writer,b_date,b_count,
-		(select count(*) from reply where b_no = b.b_no) AS recnt 
+		(SELECT count(*) FROM reply WHERE b_no = b.b_no) AS recnt 
 		 FROM board b
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if

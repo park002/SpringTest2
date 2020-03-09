@@ -18,6 +18,7 @@ import com.spring.jaeho.dto.BoardDTO;
 import com.spring.jaeho.dto.ReplyDTO;
 import com.spring.jaeho.page.Pagination;
 import com.spring.jaeho.service.BoardService;
+import com.spring.jaeho.service.ReplyService;
 
 @Controller
 @RequestMapping("/board/")
@@ -25,6 +26,9 @@ public class BoardController {
 
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	ReplyService replyService;
 
 	@RequestMapping(value = "/createform", method = RequestMethod.GET)
 	public String createGET(BoardDTO dto,HttpSession session,Model model) throws Exception {
@@ -47,9 +51,10 @@ public class BoardController {
 	public ModelAndView listAll(@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(required = false, defaultValue = "title") String searchOption,
 			@RequestParam(required = false) String keyword, HttpSession session) throws Exception {
-
+	
 		// 연결유지 getAttribute 메소드가 Object 타입 이므로 형변환 해준다
 		// 레코드 갯수 계산
+	
 		int count = service.getBoardListCnt(searchOption, keyword);
 		// Pagination2 pagination = new Pagination2(); // 게시글 전체 갯수, 현재 페이지번호
 		Pagination pagination = new Pagination(count, curPage);
@@ -75,10 +80,12 @@ public class BoardController {
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detailBoard(Model model, @RequestParam("b_no") int b_no,HttpSession session) throws Exception {
-		System.out.println("게시글 번호=>" + b_no + "번의 상세 페이지");
+		int ReplyCount = replyService.countReply(b_no); //댓글의 수 구하기 . 무결성 제약조건 해결방법1. 
+		//부모테이블의 주키가 자식테이블의 외래키로 사용중.
 		String userId = (String)session.getAttribute("userId");
 		model.addAttribute("boardContent", service.detailBoard(b_no));
 		model.addAttribute("userId",userId);
+		model.addAttribute("ReplyCount",ReplyCount);
 		service.updateCount(b_no);
 		
 		return "board/BoardContent";
@@ -91,18 +98,6 @@ public class BoardController {
 		return "redirect:/board/listAll";
 	}
 
-//	@RequestMapping("/updateBoardForm")
-//	public ModelAndView updateBoardForm(@RequestParam("b_no") int b_no,
-//			@ModelAttribute("upboard") BoardDTO dto,HttpSession session)
-//			throws Exception { // 게시글 번호 잘넘어옴
-//		ModelAndView mav = new ModelAndView();
-//		String userId = (String)session.getAttribute("userId");
-//		BoardDTO board = service.detailBoard(b_no);
-//		mav.addObject("upboard", board);
-//		mav.addObject("userId",userId);
-//		mav.setViewName("/board/update");
-//		return mav;
-//	}
 
 	@RequestMapping(value = "/updateBoard", method = RequestMethod.GET)
 	public String updateBoard(BoardDTO dto) throws Exception {

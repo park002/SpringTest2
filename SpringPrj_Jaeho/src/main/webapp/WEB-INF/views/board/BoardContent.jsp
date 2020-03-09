@@ -78,11 +78,11 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 	});
 	
 	$("#btnDelete").click(function(){
-		if(confirm('정말 삭제하시겠습니까?')) {
-			document.form1.action="${pageContext.request.contextPath}/board/delete";
+		    alert('정말 삭제하시겠습니까?');
+		    var b_no ="${boardContent.b_no}"
+			document.form1.action="${pageContext.request.contextPath}/board/delete?b_no";
 			document.form1.submit();
-		}
-	});
+	 });
 	
 		$("#btnUpdate").click(function(){
 			var b_title=$("#b_title").val();
@@ -99,11 +99,7 @@ $(function(){ //ready함수 => DOM이 문서를 다 읽고 난 후 실행
 				document.form1.b_detail.focus();
 				return;
 			}
-			if(b_writer=="") {
-				alert('작성자를 입력하세요');
-				document.form1.b_writer.focus();
-				return;
-			}
+	
 			alert('작성하신대로 수정 하시겠습니까?');
 			document.form1.action="${pageContext.request.contextPath}/board/updateBoard";
 			document.form1.submit();
@@ -156,22 +152,27 @@ visibility:hidden;
 <form name="form1" method="get">
 <div>
 
- 작성일자:<fmt:formatDate value="${boardContent.b_date}" pattern="yyyy-MM-dd HH:mm:ss" />
+ 작성일:<fmt:formatDate value="${boardContent.b_date}" pattern="yyyy-MM-dd HH:mm" />
 </div>
 <div>
 조회수 : ${boardContent.b_count}
 </div>
+<br>
 <div>
-제목<input name="b_title" id="b_title" size="80" value="${boardContent.b_title}">
+제목<input name="b_title" id="b_title" size="80" value="${boardContent.b_title}" >
 </div>
-내용<textarea name="b_detail" id="b_detail" rows="4" cols="80" placeholder="내용을 입력하세요">${boardContent.b_detail}</textarea>
+<br>
+내용<textarea name="b_detail" id="b_detail" rows="15" cols="3" placeholder="내용을 입력하세요" >${boardContent.b_detail}</textarea>
 <div>
 작성자 <input name="b_writer" id="b_writer" value="${boardContent.b_writer}" readonly>
 </div>
+
 <div style="width:650px; text-align:center;">
+
 <input type="hidden" name="b_no" value="${boardContent.b_no}">
+
 <!--본인이 쓴 게시물만 수정,삭제 가능하도록 처리  -->
-<c:if test="${userId == boardContent.b_writer}">
+<c:if test="${userId eq boardContent.b_writer }">
 <button type="button" id="btnUpdate">수정</button>
 <button type="button" id="btnDelete">삭제</button>
 </c:if>
