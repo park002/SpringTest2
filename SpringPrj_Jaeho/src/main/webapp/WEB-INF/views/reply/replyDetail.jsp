@@ -2,13 +2,13 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/WEB-INF/views/board/BoardLayout/header.jsp"%>
 <!-- 컨택스트  패스-->
 
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta charset="EUC-KR">
 <script>
 	//댓글수정
@@ -58,12 +58,12 @@
 </head>
 <body>
 	댓글번호:${dto.r_no}
-	<textarea id="detailReplyText" rows="5" cols="82">${dto.replytext}</textarea>
+	<textarea id="detailReplyText"  class="form-control col-sm-12" rows="4" cols="70">${dto.replytext}</textarea>
 	<div style="text-align: center;">
 		<!--댓글 수정 ,삭제,닫기-->
-		<button type="button" id="btnReplyUpdate">수정</button>
-		<button type="button" id="btnReplyDelete">삭제</button>
-		<button type="button" id="btnReplyClose">닫기</button>
+		<button type="button" id="btnReplyUpdate" class="btn btn-sm btn-primary">수정</button>
+		<button type="button" id="btnReplyDelete" class="btn btn-sm btn-primary">삭제</button>
+		<button type="button" id="btnReplyClose" class="btn btn-sm btn-primary">닫기</button>
 	</div>
 </body>
 </html>
