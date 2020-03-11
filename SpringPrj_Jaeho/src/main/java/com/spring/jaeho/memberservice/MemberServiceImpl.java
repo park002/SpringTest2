@@ -68,5 +68,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.viewMember(dto);
 	}
 	
+	@Override
+	public boolean selectId(MemberDTO dto) {
+		
+		return  dao.selectId(dto);
+	}
+	
 
 }

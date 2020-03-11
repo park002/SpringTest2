@@ -10,28 +10,28 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta charset="EUC-KR">
-<script>
-	//댓글수정
+   <script>
+	  //댓글수정
 
-	$("#btnReplyUpdate").click(function(){
-		var detailReplyText = $("#detailReplyText").val();
-		$.ajax({
-			type : "PATCH",
-			url : "${pageContext.request.contextPath}/reply/update/${dto.r_no}",
-			headers:{ "Content-Type" : "application/json"},
-			dataType:"text",
-			data:JSON.stringify({
-				replytext : detailReplyText,
+	      $("#btnReplyUpdate").click(function(){
+		       var detailReplyText = $("#detailReplyText").val();
+		     $.ajax({
+			 type : "PATCH",
+			 url : "${pageContext.request.contextPath}/reply/update/${dto.r_no}",
+			 headers:{ "Content-Type" : "application/json"},
+			 dataType:"text",
+			 data:JSON.stringify({
+				  replytext : detailReplyText,
 			}),
-			success:function(result) {
+			 success:function(result) {
 				if(result=="success") {
-					alert('수정이 완료 되었습니다.');
-					$("#modifyReply").css("visibility","hidden");
-					listReplyRest("1");
-				}
-			}
-		});
-	});
+					  alert('수정이 완료 되었습니다.');
+					  $("#modifyReply").css("visibility","hidden");
+					  listReplyRest("1");
+				    }
+			    }
+		    });
+	    });
 	$("#btnReplyDelete").click(function(){
 			if(confirm('정말 삭제하시겠습니까?')) {
         	 $.ajax({

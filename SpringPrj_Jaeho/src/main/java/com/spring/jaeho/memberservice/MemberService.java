@@ -23,6 +23,9 @@ public interface MemberService {
 	//세션에 담아줄 메소드 
 	public MemberDTO viewMember(MemberDTO dto);
 	
+	//ID 존재유무
+	public boolean selectId(MemberDTO dto);
+	
 
 	
 }

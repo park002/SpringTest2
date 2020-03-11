@@ -84,44 +84,49 @@ button {
 	width: 20%;
 }
 </style>
-<script type="text/javascript">
+<script>
+
 	var duplicate = false;
-	/* $(document).ready(function() {
+	
+	 $(document).ready(function() {
 		
-		$('#checkbtn').on('click', function() {
-			//alert($('#m_id').val());
-			$.ajax({
-				type : 'POST',
-				url : '/biz/duplicate.do',
-				data : {
+		   $('#checkbtn').on('click', function() {
+			  //alert($('#m_id').val());
+			 $.ajax({
+				 type : 'POST',
+				 url : '${pageContext.request.contextPath}/member/duplicate',
+				 data : {
 					"m_id" : $('#m_id').val()
 				},
+				
 				success : function(data) {
-					if ($.trim(data) == 0) {
-						//$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
+					if ($.trim(data) == 'false') {
+						$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
 						alert("사용 가능한 아이디 입니다!");
 						duplicate = true;
 					} else if ($.trim(data) == "blank") {
 						alert("아이디에 공백은 불가합니다!");
 						duplicate = false;
-					} else if ($.trim(data) == "@") {
-						alert("아이디에 특수문자@는 불가합니다!");
+					} else if ($.trim(data) == "regex") {
+						alert("아이디에 특수문자는 불가합니다!");
 						duplicate = false;
 					} else {
-						//$('#checkMsg').html('<p style="color:red;width:100px;">사용불가능</p>');
-						alert("사용 불가능한 아이디 입니다!");
+						$('#checkMsg').html('<p style="color:red;width:100px;">사용불가능</p>');
+						alert("아이디가 중복됩니다!");
 						duplicate = false;
 					}
 				}
 			}); //end ajax   
 		}); //end on    
-	}); */
+	}); 
+	
+	
 /* 	function beforeSubmit() {
 		if (duplicate == false) {
 			alert("아이디 중복확인을 해주세요!");
 			return false;
+			
 		} else if (duplicate == true) {
-
 			if ($('font[name=check]').text() == "암호일치") {
 				location.replace("./signConfirm.jsp");
 				return true;
@@ -131,7 +136,8 @@ button {
 			}
 		}
 	} */
-	$(function() {
+	
+	/* $(function() {
 		$('#pass').keyup(function() {
 			$('font[name=check]').text('');
 		}); //#user_pass.keyup
@@ -145,7 +151,7 @@ button {
 				$('font[name=check]').html("암호일치");
 			}
 		}); //#chpass.keyup
-	});
+	}); */
 </script>
 </head>
 
@@ -167,13 +173,12 @@ button {
 					<td><input type="text" name="m_id" id="m_id" required>
 						<label>공백 없는 영문, 숫자 포함 6-20자</label></td>
 					<td><a id="checkbtn"><button>중복확인</button></a></td>
-					<!--<td id="checkMsg">
-                    </td>-->
+					<td id="checkMsg"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" name="m_password" id="pass"
-						required> <label>공백 없는 영문, 숫자 포함 6-20자</label></td>
+					<td><input type="password" name="m_password" id="pass" required> 
+					 <label>공백 없는 영문, 숫자 포함 6-20자</label></td>
 				</tr>
 				<tr>
 					<td>비밀번호 확인</td>
@@ -204,7 +209,9 @@ button {
 					<td><input type="text" name="m_tel" class="phoneNum" required> 
 				<tr>
 					<td colspan="2" style="margin: auto;">
-						<button class="submit">가입하기</button> <a href="javascript:history.go(-2)"><button type="button" class="cancel">취 소</button></a>
+						<button class="submit">가입하기</button> 
+						
+						<a href="#"><button type="button" class="cancel" onclick="history.go(-1)">취 소</button></a>
 					</td>
 				</tr>
 			</table>

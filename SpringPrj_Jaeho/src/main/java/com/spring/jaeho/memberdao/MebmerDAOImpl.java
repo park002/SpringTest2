@@ -31,18 +31,25 @@ public class MebmerDAOImpl implements MemberDAO {
 	@Override
 	public boolean login(MemberDTO dto) {
 		String logincheck = sqlSession.selectOne(namespace + ".login", dto);
-		System.out.println("로그인체쿠!~!~~!~!!~!~!~!~!~!~!~~!!~!~!!~!~!~!!~ =>" + logincheck); // name값이 담길 것임
 		return (logincheck == null) ? false : true;
 	}
 	@Override
 	public int getUserEmailChecked(MemberDTO dto) {
 		Integer EmailCheck = sqlSession.selectOne(namespace + ".getUserEmailChecked", dto);
-        System.out.println("이메일체쿠~!~!!~!~!~!!~ 이메일 인증 한 아이디 인지 아닌지 =>"+EmailCheck);
+		System.out.println("EmailCheck!!!!!!!!=>"+EmailCheck);
 		return (EmailCheck == 0) ? 0 : 1;
 	}
 	@Override
 	public MemberDTO viewMember(MemberDTO dto) {
 		return sqlSession.selectOne(namespace+".viewMember",dto);
+	}
+	
+	@Override
+	public boolean selectId(MemberDTO dto) {
+		   String selectId = sqlSession.selectOne(namespace + ".selectId", dto);
+		     System.out.println("!!!!!!!!!!!!!!!!!!!"+selectId);
+		return (selectId==null) ? false:true ; 
+		
 	}
 
 }

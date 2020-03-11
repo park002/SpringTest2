@@ -31,7 +31,7 @@ body .container .login_header {
   padding: 40px 40px 0;
 }
 body .container .login_header.bg {
-  background-image: url("./img/이정재.jpg");
+  background-image: url("./resources/img/아이유1.PNG");
   background-size: 100%;
   background-repeat: no-repeat;
   position: relative;
@@ -257,17 +257,37 @@ body .container .content .signup-cont {
 
 </style>
 </head>
+<script>
+$(document).ready(function(){
+	   $("#login").click(function(){
+		   var m_id = $("#m_id").val();
+		   var m_password =$("#m_password").val();
+		   if(! m_id) {
+			   alert('아이디를 입력하세요');
+			   document.form1.m_id.focus();
+			   return false;
+		   }
+		   
+		  if(! m_password) {
+			   alert('비밀번호를 입력하세요');
+			   document.form1.m_password.focus();
+			   return false;
+		 }
+	});
+});
+</script>
 <body>
-	<%-- <c:if test="${notVerify }">
-	<script>
-		alert("이메일 인증이 되지 않았습니다! 이메일을 확인하시고 인증해주시기 바랍니다!");
-	</script>
-	</c:if>
-	<c:if test="${notExist }">
-	<script>
-		alert("아이디나 비밀번호가 일치하지 않습니다!");
-	</script>
-	</c:if> --%>
+<c:if test="${Emailmsg eq 0}">
+<script>alert('이메일 인증 후 로그인 해주시기 바랍니다.')</script>
+</c:if>
+<c:if test="${Loginmsg eq  false }">
+<script>alert('패스워드를 확인 해주세요');</script>
+</c:if>
+<c:if test="${SelectIdmsg eq false }">
+<script>alert('존재하지 않는 ID 입니다.');</script>
+</c:if>
+
+
 <section class="container">
 		    <article class="login_header">
               <h1>로그인</h1>
@@ -276,20 +296,17 @@ body .container .content .signup-cont {
 			        </div>
 			        <div class="content">
 				            <div class="signin-cont cont">
-				            
-					                <form action="/jaeho/member/login" method="post">
-						                    <input type="text" name="m_id" id="email" class="inpt"  placeholder="Your ID">
-
-						                    <input type="password" name="m_password" id="password" class="inpt"  placeholder="Your password">
+					                <form name="form1" action="/jaeho/member/login" method="post">
+						                    <input type="text" name="m_id" id="m_id" class="inpt"  placeholder="Your ID">
+						                    <input type="password" name="m_password" id="m_password" class="inpt"  placeholder="Your password">
                 						    <label for="password">Your password</label>
 						                    <input type="checkbox" id="remember" class="checkbox" checked>
 						                    <label for="remember">Remember me</label>
 						                    <div class="submit-wrap">
-                                    <input type="submit" value="로그인" class="submit">
-                                    
+                                    <input type="submit" id="login" value="로그인" class="submit">
                                     <a href="index.jsp"><input type="button" value="메인" class="submit"></a><br><br>
                                       <a href="searchIdpass.jsp" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
-                                      <a href="agreePage.jsp" class="more">아직 회원이 아니신가요?</a>
+                                      <a href="/jaeho/member/loginform" class="more">아직 회원이 아니신가요?</a>
                                 </div>
                                 <div class="sign_up">
 

@@ -80,18 +80,14 @@
 			location.href = "${pageContext.request.contextPath}/board/listAll"
 		});
 
-		$("#btnDelete")
-				.click(
-						function() {
+		$("#btnDelete").click(function() {
 							alert('정말 삭제하시겠습니까?');
 							var b_no = "${boardContent.b_no}"
 							document.form1.action = "${pageContext.request.contextPath}/board/delete?b_no";
 							document.form1.submit();
 						});
 
-		$("#btnUpdate")
-				.click(
-						function() {
+		$("#btnUpdate").click(function() {
 							var b_title = $("#b_title").val();
 							var b_detail = $("#b_detail").val();
 							var b_writer = $("#b_writer").val();

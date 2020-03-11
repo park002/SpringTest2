@@ -3,7 +3,7 @@ package com.spring.jaeho.page;
 // 페이지 나누기 관련 작업 클래스
 public class Pagination {
 	// 페이지당 게시물 수
-	public static final int PAGE_SCALE = 5;
+	public static final int PAGE_SCALE = 8;
 	// 화면당 페이지 수
 	public static final int BLOCK_SCALE = 5;
 	private int curPage; // 현재 페이수
