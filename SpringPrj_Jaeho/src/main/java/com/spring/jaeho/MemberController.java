@@ -70,21 +70,22 @@ public class MemberController {
 	}
 	
 	private static final Pattern ID_REGEX = Pattern.compile("^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$");
-	
 	@ResponseBody
 	@RequestMapping(value = "/duplicate", method = RequestMethod.POST)
 	public String duplicateCheck(@RequestParam("m_id") String m_id, MemberDTO dto) {
 		System.out.println(m_id);
-
-		if(!ID_REGEX.matcher(m_id).matches()) { // 특정 문자열이 있다면 true, 없다면 false 반환 contains()
+		//Pattern 클래스는 패턴을 저장하고 Matcher라는 클래스는 검사결과를 저장한다. 
+		//그래서 Matcher의 함수인 matches 함수를 사용하여 결과를 boolean 으로 리턴받을 수 있다.
+		//matches() 주어진 텍스트 전체와 패턴이 일치하는 경우 true 반환 (일치,불일치 확인)
+		//ekem159
+		if(!ID_REGEX.matcher(m_id).matches()) { //특수 문자가 들어 갔다면.  
 			return "regex";
 			
 		} else if (m_id.trim().length() == 0) {
 			return "blank";
 		} else {
 			dto.setM_id(m_id);
-			boolean duplicateCheck = service.selectId(dto); //null 일 경우 false
-			System.out.println(duplicateCheck);
+			boolean duplicateCheck = service.selectId(dto); 
 			//기본자료형을 문자 열로 변경한다.
 			return String.valueOf(duplicateCheck);
 		}

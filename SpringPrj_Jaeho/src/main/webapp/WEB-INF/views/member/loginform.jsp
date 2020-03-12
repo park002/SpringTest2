@@ -85,10 +85,8 @@ button {
 }
 </style>
 <script>
-
 	var duplicate = false;
-	
-	 $(document).ready(function() {
+	 $(document).ready(function(e) {
 		
 		   $('#checkbtn').on('click', function() {
 			  //alert($('#m_id').val());
@@ -104,16 +102,21 @@ button {
 						$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
 						alert("사용 가능한 아이디 입니다!");
 						duplicate = true;
+					
 					} else if ($.trim(data) == "blank") {
 						alert("아이디에 공백은 불가합니다!");
 						duplicate = false;
+					
 					} else if ($.trim(data) == "regex") {
-						alert("아이디에 특수문자는 불가합니다!");
+						$('#checkMsg').html('<p style="color:red;width:100px">사용불가</p>');
+						alert("시작은 영문으로만,특수문자,공백 없는 영문, 숫자 포함 5-12자 이하로 해주시기 바랍니다.");
 						duplicate = false;
+						
 					} else {
-						$('#checkMsg').html('<p style="color:red;width:100px;">사용불가능</p>');
+						$('#checkMsg').html('<p style="color:red;width:100px;">아이디 중복!</p>');
 						alert("아이디가 중복됩니다!");
 						duplicate = false;
+					
 					}
 				}
 			}); //end ajax   
@@ -121,43 +124,56 @@ button {
 	}); 
 	
 	
-/* 	function beforeSubmit() {
-		if (duplicate == false) {
-			alert("아이디 중복확인을 해주세요!");
-			return false;
-			
-		} else if (duplicate == true) {
-			if ($('font[name=check]').text() == "암호일치") {
-				location.replace("./signConfirm.jsp");
-				return true;
-			} else {
-				alert("암호가 일치하지 않습니다! 확인해주세요!")
-				return false;
+ 	function beforeSubmit() {
+ 			if(duplicate) {
+ 	 			 if($('font[name=check]').text() == "비밀번호 일치") {
+ 	 				alert('회원가입이 완료 되었습니다 이메일 인증을 통하여 로그인 해주시기 바랍니다.');
+ 					location.replace("/member/login");
+ 					return true;
+ 	 			 }
+ 	 			 else {
+ 	 				alert("암호가 일치하지 않습니다!")
+ 	 				return false;
+ 	 			 }
+ 	 		}
+ 	 		else {
+ 	 			$('#checkMsg').html('<p style="color:red;width:70px;">중복검사를 해주세요!</p>');
+ 	 			return false;
+ 	 		}
+ 	}
+
+	$(function(){ 
+		$("#pass_ck").keyup(function(){
+			if($("#pass").val() != $("#pass_ck").val()) {
+				$('font[name=check]').html('비밀번호 불일치') 
 			}
+			else {
+				$('font[name=check]').html('비밀번호 일치')
+			}
+		});
+	});
+	
+	/* function beforeSubmit() {
+		if(duplicate) { //duplicate 가 true라면
+                if($('font[name=check]').html('비밀번호 일치')) {
+                	 location.replace("member/login");
+                	 return true;
+                } 			
+		}
+		else { //duplicate가 false 라면 중복검사하세요
+			alert('ID 중복검사를 해주시기 바랍니다.');
+		    return false;
 		}
 	} */
-	
-	/* $(function() {
-		$('#pass').keyup(function() {
-			$('font[name=check]').text('');
-		}); //#user_pass.keyup
-
-		$('#pass_ck').keyup(function() {
-			if ($('#pass').val() != $('#pass_ck').val()) {
-				$('font[name=check]').text('');
-				$('font[name=check]').html("암호일치X");
-			} else {
-				$('font[name=check]').text('');
-				$('font[name=check]').html("암호일치");
-			}
-		}); //#chpass.keyup
-	}); */
+			 
+		
+		 
 </script>
 </head>
 
 <body>
-	<div class="wraper"> <!--onsubmit="return beforeSubmit()"  -->
-		<form action="/jaeho/member/insertMember" method="post" >
+	<div class="wraper"> 
+		<form id="form1" action="/jaeho/member/insertMember" method="post" onsubmit="return beforeSubmit();">
 			<div class="title"></div>
 			<table class="registerForm">
 				<tr>
@@ -171,7 +187,7 @@ button {
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="m_id" id="m_id" required>
-						<label>공백 없는 영문, 숫자 포함 6-20자</label></td>
+						<label>시작은 영문으로만, 특수문자,공백 없는 영문, 숫자 포함 5-12자 이하</label></td>
 					<td><a id="checkbtn"><button>중복확인</button></a></td>
 					<td id="checkMsg"></td>
 				</tr>
