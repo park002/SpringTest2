@@ -46,10 +46,13 @@ public class MebmerDAOImpl implements MemberDAO {
 	
 	@Override
 	public boolean selectId(MemberDTO dto) {
-		   String selectId = sqlSession.selectOne(namespace + ".selectId", dto);
-		     System.out.println("!!!!!!!!!!!!!!!!!!!"+selectId);
+		  String selectId = sqlSession.selectOne(namespace + ".selectId", dto);
 		return (selectId==null) ? false:true ; 
 		
+	}
+	@Override
+	public String SearchID(MemberDTO dto) {
+		return sqlSession.selectOne(namespace+".SearchID",dto);
 	}
 
 }

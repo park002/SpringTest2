@@ -1,7 +1,6 @@
 package com.spring.jaeho;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.Mail.SHA256;
 import com.spring.jaeho.memberdto.MemberDTO;
@@ -90,4 +88,36 @@ public class MemberController {
 			return String.valueOf(duplicateCheck);
 		}
 	}
+	
+	
+	@RequestMapping(value="/FindMe", method=RequestMethod.GET)
+	public String FindMe() {
+	return "/member/FindMe";	
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/SearchID",method=RequestMethod.POST)
+	public String SearchID(@RequestParam("m_name") String m_name,
+			@RequestParam("m_userEmail") String m_userEmail,MemberDTO dto,HttpServletRequest request) {
+		
+	     String m_id = service.SearchID(dto); //찾을 ID
+	     
+	    service.SearchIDMailSend(m_id, m_userEmail, request);
+        if(m_id!=null) { //id에 값이 있다면
+        	return m_id;
+        }
+             return null;
+	    
+	    //mav.addObject("Member_id", m_id);
+		// mav.setViewName("/member/FindMe");
+             
+	
+//		public Map<String, String> SearchID(@RequestParam("m_name") String m_name,
+//			@RequestParam("m_userEmail") String m_userEmail,MemberDTO dto,HttpServletRequest request) {
+
+		
+	}
+	
 }

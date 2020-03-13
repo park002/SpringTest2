@@ -23,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(MemberDTO dto) {
 		dao.insertMember(dto);
 	}
+	
 	@Override
 	public void MailSend(MemberDTO dto, String e_mail, HttpServletRequest request) {
 		MimeMessage mail = mailSender.createMimeMessage();
@@ -73,6 +74,36 @@ public class MemberServiceImpl implements MemberService {
 		
 		return  dao.selectId(dto);
 	}
+	
+	@Override
+	public String SearchID(MemberDTO dto) {
+	
+		return  dao.SearchID(dto); //찾을 id 
+	}
+	@Override
+	public void SearchIDMailSend(String m_id, String e_mail, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+	System.out.println("!!!!!!!!!!!!!!!!!!!!!! id잘 왔나=>"+m_id);
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>안녕하세요 호텔 델루나 입니다</h2><p>"
+				+ "<h3><a href='http://localhost:8090" + request.getContextPath() + "/'>델루나 로그인</a></h3></p>" 
+		     	+	"<p>귀하의 ID 는"+m_id +"입니다 감사합니다.</p>";
+		try {
+			mail.setSubject("[인증] 요청하신 델루나 ID 입니다 . 감사합니다 ", "utf-8");
+			mail.setText(htmlStr, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(e_mail)); // 수신자
+			mail.setFrom(new InternetAddress("ekekekem159@gmail.com")); // 송신자
+			mailSender.send(mail);
+		} catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
+	
+	
+	
+	
 	
 
 }

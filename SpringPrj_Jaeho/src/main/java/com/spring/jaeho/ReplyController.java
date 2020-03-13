@@ -80,8 +80,7 @@ public class ReplyController {
 		int start = replyPager.getPageBegin(); // 0 0행부터
 		int end = replyPager.getPageScale(); // 5 5개씩 보여주겠다.
 		List<ReplyDTO> list = service.listReply(b_no, start, end, session);
-		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+list.get(0).getB_date());
+		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+list.get(0).getB_date());
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
 		mav.setViewName("board/replyList");

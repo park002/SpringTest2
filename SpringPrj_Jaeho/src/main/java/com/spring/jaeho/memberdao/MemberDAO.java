@@ -20,5 +20,6 @@ public MemberDTO viewMember(MemberDTO dto);
 //ID 존재유무
 public boolean selectId(MemberDTO dto);
 
-
+//ID 찾기 
+public String SearchID(MemberDTO dto);
 }

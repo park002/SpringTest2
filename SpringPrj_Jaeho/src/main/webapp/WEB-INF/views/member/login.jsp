@@ -305,7 +305,7 @@ $(document).ready(function(){
 						                    <div class="submit-wrap">
                                     <input type="submit" id="login" value="로그인" class="submit">
                                     <a href="index.jsp"><input type="button" value="메인" class="submit"></a><br><br>
-                                      <a href="searchIdpass.jsp" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
+                                      <a href="/jaeho/member/FindMe" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
                                       <a href="/jaeho/member/loginform" class="more">아직 회원이 아니신가요?</a>
                                 </div>
                                 <div class="sign_up">
