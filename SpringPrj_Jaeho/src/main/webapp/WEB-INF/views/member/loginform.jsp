@@ -99,7 +99,7 @@ button {
 				
 				success : function(data) {
 					if ($.trim(data) == 'false') {
-						$('#checkMsg').html('<p style="color:blue;width:100px;">사용가능</p>');
+						$('#checkMsg').html('<p style="color:blue;width:65px;">사용가능</p>');
 						alert("사용 가능한 아이디 입니다!");
 						duplicate = true;
 					
@@ -108,12 +108,12 @@ button {
 						duplicate = false;
 					
 					} else if ($.trim(data) == "regex") {
-						$('#checkMsg').html('<p style="color:red;width:100px">사용불가</p>');
+						$('#checkMsg').html('<p style="color:red;width:65px">사용불가</p>');
 						alert("시작은 영문으로만,특수문자,공백 없는 영문, 숫자 포함 5-12자 이하로 해주시기 바랍니다.");
 						duplicate = false;
 						
 					} else {
-						$('#checkMsg').html('<p style="color:red;width:100px;">아이디 중복!</p>');
+						$('#checkMsg').html('<p style="color:red;width:95px;">아이디 중복!</p>');
 						alert("아이디가 중복됩니다!");
 						duplicate = false;
 					
@@ -122,7 +122,6 @@ button {
 			}); //end ajax   
 		}); //end on    
 	}); 
-	
 	
  	function beforeSubmit() {
  			if(duplicate) {
@@ -137,7 +136,7 @@ button {
  	 			 }
  	 		}
  	 		else {
- 	 			$('#checkMsg').html('<p style="color:red;width:70px;">중복검사를 해주세요!</p>');
+ 	 			$('#checkMsg').html('<p style="color:red;width:65px;">중복검사를 해주세요!</p>');
  	 			return false;
  	 		}
  	}
@@ -177,8 +176,7 @@ button {
 			<div class="title"></div>
 			<table class="registerForm">
 				<tr>
-					<th class="title" colspan="2"><b>회원가입 정보입력</b> <label>회원가입시
-							필요한 정보를 입력하세요</label></th>
+					<th class="title" colspan="2"><b>회원가입 </b> <label>회원가입시 필요한 정보를 입력하세요</label></th>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -187,7 +185,8 @@ button {
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="m_id" id="m_id" required>
-						<label>시작은 영문으로만, 특수문자,공백 없는 영문, 숫자 포함 5-12자 이하</label></td>
+						<label>시작은 영문으로만, 특수문자,공백 없는 영문, 숫자 포함 5-12자 이하</label>
+						</td>
 					<td><a id="checkbtn"><button>중복확인</button></a></td>
 					<td id="checkMsg"></td>
 				</tr>
@@ -200,7 +199,8 @@ button {
 					<td>비밀번호 확인</td>
 					<td><input type="password" id="pass_ck" required> <label>비밀번호
 							확인을 위해 한번 더 입력하세요</label> <span></span></td>
-					<td><font name="check" size="2" color="red"></font></td>
+							
+					<td><font name="check" size="2" color="red">     </font></td>
 				</tr>
 				<tr>
 					<td rowspan="3">주소</td>
@@ -218,11 +218,11 @@ button {
 				</tr>
 				<tr>
 					<td>이메일</td>	
-					<td><input type="text" name="m_userEmail" class="email_Id" required> 
+					<td><input type="text" name="m_userEmail" class="address" required> 
 				</tr>
 				<tr>
-					<td>번호</td>
-					<td><input type="text" name="m_tel" class="phoneNum" required> 
+					<td>전화번호</td>
+					<td><input type="text" name="m_tel" class="address" required> 
 				<tr>
 					<td colspan="2" style="margin: auto;">
 						<button class="submit">가입하기</button> 

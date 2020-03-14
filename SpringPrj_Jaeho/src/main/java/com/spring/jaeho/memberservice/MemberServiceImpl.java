@@ -31,9 +31,9 @@ public class MemberServiceImpl implements MemberService {
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 호텔델루나에 방문해 주셔서 감사합니다. 아래 링크 클릭시 회원가입 인증이 완료됩니다.</h2><p>"
 				+ "<h3><a href='http://localhost:8090" + request.getContextPath() + "/member/EmailCheckAction?code="
-				+ dto.getM_userEmailHash() + "'>델루나 회원인증</a></h3></p>";
+				+ dto.getM_userEmailHash() + "'>델루나 회원인증</a></h3></p>"
+				+"<img src=http://localhost:8090"+request.getContextPath()+"/resources/img/델루나3.PNG>";
 		try {
-			System.out.println(e_mail);
 			mail.setSubject("[본인인증] 호텔 델루나 인증 메일입니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(e_mail)); // 수신자
@@ -89,7 +89,8 @@ public class MemberServiceImpl implements MemberService {
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 호텔 델루나 입니다</h2><p>"
 				+ "<h3><a href='http://localhost:8090" + request.getContextPath() + "/'>델루나 로그인</a></h3></p>" 
-		     	+	"<p>귀하의 ID는  <b>"+m_id +"</b> 입니다 감사합니다.</p>";
+		     	+	"<p>귀하의 ID는  <b>"+m_id +"</b> 입니다 감사합니다.</p>"
+		     	+"<br><img src=http://localhost:8090"+request.getContextPath()+"/resources/img/델루나4.PNG>";
 		try {
 			mail.setSubject("[인증] 요청하신 델루나 ID 입니다 . 감사합니다 ", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
@@ -105,14 +106,12 @@ public class MemberServiceImpl implements MemberService {
 
    @Override
 public void SearchPWMailSend(MemberDTO dto, String Hash,HttpServletRequest request) {
-	// TODO Auto-generated method stub
-	   
-	     //id,email,hash,기존비번
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 호텔 델루나 입니다</h2><p>"
          + "<h3><a href='http://localhost:8090" + request.getContextPath() 
           + "/member/Searchpassword?code="+Hash+"&Password="+dto.getM_password()+"'>델루나 로그인</a></h3></p>" 
-		     	+	"<p>귀하의 임시 비밀번호는  <b>"+Hash+"</b> 입니다 감사합니다. <p>위의 링크 클릭 시 비밀번호 자동 변경이 됩니다.</p></p>";
+		     	+	"<p>귀하의 임시 비밀번호는  <b>"+Hash+"</b> 입니다 감사합니다. <p>위의 링크 클릭 시 비밀번호 자동 변경이 됩니다.</p></p>"
+		     	+"<br><img src=http://localhost:8090"+request.getContextPath()+"/resources/img/델루나6.PNG>";
 		try {
 			mail.setSubject("[인증] 요청하신 델루나 Password 입니다 . 감사합니다 ", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");

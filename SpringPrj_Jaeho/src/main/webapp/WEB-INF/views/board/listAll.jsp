@@ -16,12 +16,18 @@
     	                     $("#btnWrite").click(function(){
 			                         location.href="${pageContext.request.contextPath}/board/createform";
                       	         });
+    	                     $("#btnLogout").click(function(){
+    	                    	      location.href="${pageContext.request.contextPath}/member/Logout"
+    	                     });
     	     	         });
     
 	                         function list(page) {
 		                       location.href = "${pageContext.request.contextPath}/board/listAll?curPage="
 				              +page+"&searchOption=${map.searchOption}"+"&keyword=${map.keyword}"
 	                             }
+	                         
+	                         
+	                         
                  </script>
               <body>
                    <div class="container">
@@ -30,6 +36,7 @@
 			       		               <!--로그인한 사용자만 글쓰기 버튼 활성화  -->
                                                <c:if test="${userName ne null}"> 
                                                                 안녕하세요 ${userName}님
+                                                     <button class="btn btn-link btn-sm"  id="btnLogout">로그아웃</button>
 		                                             <button class="btn btn-link btn-sm"  id="btnWrite">글쓰기</button>
                                                 </c:if>
 		                                <colgroup>

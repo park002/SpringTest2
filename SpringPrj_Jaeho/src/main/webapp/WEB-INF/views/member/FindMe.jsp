@@ -26,14 +26,13 @@
 			    	"m_userEmail" : $("#m_userEmail").val()
 			    },
 			    success: function(result) {
-			    	console.log(result);
-		                if(result) {
+		                if(result=='success') 
 		                	alert('작성하신 이메일로 전송을 완료하였습니다. 인증 후 사용 바랍니다.');
-		                }
-		                else {
-		                      alert('이름,이메일을 확인 해주세요');
-		                }
-			    }		
+		                },
+		                error:function(){
+		 				   alert('이름과 이메일을 확인하여 주시기 바랍니다.');
+		 			   }
+			    		
 		   });//ajax
 	   });//on
 	   
@@ -55,11 +54,11 @@
 				   m_userEmail : $('#m_userEmail2').val()
 			   }),
 			   success:function(result) {
-				   console.log(result);
-			
-			   },
-			   error:function(){
-				   //alert('');
+				     if(result=='success')  
+				    	 alert('이메일로 임시 비밀번호를 전송하였습니다 링크 클릭 후 로그인 해주시기 바랍니다.');
+				      },
+			   error:function(result){
+				   alert('아이디와 이메일을 확인하여 주시기 바랍니다.');
 			   }
 		   });//ajax
 		   

@@ -44,7 +44,7 @@
 				listReplyRest("1"); //Rest방식
 			},
 			error : function() {
-				alert('댓글이 등록에 실패했습니다.');
+				alert('댓글 등록에 실패했습니다.');
 
 			}
 		});

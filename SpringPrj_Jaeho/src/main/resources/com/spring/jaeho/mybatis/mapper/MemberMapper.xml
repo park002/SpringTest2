@@ -37,7 +37,7 @@
 	</select>
 	
 	<select id="SearchPW" resultType="String">
-	SELECT m_userEmailHash FROM member WHERE m_id=#{m_id} AND m_password=#{m_password}
+	SELECT m_userEmailHash FROM member WHERE m_id=#{m_id} AND m_userEmail=#{m_userEmail}
 	</select>
 	
 	<update id="updatePW" >

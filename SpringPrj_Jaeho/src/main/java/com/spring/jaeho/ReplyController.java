@@ -52,8 +52,6 @@ public class ReplyController {
 			// 댓글입력(삽입) 메소드 호출
 		
 			service.insertReply(dto);
-			
-	
 			// 댓글입력이 성공하면 성공메시지 저장
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
 
