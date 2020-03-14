@@ -27,10 +27,10 @@
 			headers : {
 				"Content-Type" : "application/json"
 			},
-			dateType : "text",
+			dataType : "text",
 			//param형식보다 간편 한 것.
 			//JSON=>브라우저와 서버사이에서 오고가는 데이터의 형식
-			//JSON.stringify() => 자바스크립트의 값을 JSON문자열로 반환한다.
+			//JSON.stringify() => 자바스크립트의 객체의 값을 JSON문자열로 반환한다.
 			//서버의 @RequestBody 어노테이션으로 인해 반드시 JSON.stringify(), 그리고 content-Type 지정해야한다 .
 			data : JSON.stringify({ // 자바스크립트 객체생성=>{}
 				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)

@@ -36,6 +36,34 @@
 			    }		
 		   });//ajax
 	   });//on
+	   
+	   
+	   //Restful 방식
+	   $("#spwOkbtn").on('click',function(){
+		   if(!$("#m_id").val() || !$("#m_userEmail2").val()) {
+		    	  alert('ID,이메일을 확인해주세요');
+		    	  return false;
+		      }
+		   $.ajax({
+			   type: "post",
+			   url:"${pageContext.request.contextPath}/member/SearchPW",
+			   headers: {
+				   "Content-Type" : "application/json"
+			   },
+			   data:JSON.stringify({
+				   m_id : $('#m_id').val(),
+				   m_userEmail : $('#m_userEmail2').val()
+			   }),
+			   success:function(result) {
+				   console.log(result);
+			
+			   },
+			   error:function(){
+				   //alert('');
+			   }
+		   });//ajax
+		   
+	   });//on
    })//ready()
 
 </script>
@@ -48,22 +76,37 @@
  		<div id="siBoxes">
  		<div id="siTextbox">
  		<p id="siTextTitle">아이디 찾기</p>
- 		<p id="siText">회원 정보를 확인하여 아이디를 찾아 드립니다</p>
+ 		<p id="siText">본인인증으로 아이디를 찾아 드립니다</p>
  		     </div>
  		<div id="siInputTextBoxes">    
  			<div class="siInputText">
-	   <input type="text" name="m_name" id="m_name" placeholder="Your Name">
+	   <input type="text" name="m_name" id="m_name" class="spwInputTextBox"  placeholder="Your Name">
 	</div>
 	 <div class="siInputText">
-	  <input type="text" name="m_userEmail" id="m_userEmail" placeholder="Yout Email">
+	  <input type="text" name="m_userEmail" id="m_userEmail" class="spwInputTextBox"  placeholder="Your Email">
      </div>
        <div id="check"></div>
      
      	</div>
      		<img id="siOkbtn" class="showMask" src="${pageContext.request.contextPath}/resources/img/btn_ok.png" style="cursor: pointer;">
-	       
+          </div>
+          
+          <div id="pwBoxes">
+             	<div id="spwTextbox">
+				<p id="spwTextTitle">비밀번호 찾기</p>
+				<p id="spwText">본인인증으로 비밀번호를 변경하세요</p>
+			</div>
+				<div class="spwInputText">
+              <input type="text" name="m_id" id="m_id"  class="spwInputTextBox" maxlength="20" placeholder="Your ID">
+              </div>
+              <div class="spwInputText">
+              <input type="text" name="m_userEmail" id="m_userEmail2"  class="spwInputTextBox" maxlength="50" placeholder="Your Email">
+              </div>
+              	<img id="spwOkbtn" class="sendEmail" src="${pageContext.request.contextPath}/resources/img/btn_email.png" style="cursor: pointer;">
           </div>
 </div>
 
+ 
+          
 </body>
 </html>

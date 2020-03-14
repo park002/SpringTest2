@@ -31,7 +31,23 @@
 	<select id="selectId" resultType="String">
 	 SELECT m_id FROM member WHERE m_id=#{m_id}
 	</select>
+	
 	<select id="SearchID" resultType="String" parameterType="MemberDTO" >
 	SELECT m_id FROM member WHERE m_name=#{m_name} AND m_userEmail=#{m_userEmail}
 	</select>
+	
+	<select id="SearchPW" resultType="String">
+	SELECT m_userEmailHash FROM member WHERE m_id=#{m_id} AND m_password=#{m_password}
+	</select>
+	
+	<update id="updatePW" >
+	  UPDATE member SET  m_password =#{m_userEmailHash} WHERE m_password=#{m_password} 
+	</update>
+	
+	<select id="selectPW" resultType="String">
+	  SELECT m_password FROM member WHERE m_id = #{m_id}
+	</select>
+	
+	
+	
 </mapper>

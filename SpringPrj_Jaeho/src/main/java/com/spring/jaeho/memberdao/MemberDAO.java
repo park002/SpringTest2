@@ -22,4 +22,13 @@ public boolean selectId(MemberDTO dto);
 
 //ID 찾기 
 public String SearchID(MemberDTO dto);
+//PW 찾기
+public String SearchPW(MemberDTO dto);
+
+//기존 PW 조회
+public String selectPW(MemberDTO dto);
+
+//비밀번호 변경
+public void updatePW(MemberDTO dto);
+
 }

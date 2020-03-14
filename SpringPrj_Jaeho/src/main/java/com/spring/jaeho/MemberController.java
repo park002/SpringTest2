@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,8 +104,7 @@ public class MemberController {
 			@RequestParam("m_userEmail") String m_userEmail,MemberDTO dto,HttpServletRequest request) {
 		
 	     String m_id = service.SearchID(dto); //찾을 ID
-	     
-	    service.SearchIDMailSend(m_id, m_userEmail, request);
+	      service.SearchIDMailSend(m_id, m_userEmail, request);
         if(m_id!=null) { //id에 값이 있다면
         	return m_id;
         }
@@ -116,7 +116,31 @@ public class MemberController {
 	
 //		public Map<String, String> SearchID(@RequestParam("m_name") String m_name,
 //			@RequestParam("m_userEmail") String m_userEmail,MemberDTO dto,HttpServletRequest request) {
-
+		
+ //   return Collections.singletonMap("Member_id", service.SearchID(dto));
+	}
+	
+    @ResponseBody	
+ 	@RequestMapping(value="/SearchPW",method=RequestMethod.POST)
+	///반환값 바꾸자 Response머머머머머로@@
+	public String SearchPW(@RequestBody MemberDTO dto,HttpServletRequest request) {
+	      dto.setM_password(service.selectPW(dto)); 
+		  String Hash = service.SearchPW(dto);
+	      //id,email,기존비번
+          service.SearchPWMailSend(dto, Hash, request);
+		if(Hash!=null) {
+			return Hash;
+		}
+		return null;
+	}
+	@RequestMapping(value="/Searchpassword" , method=RequestMethod.GET)
+	public String SearchMailpassword(@RequestParam("code") String code,@RequestParam("Password") String Password,MemberDTO dto) {
+		//update set
+		dto.setM_userEmailHash(code);
+		dto.setM_password(Password);
+		service.updatePW(dto);
+	   	
+		return "redirect:/";
 		
 	}
 	

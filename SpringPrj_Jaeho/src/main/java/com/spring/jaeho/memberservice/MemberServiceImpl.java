@@ -1,6 +1,7 @@
 package com.spring.jaeho.memberservice;
 
 import javax.mail.internet.InternetAddress;
+
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
 	private JavaMailSender mailSender;
 	@Autowired
 	MemberDAO dao;
+	
 	@Override
 	public void insertMember(MemberDTO dto) {
 		dao.insertMember(dto);
@@ -83,11 +85,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void SearchIDMailSend(String m_id, String e_mail, HttpServletRequest request) {
 		// TODO Auto-generated method stub
-	System.out.println("!!!!!!!!!!!!!!!!!!!!!! id잘 왔나=>"+m_id);
+
 		MimeMessage mail = mailSender.createMimeMessage();
 		String htmlStr = "<h2>안녕하세요 호텔 델루나 입니다</h2><p>"
 				+ "<h3><a href='http://localhost:8090" + request.getContextPath() + "/'>델루나 로그인</a></h3></p>" 
-		     	+	"<p>귀하의 ID 는"+m_id +"입니다 감사합니다.</p>";
+		     	+	"<p>귀하의 ID는  <b>"+m_id +"</b> 입니다 감사합니다.</p>";
 		try {
 			mail.setSubject("[인증] 요청하신 델루나 ID 입니다 . 감사합니다 ", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
@@ -98,11 +100,46 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 			
 		}
-		
 	}
 	
+
+   @Override
+public void SearchPWMailSend(MemberDTO dto, String Hash,HttpServletRequest request) {
+	// TODO Auto-generated method stub
+	   
+	     //id,email,hash,기존비번
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>안녕하세요 호텔 델루나 입니다</h2><p>"
+         + "<h3><a href='http://localhost:8090" + request.getContextPath() 
+          + "/member/Searchpassword?code="+Hash+"&Password="+dto.getM_password()+"'>델루나 로그인</a></h3></p>" 
+		     	+	"<p>귀하의 임시 비밀번호는  <b>"+Hash+"</b> 입니다 감사합니다. <p>위의 링크 클릭 시 비밀번호 자동 변경이 됩니다.</p></p>";
+		try {
+			mail.setSubject("[인증] 요청하신 델루나 Password 입니다 . 감사합니다 ", "utf-8");
+			mail.setText(htmlStr, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(dto.getM_userEmail())); // 수신자
+			mail.setFrom(new InternetAddress("ekekekem159@gmail.com")); // 송신자
+			mailSender.send(mail);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	
+}
+	@Override
+	public String SearchPW(MemberDTO dto) {
+		return  dao.SearchPW(dto);
+	}
 	
+	@Override
+	public String selectPW(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.selectPW(dto);
+	}
+	@Override
+	public void updatePW(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		dao.updatePW(dto);
+		
+	}
 	
 	
 

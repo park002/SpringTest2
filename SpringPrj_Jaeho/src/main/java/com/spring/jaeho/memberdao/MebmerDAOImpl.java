@@ -54,5 +54,20 @@ public class MebmerDAOImpl implements MemberDAO {
 	public String SearchID(MemberDTO dto) {
 		return sqlSession.selectOne(namespace+".SearchID",dto);
 	}
+	@Override
+	public String SearchPW(MemberDTO dto) {
+		return sqlSession.selectOne(namespace+".SearchPW", dto);
+	}
+	@Override
+	public String selectPW(MemberDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectPW",dto);
+	}
+@Override
+public void updatePW(MemberDTO dto) {
+	// TODO Auto-generated method stub
+	sqlSession.update(namespace+".updatePW",dto);
+	
+}
 
 }
