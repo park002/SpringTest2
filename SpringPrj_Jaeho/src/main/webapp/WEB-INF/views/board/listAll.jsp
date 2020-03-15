@@ -19,12 +19,15 @@
     	                     $("#btnLogout").click(function(){
     	                    	      location.href="${pageContext.request.contextPath}/member/Logout"
     	                     });
+    	                     $("#btnRemove").click(function(){
+    	                    	 location.href="${pageContext.request.contextPath}/member/Remove?m_name="+"${userName}"
+    	                     });
     	     	         });
     
 	                         function list(page) {
 		                       location.href = "${pageContext.request.contextPath}/board/listAll?curPage="
-				              +page+"&searchOption=${map.searchOption}"+"&keyword=${map.keyword}"
-	                             }
+				                  +page+"&searchOption=${map.searchOption}"+"&keyword=${map.keyword}"
+	                          }
 	                         
 	                         
 	                         
@@ -33,11 +36,12 @@
                    <div class="container">
                          <div class="table-responsive">
                                  <table class="table table-striped table-sm">
-			       		               <!--로그인한 사용자만 글쓰기 버튼 활성화  -->
+			       		               <!--로그인한 사용자만 글쓰기,로그아웃,회원탈퇴  버튼 활성화  -->
                                                <c:if test="${userName ne null}"> 
                                                                 안녕하세요 ${userName}님
                                                      <button class="btn btn-link btn-sm"  id="btnLogout">로그아웃</button>
 		                                             <button class="btn btn-link btn-sm"  id="btnWrite">글쓰기</button>
+		                                             <button class="btn btn-link btn-sm"  id="btnRemove">회원탈퇴</button>
                                                 </c:if>
 		                                <colgroup>
 		                	                 <col style="width: 5%;" />

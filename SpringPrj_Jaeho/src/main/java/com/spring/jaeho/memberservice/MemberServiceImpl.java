@@ -139,6 +139,12 @@ public void SearchPWMailSend(MemberDTO dto, String Hash,HttpServletRequest reque
 		dao.updatePW(dto);
 		
 	}
+	@Override
+	public void Remove(String m_name) {
+		// TODO Auto-generated method stub
+		dao.Remove(m_name);
+		
+	}
 	
 	
 

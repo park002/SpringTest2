@@ -31,4 +31,7 @@ public String selectPW(MemberDTO dto);
 //비밀번호 변경
 public void updatePW(MemberDTO dto);
 
+//회원탈퇴
+public void Remove(String m_name);
+
 }

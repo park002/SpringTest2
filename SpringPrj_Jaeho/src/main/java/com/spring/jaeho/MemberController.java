@@ -66,7 +66,6 @@ public class MemberController {
 			}
 		} else {
 			model.addAttribute("Emailmsg", EmailCheck);
-
 		}
 		return "member/login";
 	}
@@ -104,11 +103,10 @@ public class MemberController {
 	public ResponseEntity<String> SearchID(@RequestParam("m_name") String m_name, @RequestParam("m_userEmail") String m_userEmail,
 			MemberDTO dto, HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
-		////////////귀하의 id는 널값이 뜬다 고치자 수정!
 		String m_id = service.SearchID(dto); // 찾을 ID
 		if(m_id !=null) {
 			service.SearchIDMailSend(m_id, m_userEmail, request);
-			entity= new ResponseEntity<String>("success",HttpStatus.OK);
+			entity= new ResponseEntity<String>("success",HttpStatus.OK);//200 
 		}
 		else {
 			entity= new ResponseEntity<String>("failure",HttpStatus.INTERNAL_SERVER_ERROR);//500 에러 
@@ -154,6 +152,13 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	@RequestMapping(value="/Remove", method=RequestMethod.GET)
+	public String Remove(@RequestParam("m_name") String m_name) {
+		  service.Remove(m_name);
+		return "member/Remove";
+		
+	}
+	
 	
 
 }

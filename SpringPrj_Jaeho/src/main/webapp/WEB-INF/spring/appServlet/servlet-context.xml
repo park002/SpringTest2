@@ -28,4 +28,11 @@
 
 	<context:component-scan base-package="com.spring.jaeho" />
 	
+    <interceptors>
+	    <interceptor>
+	       <mapping path="/board/listAll"/>
+	  
+	       <beans:bean class="com.spring.jaeho.memberservice.MemberRemoveInterceptor"></beans:bean>
+	   </interceptor>
+	</interceptors>
 </beans:beans>

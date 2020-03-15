@@ -48,6 +48,9 @@
 	  SELECT m_password FROM member WHERE m_id = #{m_id}
 	</select>
 	
+	<delete id="Remove">
+      DELETE FROM member WHERE m_name=#{m_name};
+	</delete>
 	
 	
 </mapper>

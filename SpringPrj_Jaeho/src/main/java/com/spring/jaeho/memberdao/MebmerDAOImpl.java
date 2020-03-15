@@ -69,5 +69,12 @@ public void updatePW(MemberDTO dto) {
 	sqlSession.update(namespace+".updatePW",dto);
 	
 }
+@Override
+public void Remove(String m_name) {
+	// TODO Auto-generated method stub
+	sqlSession.delete(namespace+".Remove",m_name);
+	
+	
+}
 
 }

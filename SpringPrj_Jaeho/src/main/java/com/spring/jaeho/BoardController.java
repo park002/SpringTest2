@@ -74,6 +74,7 @@ public class BoardController {
 		String userName = (String) session.getAttribute("userName");
 		mav.addObject("userName", userName);
 		mav.addObject("map", map);
+		
 		mav.setViewName("board/listAll");
 		return mav;
 	}
