@@ -122,7 +122,13 @@ button {
 			}); //end ajax   
 		}); //end on    
 	}); 
-	
+	 
+	 $(function() { //input 요소의 값이 변할 경우 
+		 $('#m_id').change(function() {
+			 duplicate  = false; 
+			 })
+	   });
+	 
  	function beforeSubmit() {
  			if(duplicate) {
  	 			 if($('font[name=check]').text() == "비밀번호 일치") {
@@ -187,7 +193,7 @@ button {
 					<td><input type="text" name="m_id" id="m_id" required>
 						<label>시작은 영문으로만, 특수문자,공백 없는 영문, 숫자 포함 5-12자 이하</label>
 						</td>
-					<td><a id="checkbtn"><button>중복확인</button></a></td>
+					<td><button type="button" id = "checkbtn">중복확인</button></td>
 					<td id="checkMsg"></td>
 				</tr>
 				<tr>
@@ -225,7 +231,7 @@ button {
 					<td><input type="text" name="m_tel" class="address" required> 
 				<tr>
 					<td colspan="2" style="margin: auto;">
-						<button class="submit">가입하기</button> 
+						<button>가입하기</button> 
 						
 						<a href="#"><button type="button" class="cancel" onclick="history.go(-1)">취 소</button></a>
 					</td>

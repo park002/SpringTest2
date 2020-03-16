@@ -12,8 +12,7 @@
 <%-- <script src="<c:url value="/resources/js/moment.js" />"></script> --%>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상세보기</title>
 <script>
@@ -56,7 +55,6 @@
 					url : "${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"
 							+ num,
 					success : function(result) { //ajax가 request를 보내고 response로 돌아온 값 =>result
-
 						$("#listReply").html(result);
 					}
 				});
