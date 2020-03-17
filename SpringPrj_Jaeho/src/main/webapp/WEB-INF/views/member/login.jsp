@@ -297,22 +297,21 @@ $(document).ready(function(){
 			        <div class="content">
 				            <div class="signin-cont cont">
 					                <form name="form1" action="/jaeho/member/login" method="post">
-						                    <input type="text" name="m_id" id="m_id" class="inpt"  placeholder="Your ID">
-						                    <input type="password" name="m_password" id="m_password" class="inpt"  placeholder="Your password">
-                						    <label for="password">Your password</label>
-						                    <input type="checkbox" id="remember" class="checkbox" checked>
-						                    <label for="remember">Remember me</label>
-						                    <div class="submit-wrap">
-                                    <input type="submit" id="login" value="로그인" class="submit">
-                                    <a href="index.jsp"><input type="button" value="메인" class="submit"></a><br><br>
-                                      <a href="/jaeho/member/FindMe" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
-                                      <a href="/jaeho/member/loginform" class="more">아직 회원이 아니신가요?</a>
-                                </div>
-                                <div class="sign_up">
-
-                                </div>
-        					        </form>
-    				        </div>
+						                         <input type="text" name="m_id" id="m_id" class="inpt"  placeholder="Your ID">
+						                         <input type="password" name="m_password" id="m_password" class="inpt"  placeholder="Your password">
+                						                  <label for="password">Your password</label>
+						                         <input type="checkbox" id="remember" class="checkbox" checked>
+						                                   <label for="remember">Remember me</label>
+						                        <div class="submit-wrap">
+                                                     <input type="submit" id="login" value="로그인" class="submit">
+                                                           <a href="index"><input type="button" value="메인" class="submit"></a><br><br>
+                                                           <a href="/jaeho/member/FindMe" class="more">아이디 / 비밀번호를 잊으셨나요?</a>
+                                                           <a href="/jaeho/member/loginform" class="more">아직 회원이 아니신가요?</a>
+                                               </div>
+                                             <div class="sign_up">
+                                         </div>
+        			              </form>
+    				         </div>
 			        </div>
 		    </article>
 		    <div class="login_header bg"></div>

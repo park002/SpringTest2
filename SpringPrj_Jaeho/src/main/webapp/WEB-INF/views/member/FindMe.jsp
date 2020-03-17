@@ -14,10 +14,11 @@
 <script>
    $(function(){ 
 	   $("#siOkbtn").on('click',function(){
-		      if(!$("#m_name").val() || !$("#m_userEmail").val()) {
+	 	      if(!$("#m_name").val() || !$("#m_userEmail").val()) {
 		    	  alert('이름,이메일을 확인해주세요');
 		    	  return false;
-		      }
+		      } 
+		   
 		   $.ajax({
 			    type:'POST',
 			    url:'${pageContext.request.contextPath}/member/SearchID',
@@ -32,11 +33,9 @@
 		                error:function(){
 		 				   alert('이름과 이메일을 확인하여 주시기 바랍니다.');
 		 			   }
-			    		
 		   });//ajax
 	   });//on
-	   
-	   
+	
 	   //Restful 방식
 	   $("#spwOkbtn").on('click',function(){
 		   if(!$("#m_id").val() || !$("#m_userEmail2").val()) {

@@ -86,6 +86,7 @@ button {
 </style>
 <script>
 	var duplicate = false;
+	
 	 $(document).ready(function(e) {
 		
 		   $('#checkbtn').on('click', function() {
@@ -98,12 +99,21 @@ button {
 				},
 				
 				success : function(data) {
-					if ($.trim(data) == 'false') {
+					if (data == 'false') {
 						$('#checkMsg').html('<p style="color:blue;width:65px;">사용가능</p>');
 						alert("사용 가능한 아이디 입니다!");
 						duplicate = true;
 					
-					} else if ($.trim(data) == "blank") {
+					}
+					else if ($.trim(data) == "blank") {
+						
+						/* var $ = {
+								trim : function(param) {
+									return 'blank';
+								}
+						};
+						$.trim(); */
+						
 						alert("아이디에 공백은 불가합니다!");
 						duplicate = false;
 					
