@@ -65,7 +65,7 @@ public class Pagination {
 		if(nextPage >= totPage) nextPage = totPage;
 	}
 
-	public static int getPageScale() { //mybatis는 getter를 찾아서 호출한다 .
+	public  int getPageScale() { //mybatis는 getter를 찾아서 호출한다 .
 		return PAGE_SCALE;
 	}
 	

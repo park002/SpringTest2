@@ -13,7 +13,7 @@
 
 	<update id="setUserEmailChecked">
 		UPDATE member SET m_userEmailChecked = 1 WHERE
-		m_userEmailHash =#{ism_userEmailChecked}
+		m_userEmailHash =#{m_userEmailHash}
 	</update>
 	
 	<select id="login" parameterType="MemberDTO" resultType="String">

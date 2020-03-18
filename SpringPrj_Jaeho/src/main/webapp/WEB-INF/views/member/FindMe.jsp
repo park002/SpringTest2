@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/searchID.css?ver=1">
 <title>ID/Password Find</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script>
    $(function(){ 
 	   $("#siOkbtn").on('click',function(){
@@ -36,7 +35,7 @@
 		   });//ajax
 	   });//on
 	
-	   //Restful 방식
+
 	   $("#spwOkbtn").on('click',function(){
 		   if(!$("#m_id").val() || !$("#m_userEmail2").val()) {
 		    	  alert('ID,이메일을 확인해주세요');

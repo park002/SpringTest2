@@ -41,8 +41,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/EmailCheckAction", method = RequestMethod.GET)
-	public String EmailCheckAction(@RequestParam(required = false) String code, MemberDTO dto) {
-		System.out.println(code);
+	public String EmailCheckAction(@RequestParam String code) {
 		service.setUserEmailChecked(code);
 		return "member/login";
 	}

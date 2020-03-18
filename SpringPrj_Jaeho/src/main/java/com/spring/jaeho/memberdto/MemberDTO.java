@@ -1,17 +1,6 @@
 package com.spring.jaeho.memberdto;
 
-/*`m_id` VARCHAR(30) NOT NULL COMMENT '회원ID',
-`m_name`VARCHAR(10) NOT NULL COMMENT'회원이름',
-`m_zip1` VARCHAR(30) NOT NULL COMMENT '우편번호',
-`m_zip2` VARCHAR(70) NOT NULL COMMENT '기본주소',
-`m_zip3` VARCHAR(70) NOT NULL COMMENT '상세주소',
-`m_password` VARCHAR(30) NOT NULL COMMENT '비밀번호',
-`m_userEmail` VARCHAR(100) NOT NULL COMMENT '이메일',
-`m_userEmailHash` VARCHAR(100) NULL COMMENT '이메일HASH값',
-`m_userEmailChecked`  TINYINT(1) NULL COMMENT '이메일 인증 여부',
-`m_tel` VARCHAR(20) NULL COMMENT '전화번호',
-PRIMARY KEY (`m_id`));
-*/
+
 public class MemberDTO {
 	private String m_id;
 	private String m_name;

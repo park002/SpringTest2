@@ -27,9 +27,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> listBoard(int start,int end,String searchOption, String keyword) throws Exception {
-		// System.out.println("SELECT * FROM board LIMIT#{pageBegin},#{pageScale}\n"
-		// +pagination.getPageBegin() + ", " +pagination.getPageScale());
-		// #{start} #{end} 에 입력 될 값을 맵에 저장
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
