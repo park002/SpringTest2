@@ -12,7 +12,6 @@
 <meta charset="EUC-KR">
    <script>
 	  //댓글수정
-
 	      $("#btnReplyUpdate").click(function(){
 		       var detailReplyText = $("#detailReplyText").val();
 		     $.ajax({

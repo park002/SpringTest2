@@ -79,7 +79,7 @@
 			            <!--게시글 페이징  -->
 	                       <div id="paginationBox">
 		                                 <ul class="pagination">
-				                        <!--처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음] 하이퍼링크를 화면에 출력 --> 
+				                        <!--처음페이지로 이동 : 현재 블럭이 1보다 크면  [처음] 하이퍼링크를 화면에 출력 --> 
 				                                 <c:if test="${map.boardPager.curBlock >1}">
 	     		                                        <li class="page-item">
 	     		                                                <a class="page-link" href="#" onclick="javascript:list('1')">처음</a></li>

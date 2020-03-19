@@ -40,11 +40,8 @@ public class BoardController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createPOST(BoardDTO dto) throws Exception {
-//		 String writer = (String)session.getAttribute("m_id");
-//	    dto.setB_writer(writer);	
 		service.insertBoard(dto);
-		System.out.println("게시판등록 성공 createPOST()");
-		return "redirect:/board/listAll"; // redirct 자체가 응답이다 . 302
+		return "redirect:/board/listAll"; 
 	}
 
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
@@ -67,6 +64,7 @@ public class BoardController {
 		mav.addObject("userName", userName);
 		mav.addObject("map", map);
 		mav.setViewName("board/listAll");
+		
 		return mav;
 	}
 
@@ -86,7 +84,6 @@ public class BoardController {
 	@RequestMapping("/delete")
 	public String deleteBoard(@RequestParam("b_no") int b_no) throws Exception {
 		service.deleteboard(b_no);
-		System.out.println("deleteboard ()완료");
 		return "redirect:/board/listAll";
 	}
 

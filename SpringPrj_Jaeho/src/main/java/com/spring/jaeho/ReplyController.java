@@ -1,6 +1,5 @@
 package com.spring.jaeho;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,14 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.jaeho.dto.ReplyDTO;
 import com.spring.jaeho.page.ReplyPager;
 import com.spring.jaeho.service.ReplyService;
-
 @RestController
 @RequestMapping("/reply/")
 public class ReplyController {
@@ -44,17 +41,14 @@ public class ReplyController {
 	@RequestMapping(value = "/insertRest", method = RequestMethod.POST)
 	public ResponseEntity<String> insertRest(@RequestBody ReplyDTO dto, HttpSession session) {
 		ResponseEntity<String> entity = null;
-
 		try {
 			// 세션에 저장된 회원아이디를 댓글작성자에 세팅 .
 			String userId = (String) session.getAttribute("userId");
 			dto.setReplyer(userId);
 			// 댓글입력(삽입) 메소드 호출
-		
 			service.insertReply(dto);
 			// 댓글입력이 성공하면 성공메시지 저장
 			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 댓글입력이 실패하면 실패메시지 저장
@@ -68,17 +62,13 @@ public class ReplyController {
 	//댓글리스트
 	// PathVariable: url에 명시된 변수를 받아온다.
 	@RequestMapping(value = "/list/{b_no}/{curPage}", method = RequestMethod.GET)
-	public ModelAndView replyList(@PathVariable("b_no") int b_no, @PathVariable int curPage, ModelAndView mav,
+	public ModelAndView replyList(@PathVariable  int b_no, @PathVariable int curPage, ModelAndView mav,
 			HttpSession session) {
-		// 페이징처리 댓글갯수 구하는 메소드 필요 .
 		int count = service.countReply(b_no);
-
 		ReplyPager replyPager = new ReplyPager(count, curPage);
-		// 현재 페이지의 페이지 시작번호
-		int start = replyPager.getPageBegin(); // 0 0행부터
-		int end = replyPager.getPageScale(); // 5 5개씩 보여주겠다.
+		int start = replyPager.getPageBegin(); 
+		int end = replyPager.getPageScale(); 
 		List<ReplyDTO> list = service.listReply(b_no, start, end, session);
-		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+list.get(0).getB_date());
 		mav.addObject("list", list);
 		mav.addObject("replyPager", replyPager);
 		mav.setViewName("board/replyList");

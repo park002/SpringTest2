@@ -34,33 +34,28 @@
 		});
 	});
 </script>
-<body>
-	<article>
-		<div class="container" role="main">
-			<h1>게시글 작성</h1>
-			<form name="form1" action="<c:url value="/board/create"/>"
-				method="POST">
-				<div class="mb-3">
-					<label for="title">제목</label> <input type="text" id="b_title"
-						class="form-control" name="b_title" placeholder="제목을 입력해주세요">
-				</div>
-				<div class="mb-3">
-					<label for="content">내용</label>
-					<textarea id="b_detail" class="form-control" rows="8"
-						name="b_detail" placeholder="내용을 입력해주세요"></textarea>
-				</div>
-
-				<div class="mb-3">
-					<label for="reg_id"> 작성자</label> <input type="text" name="b_writer"
-						id="b_writer" placeholder="작성자" value="${userId}" readonly>
-				</div>
-				<div>
-					<button type="button" id="btnSave" class="btn btn-sm btn-primary">작성하기</button>
-					<button type="reset" class="btn btn-sm btn-primary">취소</button>
-				</div>
-			</form>
-
-		</div>
+      <body>
+	         <article>
+		             <div class="container" role="main">
+			                     <h1>게시글 작성</h1>
+			                                <form name="form1" action="<c:url value="/board/create"/>"method="POST">
+				                            		<div class="mb-3">
+															<label for="title">제목</label> <input type="text" id="b_title"
+																	class="form-control" name="b_title" placeholder="제목을 입력해주세요">
+													</div>
+													<div class="mb-3">
+															<label for="content">내용</label>
+																 <textarea id="b_detail" class="form-control" rows="8" name="b_detail" placeholder="내용을 입력해주세요"></textarea>
+													</div>
+													<div class="mb-3">
+														<label for="reg_id"> 작성자</label> <input type="text" name="b_writer" id="b_writer" placeholder="작성자" value="${userId}" readonly>
+													</div>
+													<div>
+														<button type="button" id="btnSave" class="btn btn-sm btn-primary">작성하기</button>
+														<button type="reset" class="btn btn-sm btn-primary">취소</button>
+												   </div>
+										</form>
+						</div>
 	</article>
 </body>
 </html>

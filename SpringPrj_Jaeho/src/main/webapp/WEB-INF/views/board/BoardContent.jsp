@@ -19,7 +19,6 @@
 	function replyJson() {
 		var replytext = $("#replytext").val(); //댓글의 내용을 가져온다 
 		var b_no = "${boardContent.b_no}" //게시글번호 
-
 		$.ajax({
 			type : "post",
 			url : "${pageContext.request.contextPath}/reply/insertRest",
@@ -34,10 +33,9 @@
 			data : JSON.stringify({ // 자바스크립트 객체생성=>{}
 				b_no : b_no, //왼쪽이 속성명(문자열): 속성값(변수)
 				replytext : replytext,
-
 			}),
 			success : function(abc) {
-				console.log(abc); // console에 success 뜬다
+				//console.log(abc);
 				alert('댓글이 등록되었습니다');
 				//댓글 입력 완료 후 댓글 목록 불러오기 함수호출
 				listReplyRest("1"); //Rest방식
@@ -54,7 +52,7 @@
 					type : "get",
 					url : "${pageContext.request.contextPath}/reply/list/${boardContent.b_no}/"
 							+ num,
-					success : function(result) { //ajax가 request를 보내고 response로 돌아온 값 =>result
+					success : function(result) {
 						$("#listReply").html(result);
 					}
 				});
@@ -86,10 +84,6 @@
 						});
 
 		$("#btnUpdate").click(function() {
-							var b_title = $("#b_title").val();
-							var b_detail = $("#b_detail").val();
-							var b_writer = $("#b_writer").val();
-
 							if (b_title == "") {
 								alert('제목을 입력하세요');
 								document.form1.b_title.focus();
@@ -100,7 +94,6 @@
 								document.form1.b_detail.focus();
 								return;
 							}
-
 							alert('작성하신대로 수정 하시겠습니까?');
 							document.form1.action = "${pageContext.request.contextPath}/board/updateBoard";
 							document.form1.submit();
@@ -118,8 +111,6 @@
 	});
 </script>
 
-
-
 </head>
 <style>
 #modifyReply {
@@ -134,10 +125,8 @@
 </style>
 <body>
 	<article>
-
 		<div class="container" role="main">
 			<h2>Board Content</h2>
-
 			<form name="form1" method="get">
 				<div class="bg-white rounded shadow-sm">
 					<div class="board_date">
@@ -165,7 +154,6 @@
 				</div>
 
 				<div style="margin-top: 20px">
-
 					<input type="hidden" name="b_no" value="${boardContent.b_no}">
 					<!--본인이 쓴 게시물만 수정,삭제 가능하도록 처리  -->
 					<c:if test="${userId eq boardContent.b_writer }">
@@ -201,9 +189,11 @@
 			<!--댓글 목록 출력할 위치  -->
 			<div class="my-3 p-3 bg-white rounded shadow-sm" style="padding-top: 10px">
 				<h6 class="border-bottom pb-2 mb-0">Reply list</h6>
-				<div id="listReply"></div>
+				<div id="listReply">
+				
+				</div>
 			</div>
 		</div>
 	</article>
-</body>
+</body>	
 </html>
