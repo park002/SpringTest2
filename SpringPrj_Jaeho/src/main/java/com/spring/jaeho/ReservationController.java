@@ -34,7 +34,7 @@ public class ReservationController {
 		dto.setReservation_number(ReservationNumber);
 		service.reservation_number_people(dto);
 		int RoomPrice=service.RoomPrice(dto);
-		//체크인 체크아웃 날짜간 차이를 구한다 
+		//체크인 체크아웃 날짜간 차이를 구한다 ASD
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	    Date beginDate = formatter.parse(dto.getReservation_data_in()); //체크인
 	    Date endDate = formatter.parse(dto.getReservation_data_out()); //체크아웃
