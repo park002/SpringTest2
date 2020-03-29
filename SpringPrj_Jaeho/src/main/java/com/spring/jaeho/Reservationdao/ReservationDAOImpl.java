@@ -15,11 +15,22 @@ public class ReservationDAOImpl implements ReservationDAO {
 	private static String namespace = "com.spring.jaeho.mybatis.mapper.ReservationMapper";
 	
 	@Override
-	public void insertReservation(ReservationDTO dto) {
+	public void reservation_number_people(ReservationDTO dto) {
 		// TODO Auto-generated method stub
-		System.out.println("dto========DAO= ====>"+dto);
-		sqlSession.insert(namespace+".insertReservation"+dto);
+		sqlSession.insert(namespace+".reservation_number_people",dto);
 		
 	}
+	@Override
+	public int RoomPrice(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectOne(namespace+".RoomPrice",dto);
+	}
+	@Override
+	public void reservationInsert(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		sqlSession.selectOne(namespace+".reservationInsert",dto);
+	}
+  
+
 	
 }

@@ -13,6 +13,9 @@
 	<logger name="com.spring.jaeho">
 		<level value="info" />
 	</logger>
+	<logger name="com.spring.jaeho.Reservationdao">
+		<level value="info"/>
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
@@ -33,7 +36,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="WARN" />
 		<appender-ref ref="console" />
 	</root>
 	

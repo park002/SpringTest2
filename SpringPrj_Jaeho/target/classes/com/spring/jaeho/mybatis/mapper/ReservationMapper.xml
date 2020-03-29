@@ -3,12 +3,27 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.jaeho.mybatis.mapper.ReservationMapper">
+<mapper
+	namespace="com.spring.jaeho.mybatis.mapper.ReservationMapper">
 
-<insert id="insertReservation" parameterType="ReservationDTO">
-		INSERT INTO reservation_number_people
+	<insert id="reservation_number_people" parameterType="ReservationDTO">
+		INSERT INTO
+		reservation_number_people
 		(reservation_number,room_type,adult,child)
-		VALUES(#{reservation_number},#{room_type},${adult},${child})
+		VALUES(#{reservation_number},#{room_type},#{adult},#{child})
 	</insert>
+	<select id="RoomPrice" parameterType="ReservationDTO"
+		resultType="int">
+		SELECT room_prices
+		FROM room_information
+		WHERE
+		room_type=#{room_type}
+	</select>
 
+	<insert id="reservationInsert" parameterType="ReservationDTO">
+		INSERT INTO reservation
+		(reservation_number,m_id,reservation_date_in,reservation_date_out,price)
+		VALUES
+		(#{reservation_number},#{m_id},#{reservation_data_in},#{reservation_data_out},#{price})
+	</insert>
 </mapper>

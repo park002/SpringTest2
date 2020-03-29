@@ -12,9 +12,19 @@ public class ReservationServiceImpl implements ReservationService {
 	ReservationDAO dao;
 
 	@Override
-	public void insertReservation(ReservationDTO dto) {
+	public void reservation_number_people(ReservationDTO dto) {
 		// TODO Auto-generated method stub
-      dao.insertReservation(dto);
+      dao.reservation_number_people(dto);
+	}
+	@Override
+	public int RoomPrice(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.RoomPrice(dto);
+	}
+	@Override
+	public void reservationInsert(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		dao.reservationInsert(dto);
 	}
 
 }

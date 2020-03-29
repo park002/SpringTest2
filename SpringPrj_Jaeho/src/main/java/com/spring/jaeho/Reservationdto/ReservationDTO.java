@@ -19,7 +19,7 @@ public class ReservationDTO {
 	private String m_id;// 회원 ID
 	private String reservation_data_in;// 체크인
 	private String reservation_data_out;// 체크아웃
-	private int room_type;// 룸 타입
+	private String room_type;// 룸 타입
 	private int adult;// 성인
 	private int child;// 어린이
 	private int price;// 방 가격
@@ -56,11 +56,11 @@ public class ReservationDTO {
 		this.reservation_data_out = reservation_data_out;
 	}
 
-	public int getRoom_type() {
+	public String getRoom_type() {
 		return room_type;
 	}
 
-	public void setRoom_type(int room_type) {
+	public void setRoom_type(String room_type) {
 		this.room_type = room_type;
 	}
 
