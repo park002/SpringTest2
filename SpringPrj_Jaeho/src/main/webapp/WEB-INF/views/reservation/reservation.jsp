@@ -8,39 +8,41 @@
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="Bootstrap 3 Website Template" />
+<!--<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">  -->
 
 <!-- Stylesheets
     ============================================= -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="images/favicon/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="images/favicon/favicon-32x32.png">
-<link
-	href="http://fonts.googleapis.com/css?family=PT+Sans:300,400,500,600,700"
-	rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:300,400,500,600,700" rel="stylesheet" type="text/css" />
+
+<!-- <link rel="stylesheet" href="css/bootstrap.css" type="text/css" /> -->
+       <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" type="text/css" />
+       <link rel="stylesheet" href="css/style.css" type="text/css" />
+
 <link rel="stylesheet" href="css/dark.css" type="text/css" />
 <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
 <link rel="stylesheet" href="css/animate.css" type="text/css" />
 <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-
 <link rel="stylesheet" href="css/responsive.css" type="text/css" />
 <link
       rel="stylesheet"
       type="text/css"
       href="https://unpkg.com/vue-airbnb-style-datepicker@latest/dist/vue-airbnb-style-datepicker.min.css"
     />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <!--[if lt IE 9]>
     	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
 <!--  -->
 <!-- External JavaScripts
     ============================================= -->
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/plugins.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+       <script src="<c:url value='/resources/js/jquery.js'/>"> </script>
+<!-- <script type="text/javascript" src="js/plugins.js"></script> -->
+       <script src="<c:url value='/resources/js/plugins.js'/>"> </script>
+       
  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>  
 <!-- Document Title
@@ -217,8 +219,8 @@
 
 		<!-- Content
         ============================================= -->
-        <form action="ReservationCheck.do" method="post">
-        
+        <form action="<c:url value="/reservation/reservation1" />" method="post">
+        <%-- <script src="<c:url value="/resources/js/moment.js" />"></script> --%>
         <input id="dateOne" name="reservation_data_in" type="hidden">
         <input id="dateTwo" name="reservation_data_out" type="hidden">
 		<section id="content">

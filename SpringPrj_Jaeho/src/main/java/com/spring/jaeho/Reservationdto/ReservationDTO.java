@@ -15,7 +15,7 @@ package com.spring.jaeho.Reservationdto;
 		 ENGINE=InnoDB DEFAULT CHARSET=utf8;*/
 
 public class ReservationDTO {
-	private String reservation_number;// PK예약번호
+	private String reservation_number;// PK예약번호	
 	private String m_id;// 회원 ID
 	private String reservation_data_in;// 체크인
 	private String reservation_data_out;// 체크아웃
