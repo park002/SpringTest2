@@ -1,5 +1,7 @@
 package com.spring.jaeho.Reservationservice;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public void reservationInsert(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		dao.reservationInsert(dto);
+	}
+	@Override
+	public int DuplicateFind(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.DuplicateFind(dto);
 	}
 
 }

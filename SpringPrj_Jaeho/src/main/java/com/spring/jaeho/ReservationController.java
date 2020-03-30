@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.jaeho.Reservationdto.ReservationDTO;
 import com.spring.jaeho.Reservationservice.ReservationService;
@@ -29,7 +30,8 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value = "/reservation1", method = RequestMethod.POST)
-	public String reservation(ReservationDTO dto, HttpSession session) throws ParseException {
+	public ModelAndView reservation(ReservationDTO dto, HttpSession session) throws ParseException {
+		ModelAndView mav = new ModelAndView();
 		String ReservationNumber = UUID.randomUUID().toString(); // UUID 생성 예약번호로 사용할 것
 		dto.setReservation_number(ReservationNumber);
 		service.reservation_number_people(dto);
@@ -42,13 +44,23 @@ public class ReservationController {
         long diffDays = diff / (24 * 60 * 60 * 1000)+1;//날짜 계산 하루예약은 0이므로 +1해준다.
         //날짜 차이 * 룸 가격 
         int price = RoomPrice * (int)diffDays;
-        dto.setPrice(price);
+        dto.setPrice(price);	
         dto.setM_id("ekem159");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+dto.toString());
+        //String id = (String)session.getAttribute("userId");
+        //&& id !=null
+       // System.out.println("@@@@@@@@@@@@@@@@@@@@@@"+dto.toString());
         service.reservationInsert(dto);
-        
-    
-        
+         int duplicateFind = service.DuplicateFind(dto);
+        mav.addObject("reservation_data_in",beginDate);
+        mav.addObject("reservation_data_out",endDate);
+        mav.addObject("adult", dto.getAdult());
+        mav.addObject("child",dto.getChild());
+        mav.addObject("price",price);
+        mav.addObject("reservation_number",ReservationNumber);
+        mav.addObject("duplicateFind", duplicateFind);
+        mav.addObject("room_type",dto.getRoom_type());
+        mav.addObject("m_id", dto.getM_id());
+        mav.setViewName("/reservation/ReservationCheck");
          //System.out.println("가격!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+price);
         //System.out.println("날짜 차이 * 룸가격 =>"+diffDays+"*"+roomprices+"="+price);
 		
@@ -57,8 +69,18 @@ public class ReservationController {
 		// 조인한 count 가 값이 있다면 view 단에서 죄송합니다 방의 예약이 됬다 하면됌
 		// 룸타입에 맞는 가격도 가져와서 예약테이블에 회원 아이디도 넣어준다
 		// 그 후에 리턴 ReservationCheck 로 !
-		return "/reservation/reservation"; // 예약확인 해주는 곳으로 데이터 넘기자 ~
-
+		return mav;// 예약확인 해주는 곳으로 데이터 넘기자 ~
 	}
+	
+	@RequestMapping(value = "/ReservationPay" , method = RequestMethod.GET)
+	public String ReservationPay(@RequestParam ("number") String ReservationNumber) {
+		System.out.println(ReservationNumber);
+		//service.reservationConfirm(ReservationNumber);
+		
+	return null;
+	
+	
+	}
+	
 
 }

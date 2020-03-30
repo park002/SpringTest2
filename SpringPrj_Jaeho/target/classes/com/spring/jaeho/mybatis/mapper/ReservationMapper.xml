@@ -6,7 +6,8 @@
 <mapper
 	namespace="com.spring.jaeho.mybatis.mapper.ReservationMapper">
 
-	<insert id="reservation_number_people" parameterType="ReservationDTO">
+	<insert id="reservation_number_people"
+		parameterType="ReservationDTO">
 		INSERT INTO
 		reservation_number_people
 		(reservation_number,room_type,adult,child)
@@ -21,9 +22,24 @@
 	</select>
 
 	<insert id="reservationInsert" parameterType="ReservationDTO">
-		INSERT INTO reservation
+		INSERT INTO
+		reservation
 		(reservation_number,m_id,reservation_date_in,reservation_date_out,price)
 		VALUES
 		(#{reservation_number},#{m_id},#{reservation_data_in},#{reservation_data_out},#{price})
 	</insert>
+	
+	<select id="DuplicateFind" resultType="int" parameterType="ReservationDTO">
+		SELECT count(*) FROM
+		reservation r JOIN reservation_number_people p
+		ON 
+		r.reservation_number = p.reservation_number
+		WHERE
+		 room_type IN(#{room_type}) 
+		 AND
+		( #{reservation_data_in} BETWEEN reservation_date_in AND reservation_date_out
+		OR 
+		#{reservation_data_out} BETWEEN reservation_date_in AND reservation_date_out);
+	</select>
+
 </mapper>
