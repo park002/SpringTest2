@@ -9,5 +9,12 @@ public interface ReservationDAO {
     public int RoomPrice(ReservationDTO dto);
     public void reservationInsert(ReservationDTO dto);
     public int DuplicateFind(ReservationDTO dto);
+
+    public String PayCheck(String m_id);
+    
+    public void PayCheckUpdate(String number);
+    
+    
+ 
     
 }

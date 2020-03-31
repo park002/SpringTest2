@@ -20,9 +20,20 @@ public class ReservationDTO {
 	private String reservation_data_in;// 체크인
 	private String reservation_data_out;// 체크아웃
 	private String room_type;// 룸 타입
+	private boolean confirmation_payment;
 	private int adult;// 성인
 	private int child;// 어린이
 	private int price;// 방 가격
+
+	
+
+	public boolean isConfirmation_payment() {
+		return confirmation_payment;
+	}
+
+	public void setConfirmation_payment(boolean confirmation_payment) {
+		this.confirmation_payment = confirmation_payment;
+	}
 
 	public String getReservation_number() {
 		return reservation_number;

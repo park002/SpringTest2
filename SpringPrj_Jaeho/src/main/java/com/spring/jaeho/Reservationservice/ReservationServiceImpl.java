@@ -33,5 +33,16 @@ public class ReservationServiceImpl implements ReservationService {
 		// TODO Auto-generated method stub
 		return dao.DuplicateFind(dto);
 	}
+	@Override
+	public String PayCheck(String m_id) {
+		// TODO Auto-generated method stub
+		return dao.PayCheck(m_id);
+	}
+@Override
+public void PayCheckUpdate(String number) {
+	// TODO Auto-generated method stub
+	 dao.PayCheckUpdate(number);
+	
+}
 
 }

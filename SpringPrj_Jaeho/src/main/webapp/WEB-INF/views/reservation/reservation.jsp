@@ -7,6 +7,7 @@
 	<head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Bootstrap 3 Website Template" />
+	
 	<!-- Stylesheets
 	============================================= -->
 	<link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/favicon/favicon-16x16.png' />">
@@ -150,7 +151,7 @@
                   </li>
                   <li><a href="contact-1.jsp"><div>고객의 소리</div></a></li>
                   <li><a href="Reseravtion.do"><div>예약하기</div></a></li>     
-                  <li><a href="ReservationConfirm.do"><div>예약조회 및 취소</div></a></li>         
+                  <li><a href="<c:url value='/reservation/ReservationSelect'/>"><div>예약조회 및 취소</div></a></li>         
                         <%--  	<c:if test="${customer_id eq null}">
                   <li><a href="hewon.jsp"><div>로그인</div></a>
                       <ul>
@@ -190,6 +191,12 @@
 </section>
 <!-- #page-title end -->
 
+<c:if test="${confirmation_payment ne null}"> 
+         			<script>
+         			alert('현재 예약하신 방이 있습니다 변경을 원하실 경우 취소 후 다시 예약 해주시기 바랍니다.');
+         		 location.href="${pageContext.request.contextPath}/reservation/ReservationSelect";
+         		</script>
+         		</c:if>
 
 <!-- Content
       ============================================= -->
@@ -273,7 +280,6 @@
 				  <option value="3">어린이 3</option>
 				</select>
 				</div>
-				
 				</div>
 			</div>
 		</div>
@@ -435,10 +441,10 @@
                                 			<li><a href="suite-1.html"><div>객실 - 스위트</div></a></li>
                                 			<li><a href="dining-1.html"><div>다이닝</div></a></li>
                                 			<li><a href="Reseravtion.do"><div>예약하기</div></a></li>
-                                            <li><a href="ReservationConfirm.do"><div>예약조회 및 취소</div></a></li>
+                                            <li><a href="<c:url value='/reservation/ReservationSelect'/>"><div>예약조회 및 취소</div></a></li>
                             			</ul>
 						</div>
-					</div>
+					</div>                                     
 				</div>
 			</div>
 		</div>
