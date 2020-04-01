@@ -23,24 +23,32 @@ import com.spring.jaeho.Reservationservice.ReservationService;
 public class ReservationController {
 	@Autowired
 	ReservationService service;
- //예약하기 링크 누르면!!!!!!!!!!!!!!!여기
+
+	// 예약하기 링크 누르면!!!!!!!!!!!!!!!여기
 	@RequestMapping(value = "/r", method = RequestMethod.GET)
-	public String reservation(HttpSession session, ReservationDTO dto,Model model) {
+	public String reservation(HttpSession session, ReservationDTO dto, Model model) {
 		dto.setM_id("ekem159");
-		String confirmation_payment = service.PayCheck(dto.getM_id()); 
-		model.addAttribute("confirmation_payment",confirmation_payment);
+		String confirmation_payment = service.PayCheck(dto.getM_id());
+		model.addAttribute("confirmation_payment", confirmation_payment);
 		return "/reservation/reservation";
 	}
 
 	// 예약하기 버튼누르면
 	@RequestMapping(value = "/reservation1", method = RequestMethod.POST)
-	public String reservation(ReservationDTO dto, HttpSession session,Model model) throws ParseException {
+	public String reservation(ReservationDTO dto, HttpSession session, Model model) throws ParseException {
 		dto.setM_id("ekem159");
+
+		int duplicateFind = service.DuplicateFind(dto);
+		if (duplicateFind >= 1) {
+			model.addAttribute("duplicateFind", duplicateFind);
+			return "/reservation/ReservationCheck";
+		}
+
 		String ReservationNumber = UUID.randomUUID().toString(); // UUID 생성 예약번호로 사용할 것
 		dto.setReservation_number(ReservationNumber);
 		service.reservation_number_people(dto);
 		int RoomPrice = service.RoomPrice(dto);
-		// 체크인 체크아웃 날짜간 차이를 구한다 
+		// 체크인 체크아웃 날짜간 차이를 구한다
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date beginDate = formatter.parse(dto.getReservation_data_in()); // 체크인
 		Date endDate = formatter.parse(dto.getReservation_data_out()); // 체크아웃
@@ -49,34 +57,45 @@ public class ReservationController {
 		// 날짜 차이 * 룸 가격
 		int price = RoomPrice * (int) diffDays;
 		dto.setPrice(price);
+		System.out.println("@@@@" + dto.toString());
 		service.reservationInsert(dto);
-		int duplicateFind = service.DuplicateFind(dto);
-		model.addAttribute("reservation_data_in",beginDate);
-		model.addAttribute("reservation_data_out",endDate);
-		model.addAttribute("adult",dto.getAdult());
-		model.addAttribute("child",dto.getChild());
-		model.addAttribute("price",dto.getPrice());
-		model.addAttribute("reservation_number",dto.getReservation_number());
-		model.addAttribute("duplicateFind",duplicateFind);
-		model.addAttribute("room_type",dto.getRoom_type());
-		model.addAttribute("m_id",dto.getM_id());
+		// model.addAttribute("reservation", dto);
+		model.addAttribute("reservation_data_in", beginDate);
+		model.addAttribute("reservation_data_out", endDate);
+		// model.addAttribute("duplicateFind",duplicateFind);
+		model.addAttribute("adult", dto.getAdult());
+		model.addAttribute("child", dto.getChild());
+		model.addAttribute("price", dto.getPrice());
+		model.addAttribute("reservation_number", dto.getReservation_number());
+		model.addAttribute("room_type", dto.getRoom_type());
+		model.addAttribute("m_id", dto.getM_id());
 		return "/reservation/ReservationCheck";
 	}
 	// 결제하기
 	@RequestMapping(value = "/ReservationPay", method = RequestMethod.GET)
-	public String ReservationPay(@RequestParam ("number") String number,Model model) {
+	public String ReservationPay(@RequestParam("number") String number, Model model) {
 		service.PayCheckUpdate(number);
 		return "/index";
 	}
-
-	// 예약 조회/취소
+	// 예약 조회/취소 링크 클릭 했을 경우 
 	@RequestMapping(value = "/ReservationSelect", method = RequestMethod.GET)
-	public String ReservationSelect(HttpSession session, ReservationDTO dto, Model model) { // 일단 세션 가져왔다 치자
+	public String ReservationSelect(HttpSession session, ReservationDTO dto, Model model) {
+		// 일단 세션 가져왔다 치자
 		dto.setM_id("ekem159");
+		String confirmation_payment = service.PayCheck(dto.getM_id());
 		
-		
-		model.addAttribute("SelectNumber", dto);
+		dto = service.ReservationSelect(dto);
+		System.out.println("@@@@@@@@@@"+dto.toString());
+		model.addAttribute("confirmation_payment", confirmation_payment);
+		model.addAttribute("dto", dto);
 		return "/reservation/ReservationSelect";
+		
+	}
+	// 예약취소
+	@RequestMapping(value = "/ReservationCancel", method = RequestMethod.POST)
+	public String ReservationCancel(ReservationDTO dto) {
+		service.ReservationDelete(dto);
+		return "/index";
 
 	}
 

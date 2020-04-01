@@ -16,33 +16,49 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void reservation_number_people(ReservationDTO dto) {
 		// TODO Auto-generated method stub
-      dao.reservation_number_people(dto);
+		dao.reservation_number_people(dto);
 	}
+
 	@Override
 	public int RoomPrice(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.RoomPrice(dto);
 	}
+
 	@Override
 	public void reservationInsert(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		dao.reservationInsert(dto);
 	}
+
 	@Override
 	public int DuplicateFind(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.DuplicateFind(dto);
 	}
+
 	@Override
 	public String PayCheck(String m_id) {
 		// TODO Auto-generated method stub
 		return dao.PayCheck(m_id);
 	}
-@Override
-public void PayCheckUpdate(String number) {
-	// TODO Auto-generated method stub
-	 dao.PayCheckUpdate(number);
-	
-}
+
+	@Override
+	public void PayCheckUpdate(String number) {
+		// TODO Auto-generated method stub
+		dao.PayCheckUpdate(number);
+
+	}
+	@Override
+	public void ReservationDelete(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+	   dao.ReservationDelete(dto);
+		
+	}
+	@Override
+	public ReservationDTO ReservationSelect(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		return dao.ReservationSelect(dto);
+	}
 
 }

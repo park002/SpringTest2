@@ -154,51 +154,85 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
                         <h3>예약 조회 및 취소</h3>
                     </div>
 
-                    <div id="contact-form-result" data-notify-type="success" data-notify-msg="<i class=icon-ok-sign></i> Message Sent Successfully!"></div>
-                  
-        
+                    <div id="contact-form-result" data-notify-type="success" data-notify-msg="<i class=icon-ok-sign></i> Message Sent Successfully!">
+                    </div>
+                   
+                   
+                     <c:if test="${confirmation_payment eq null}">
+                             <span style="color: red">안녕하세요 <c:out value="${dto.m_id}"/> 님 현재 조회된 결과가 없습니다</span>  
+                      </c:if>
                     <!-- Contact Form
                     ============================================= -->
-                    
+                       <c:if test="${confirmation_payment ne null}">
                     <form method="post">
-					<input type="hidden" name="reservation_number" id="reservation_number" value="${SelectNumber.reservation_number}">
-					<div class="row">
+					<input type="hidden" name="reservation_number" id="reservation_number" value="${dto.reservation_number}">
+			
+					<%-- <div class="row">
 						<div class="col-md-6">
 							<label for="template-contactform-name">예약번호</label><br>
-							<div class="well well-sm"><c:out value="${SelectNumber.reservation_number}" /></div>
+							<div class="well well-sm"><c:out value="${dto.reservation_number}" /></div>
 						</div>
+					</div> --%>
+						 	<div class="col_full">
+							<label for="template-contactform-name">예약번호</label><br>
+							<div class="well well-sm"><c:out value="${dto.reservation_number}" /></div>
 					</div>
 					
 					<div class="row">
 						<div class="col-md-6">
 							<label for="template-contactform-name">아이디</label><br>
-							<div class="well well-sm"><c:out value="${SelectOrDelete.m_id}" /></div>
+							<div class="well well-sm"><c:out value="${dto.m_id}" /></div>
 						</div> 
-
-						<div class="col-md-6">
+						
+						
+                      	 <div class="col-md-6">
+							<label for="template-contactform-name">룸 번호</label><br>
+							<div class="well well-sm"><c:out value="${dto.room_type}"/></div>
+						</div> 
+						<%-- <div class="col-md-6">
 							<label for="template-contactform-name">예약날짜</label><br>
-							<div class="well well-sm"><fmt:formatDate value="${DateCheck.reservation_data_in}" pattern="yyyy-MM-dd"/> ~ 
-							 <fmt:formatDate value="${DateCheck.reservation_data_out}" pattern="yyyy-MM-dd"/>
+							<div class="well well-sm"><fmt:formatDate value="${dto.reservation_data_in}" pattern="yyyy-MM-dd"/> ~ 
+							 <fmt:formatDate value="${dto.reservation_data_out}" pattern="yyyy-MM-dd"/>
 							</div>
-						</div>
+						</div> --%>
+						
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<label for="template-contactform-name">성인</label><br>
-							<div class="well well-sm"><c:out value="${SelectOrDelete.adult}" /></div>
+							<div class="well well-sm"><c:out value="${dto.adult}" /></div>
 						</div>
 
 						<div class="col-md-6">
 							<label for="template-contactform-name">어린이</label><br>
-							<div class="well well-sm"><c:out value="${SelectOrDelete.child}" /></div>
+							<div class="well well-sm"><c:out value="${dto.child}" /></div>
 						</div>
 					</div>
 					
-	
+					<div class="col_full">
+							<label for="template-contactform-name">가격</label><br>
+							<div class="well well-sm"><fmt:formatNumber value="${dto.price}" pattern="#,###" /></div>
+					</div>
+					
+	               <!-- 비밀번호 입력 ajax 여기다 처리 할 것 임 
+	                  <div class="col_full">
+							<label for="template-contactform-name">결제 확인</label><br>
+							<div class="well well-sm">결제를 진행해 주세요</div>
+					</div> -->
+					
                         <div class="clearfix" style=" text-align:center;" >
-                                <button type="submit" formaction="ReservationCancellation.do" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
-                                <span>예약취소</span> <i class="icon-angle-right"></i></button></div>
+                        <c:if test="${confirmation_payment eq '0'}">
+                           <button type="button" id="pay" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black; ">
+                                <span >결제하기</span> <i class="icon-angle-right"></i></button>
+                                  </c:if>
+                                <c:if test="${confirmation_payment eq '1' || confirmation_payment eq '0'}">
+                                <button type="submit" formaction="<c:out value='/reservation/ReservationCancel'/>" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
+                                <span>예약취소</span> <i class="icon-angle-right"></i></button>
+                                </c:if>
+                              
+                                </div>
                         </form>
+                         </c:if>
                        
 
                     <script type="text/javascript">

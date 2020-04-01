@@ -54,8 +54,19 @@ public class ReservationDAOImpl implements ReservationDAO {
 	public void PayCheckUpdate(String number) {
 		// TODO Auto-generated method stub
 		sqlSession.selectOne(namespace + ".PayCheckUpdate", number);
-	
 
+	}
+
+	@Override
+	public void ReservationDelete(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		sqlSession.selectOne(namespace + ".ReservationDelete", dto);
+		
+	}
+	@Override
+	public ReservationDTO ReservationSelect(ReservationDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".ReservationSelect", dto);
 	}
 
 }

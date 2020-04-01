@@ -16,5 +16,9 @@ public interface ReservationService {
 	public String PayCheck(String m_id);
 
 	public void PayCheckUpdate(String number);
-
+	
+	public void ReservationDelete(ReservationDTO dto);
+	
+	public ReservationDTO ReservationSelect(ReservationDTO dto);
+	
 }

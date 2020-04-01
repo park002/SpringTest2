@@ -191,12 +191,18 @@
 </section>
 <!-- #page-title end -->
 
-<c:if test="${confirmation_payment ne null}"> 
+<c:if test="${confirmation_payment eq '1'}"> 
          			<script>
          			alert('현재 예약하신 방이 있습니다 변경을 원하실 경우 취소 후 다시 예약 해주시기 바랍니다.');
          		 location.href="${pageContext.request.contextPath}/reservation/ReservationSelect";
          		</script>
          		</c:if>
+   <c:if test ="${confirmation_payment eq '0'}">
+         <script>
+        	alert(' 현재 결제가 되지 않은 룸이 있습니다 결제 또는 취소 후 예약 해주시기 바랍니다 감사합니다');
+		 location.href="${pageContext.request.contextPath}/reservation/ReservationSelect";
+         </script>
+   </c:if>      		
 
 <!-- Content
       ============================================= -->

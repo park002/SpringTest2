@@ -153,10 +153,8 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
                     <div class="fancy-title title-dotted-border">
                         <h3>예약 조회 및 취소</h3>
                     </div>
-
                     <div id="contact-form-result" data-notify-type="success" data-notify-msg="<i class=icon-ok-sign></i> Message Sent Successfully!"></div>
-                  
-   				 <c:if test="${duplicateFind>1 }">
+   				 <c:if test="${duplicateFind>=1 }">
          		<script>
          			alert('현재 선택하신 방은 이미 예약된 방입니다 죄송합니다. 다른 날짜를 택하여 주십시오');
          		 location.href="${pageContext.request.contextPath}/reservation/r";
@@ -206,7 +204,7 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 					
 					<div class="col_full">
 							<label for="template-contactform-name">가격</label><br>
-							<div class="well well-sm"><c:out value="${price}"/></div>
+							<div class="well well-sm"><fmt:formatNumber value="${price}" pattern="#,###" /></div>
 					</div>
 					
 					<div class="col_full">
@@ -217,8 +215,7 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
                         <div class="clearfix" style=" text-align:center;" >
                                 <button type="button" id="pay" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black; ">
                                 <span >결제하기</span> <i class="icon-angle-right"></i></button>
-                                
-                                <button type="submit" formaction="ReservationCancellation.do" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
+                                <button type="submit" formaction="<c:url value='/reservation/ReservationCancel' />" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
                                 <span>예약취소</span> <i class="icon-angle-right"></i></button></div>
                         </form>
                         
