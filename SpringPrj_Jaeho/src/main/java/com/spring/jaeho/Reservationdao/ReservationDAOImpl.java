@@ -58,15 +58,20 @@ public class ReservationDAOImpl implements ReservationDAO {
 	}
 
 	@Override
-	public void ReservationDelete(ReservationDTO dto) {
+	public void ReservationDelete() {
 		// TODO Auto-generated method stub
-		sqlSession.selectOne(namespace + ".ReservationDelete", dto);
+		sqlSession.selectOne(namespace + ".ReservationDelete");
 		
 	}
 	@Override
 	public ReservationDTO ReservationSelect(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".ReservationSelect", dto);
+	}
+	@Override
+	public String SearchPW(String m_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".SearchPW",m_id);
 	}
 
 }

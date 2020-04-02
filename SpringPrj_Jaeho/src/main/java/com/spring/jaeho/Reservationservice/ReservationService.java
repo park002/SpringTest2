@@ -17,8 +17,11 @@ public interface ReservationService {
 
 	public void PayCheckUpdate(String number);
 	
-	public void ReservationDelete(ReservationDTO dto);
+	public void ReservationDelete();
 	
 	public ReservationDTO ReservationSelect(ReservationDTO dto);
+	
+	public String SearchPW(String m_id);
+	
 	
 }

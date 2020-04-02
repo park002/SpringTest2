@@ -3,6 +3,7 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
+<html dir="ltr" lang="UTF-8">
 <head>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -10,51 +11,29 @@
 
     <!-- Stylesheets
     ============================================= -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">        
+	<link rel="icon" type="image/png" sizes="16x16" href="<c:url value='/resources/images/favicon/favicon-16x16.png' />">
+	<link rel="icon" type="image/png" sizes="32x32" href="<c:url value='/resources/images/favicon/favicon-32x32.png'/>">
 	<link href="http://fonts.googleapis.com/css?family=PT+Sans:300,400,500,600,700" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="css/dark.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-    
-
-    <link rel="stylesheet" href="css/responsive.css" type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <!--[if lt IE 9]>
-    	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-    <![endif]-->
-
-    <!-- External JavaScripts
-    ============================================= -->
-    
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>" type="text/css" />
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>"type="text/css" />
+	<link rel="stylesheet"  href="<c:url value='/resources/css/dark.css'/>" type="text/css" />
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-icons.css'/>" type="text/css" />
+	<link rel="stylesheet" href="<c:url value='/resources/css/animate.css'/>" type="text/css" />
+	<link rel="stylesheet"  href="<c:url value='/resources/css/magnific-popup.css'/>"  type="text/css" />
+	<link rel="stylesheet"href="<c:url value='/resources/css/responsive.css'/>"  type="text/css" />
+	<link rel="stylesheet"  type="text/css" href="https://unpkg.com/vue-airbnb-style-datepicker@latest/dist/vue-airbnb-style-datepicker.min.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<script src="<c:url value='/resources/js/jquery.js'/>"> </script>
+	<script src="<c:url value='/resources/js/plugins.js'/>"> </script>
 
     <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-    <script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-    <script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/resources/include/rs-plugin/js/jquery.themepunch.tools.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/resources/include/rs-plugin/js/jquery.themepunch.revolution.min.js' />"></script>
 	
-	<!-- 달력 스크립트  -->
-	 <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Examples</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://unpkg.com/vue-airbnb-style-datepicker@latest/dist/vue-airbnb-style-datepicker.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.29.0/date_fns.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>   
-	<!-- 달력 스크립트 종료 -->  
+ 
 	
     <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-    <link rel="stylesheet" type="text/css" href="include/rs-plugin/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/include/rs-plugin/css/settings.css'/>" media="screen" />
 
     <!-- Document Title
     ============================================= -->
@@ -89,57 +68,6 @@
 		}
 
     </style>
-    <!--달력 스타일  -->
-    <style>
-      html,
-      body {
-        min-height: 100vh;
-        font-size: 14px;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-          Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-        line-height: 18px;
-        font-weight: 400;
-        -webkit-font-smoothing: antialiased;
-        padding: 10px;
-      }
-      .align-right {
-        text-align: right;
-      }
-      h1 {
-        font-size: 1.8em;
-        line-height: 1.5em;
-      }
-      .datepicker-container {
-        margin-bottom: 0px;
-        display: inline-block;
-  
-      }
-
-      #datepicker-button-trigger {
-        background: #428bca;
-        border: 1px solid #428bca;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 3px;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: center;
-        min-width: 200px;
-      }
-      input {
-        padding: 6px 10px;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-      }
-      .inline-with-input {
-        width: 300px;
-      }
-      .inline-with-input input {
-        width: 100%;
-      }
-    </style>  
-    
-    <!-- 달력 끝 -->
-
 </head>
 
 <body class="stretched">
@@ -161,8 +89,8 @@
                     <!-- Logo
                     ============================================= -->
                     <div id="logo">
-                        <a href="index.do" class="standard-logo" data-dark-logo="images/logo/mainlogo.png"><img src="images/logo/mainlogo.png" alt="Chocolat Logo"></a>
-                        <a href="index.do" class="retina-logo" data-dark-logo="images/logo/mainlogo.png"><img src="images/logo/mainlogo.png" alt="Chocolat Logo"></a>                   
+                        <a href= "<c:url value='/'/>" class="standard-logo" data-dark-logo="<c:url value='/resources/images/logo/mainlogo.png'/>"><img src="<c:url value='/resources/images/logo/mainlogo.png'/>" alt="Chocolat Logo"></a>
+                        <a href="<c:url value='/'/>" class="retina-logo" data-dark-logo="<c:url value='/resources/images/logo/mainlogo.png' />"><img src="<c:url value='/resources/images/logo/mainlogo.png'/>" alt="Chocolat Logo"></a>                   
                     </div><!-- #logo end -->
                              
                              
@@ -210,8 +138,8 @@
                                 </ul>
                             </li>
                             <li><a href="contact-1.jsp"><div>고객의 소리</div></a></li>
-                            <li><a href="Reseravtion.do"><div>예약하기</div></a></li>     
-                            <li><a href="ReservationConfirm.do"><div>예약조회 및 취소</div></a></li>  
+                            <li><a href="<c:url value='/reservation/r'/>"><div>예약하기</div></a></li>     
+                            <li><a href="<c:url value='/reservation/ReservationSelect'/>"><div>예약조회 및 취소</div></a></li>  
                             
                              <%-- 	<c:if test="${customer_id eq null}">                          
                             <li><a href="hewon.jsp"><div>로그인</div></a>
@@ -246,7 +174,7 @@
                     
                     <!-- 메인 슬라이드 부분  -->
                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-thumb="" data-saveperformance="off" data-title="">
-                        <img src="images/logo/mainslide.jpg" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
+                        <img src="<c:url value='/resources/images/logo/mainslide.jpg'/>" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
 
                         <div class="tp-caption customin ltl tp-resizeme revo-slider-caps-text uppercase"
                         data-x="340"
@@ -294,7 +222,7 @@
                     
                     <!-- SLIDE  -->
                     <li data-transition="slideup" data-slotamount="1" data-masterspeed="1000" data-thumb="" data-fstransition="fade" data-fsmasterspeed="1000" data-fsslotamount="7" data-saveperformance="off"  data-title="">
-                        <img src="images/logo/mainslide2.jpg" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
+                        <img src="<c:url value='/resources/images/logo/mainslide2.jpg'/>" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
 
                         <div class="tp-caption customin ltl tp-resizeme revo-slider-caps-text"
                         data-x="200"
@@ -343,7 +271,7 @@
                    
                     <!-- SLIDE  -->
                     <li data-transition="slideup" data-slotamount="1" data-masterspeed="1500" data-thumb="" data-delay="10000" data-saveperformance="off"  data-title="">
-                    <img src="images/logo/mainslide3.jpg" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
+                    <img src="<c:url value='/resources/images/logo/mainslide3.jpg' />" alt="" data-bgposition="left top" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="130" data-bgfitend="100" data-bgpositionend="right bottom">
 
                     <div class="tp-caption customin ltl tp-resizeme revo-slider-caps-text uppercase"
                     data-x="200"
@@ -481,7 +409,7 @@
           		<div class="section bgcolor-grey-light notopmargin noborder nobottommargin">
                     <div class="container clearfix">
                         <div class="col_half nobottommargin center">
-                            <img src="images/logo/mainpanorama.PNG" alt="" data-animate="fadeInUp">
+                            <img src="<c:url value='/resources/images/logo/mainpanorama.PNG' />" alt="" data-animate="fadeInUp">
                         </div>
                         <div class="col_half nobottommargin col_last">
                             <div class="heading-block" style="padding-top: 40px;">
@@ -497,7 +425,7 @@
            	            		<div class="section bgcolor-grey-light notopmargin noborder nobottommargin">
                     <div class="container clearfix">
                         <div class="col_half nobottommargin center">
-                            <img src="images/logo/mainheon.PNG" alt="" data-animate="fadeInUp">
+                            <img src="<c:url value='/resources/images/logo/mainheon.PNG' />" alt="" data-animate="fadeInUp">
                         </div>
                         <div class="col_half nobottommargin col_last">
                             <div class="heading-block" style="padding-top: 40px;">
@@ -512,56 +440,7 @@
            	  </div>                     
 				
 				
-				<!-- 달력 쿼리 시작 -->
-			 <script src="https://unpkg.com/vue-airbnb-style-datepicker@latest/dist/vue-airbnb-style-datepicker.min.js"></script>
-		    <script>
-		      var datepickerOptions = {}
-		      Vue.use(window.AirbnbStyleDatepicker, datepickerOptions)
-				
-		      var app = new Vue({
-		        el: '#app',
-		        data: {
-		          dateFormat: 'YYYY년 MM월 D일',
-		          inputDateOne: '',
-		          inputDateTwo: '',
-		          buttonDateOne: '',
-		          buttonDateTwo: '',
-		          inlineDateOne: '',
-		          sundayDateOne: '',
-		          sundayFirst: false,
-		          alignRight: false,
-		          trigger: false,
-		          
-		        },
-		        methods: {
-		          formatDates: function(dateOne, dateTwo) {
-		            var formattedDates = ''
-		            if (dateOne) {
-		              formattedDates =  dateFns.format(dateOne, this.dateFormat)
-		            }
-		            if (dateTwo) {
-		              formattedDates += ' - ' + dateFns.format(dateTwo, this.dateFormat)
-		            }
-		            return formattedDates
-		          },
-		          onClosed: function() {
-		            var datesStr = this.formatDates(this.inputDateOne, this.inputDateTwo)
-		            console.log('Dates Selected: ' + datesStr)
-		            alert('날짜 선택이 완료되었습니다.')
-		            this.trigger = false
-		          },
-		          toggleAlign: function() {
-		            this.alignRight = !this.alignRight
-		          },
-		          triggerDatepicker: function() {
-		            this.trigger = !this.trigger
-		          },
-		          onMonthChange: function(dates) {
-		            console.log('months changed', dates)
-		          },
-		        },
-		      })
-		    </script><!-- 달력 쿼리 끝 -->
+			
         </section><!-- #content end -->
 
         <!-- Footer
@@ -618,7 +497,7 @@
 
                             			<div class="widget_links clearfix">
                                 			<ul>
-                                    			<li><a href="index.do"><div>메인</div></a></li>
+                                    			<li><a href="<c:url value='/'/>"><div>메인</div></a></li>
                                     			<li><a href="list.do"><div>공지사항</div></a></li>
                                     			<li><a href="hotel-About-Us.html"><div>호텔소개</div></a></li>
                                     			<li><a href="Location.html"><div>호텔위치</div></a></li>
@@ -634,8 +513,8 @@
                                     			<li><a href="deluxe-1.html"><div>객실 - 디럭스</div></a></li>
                                     			<li><a href="suite-1.html"><div>객실 - 스위트</div></a></li>
                                     			<li><a href="dining-1.html"><div>다이닝</div></a></li>
-                                    			<li><a href="Reseravtion.do"><div>예약하기</div></a></li>
-                                                <li><a href="ReservationConfirm.do"><div>예약조회 및 취소</div></a></li>
+                                    			<li><a href="<c:url value='/reservation/r'/>"><div>예약하기</div></a></li>
+                                                <li><a href="<c:url value='/reservation/ReservationSelect'/>"><div>예약조회 및 취소</div></a></li>
                                 			</ul>
                             			</div>
                                     </div>
@@ -680,14 +559,14 @@
                 <div class="container clearfix">
 
                     <div class="col_half">
-                        <img src="images/logo/footer-logo.png" alt="" class="footer-logo standard-logo">
-                        <img src="images/logo/footer-logo-large.png" alt="" class="footer-logo retina-logo">
-                        Copyright &copy; 2019 Hotel Delluna. All Rights Reserved.
+                        <img src="<c:url value='/resources/images/logo/footer-logo.png'/>" alt="" class="footer-logo standard-logo">
+                        <img src="<c:url value='/resources/images/logo/footer-logo-large.png' />" alt="" class="footer-logo retina-logo">
+                        Copyright &copy; 2020 Hotel Delluna. All Rights Reserved.
                     </div>
 
                     <div class="col_half col_last tright">
                         <div class="copyrights-menu copyright-links fright clearfix">
-                            <a href="#">공지사항</a> <a href="hotel-About-Us.html">호텔소개</a> <a href="deluxe-1.html">객실</a> <a href="contact-2.jsp">예약조회 및 취소</a> <a href="contact-1.jsp">고객의 소리</a>
+                            <a href="#">공지사항</a> <a href="hotel-About-Us.html">호텔소개</a> <a href="deluxe-1.html">객실</a> <a href="<c:url value='/reservation/ReservationSelect'/>">예약조회 및 취소</a> <a href="contact-1.jsp">고객의 소리</a>
                         </div>
                         <div class="fright clearfix">
                             <a href="#" class="social-icon si-small si-borderless nobottommargin si-facebook">
@@ -746,7 +625,7 @@
 
     <!-- Footer Scripts
     ============================================= -->
-    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/functions.js'/>"></script>
 
 </body>
 </html>

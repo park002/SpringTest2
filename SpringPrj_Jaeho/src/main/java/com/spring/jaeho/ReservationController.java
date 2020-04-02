@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.jaeho.Reservationdto.ReservationDTO;
@@ -29,6 +30,7 @@ public class ReservationController {
 	public String reservation(HttpSession session, ReservationDTO dto, Model model) {
 		dto.setM_id("ekem159");
 		String confirmation_payment = service.PayCheck(dto.getM_id());
+		System.out.println("null이여야한다...." +confirmation_payment);
 		model.addAttribute("confirmation_payment", confirmation_payment);
 		return "/reservation/reservation";
 	}
@@ -83,9 +85,9 @@ public class ReservationController {
 		// 일단 세션 가져왔다 치자
 		dto.setM_id("ekem159");
 		String confirmation_payment = service.PayCheck(dto.getM_id());
-		
+		System.out.println("결제 했는지 안했는지==>"+confirmation_payment);
 		dto = service.ReservationSelect(dto);
-		System.out.println("@@@@@@@@@@"+dto.toString());
+	
 		model.addAttribute("confirmation_payment", confirmation_payment);
 		model.addAttribute("dto", dto);
 		return "/reservation/ReservationSelect";
@@ -93,10 +95,23 @@ public class ReservationController {
 	}
 	// 예약취소
 	@RequestMapping(value = "/ReservationCancel", method = RequestMethod.POST)
-	public String ReservationCancel(ReservationDTO dto) {
-		service.ReservationDelete(dto);
+	public String ReservationCancel() {
+		service.ReservationDelete();
 		return "/index";
-
 	}
+	
+	//비밀번호 체크 
+    @ResponseBody
+    @RequestMapping(value="/ReservationPasswordCheck", method=RequestMethod.POST)
+	public boolean PasswordCheck(@RequestParam ("m_id") String m_id , @RequestParam ("m_password") String m_password) {
+    	String SearchPW = service.SearchPW(m_id);
+    	if(SearchPW.equals(m_password)) {
+    		service.ReservationDelete();
+    		return true;
+    	}
+    	else  return false;
+	}
+	
+	
 
 }

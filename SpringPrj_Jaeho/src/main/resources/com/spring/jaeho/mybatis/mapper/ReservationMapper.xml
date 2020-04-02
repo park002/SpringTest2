@@ -59,15 +59,19 @@
 	  reservation_number=#{reservation_number}
 	</update>
 		
-	<delete id="ReservationDelete" parameterType="ReservationDTO">
-		 DELETE FROM 
+	<delete id="ReservationDelete">
+		 DELETE
+		  FROM 
 		 reservation_number_people
-		  WHERE
-		   reservation_number=#{reservation_number}
 		</delete>
+		
 		<select id="ReservationSelect" resultType="ReservationDTO" parameterType="ReservationDTO">
 		SELECT * FROM 
 		reservation r JOIN reservation_number_people p ON r.reservation_number = p.reservation_number 
-		WHERE  m_id = #{m_id};
+		WHERE  m_id = #{m_id}
 		</select>
+		<select id="SearchPW" parameterType="String" resultType="String">
+		   SELECT m_password FROM member WHERE m_id= #{m_id}
+		</select>
+		
        </mapper>

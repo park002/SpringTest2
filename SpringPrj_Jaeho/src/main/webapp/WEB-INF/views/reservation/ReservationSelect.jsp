@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="UTF-8">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Bootstrap 3 Website Template" />
     <!-- Stylesheets
@@ -159,7 +160,7 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
                    
                    
                      <c:if test="${confirmation_payment eq null}">
-                             <span style="color: red">안녕하세요 <c:out value="${dto.m_id}"/> 님 현재 조회된 결과가 없습니다</span>  
+                             <span style="color: red"> 현재 조회된 결과가 없습니다</span>  
                       </c:if>
                     <!-- Contact Form
                     ============================================= -->
@@ -189,12 +190,6 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 							<label for="template-contactform-name">룸 번호</label><br>
 							<div class="well well-sm"><c:out value="${dto.room_type}"/></div>
 						</div> 
-						<%-- <div class="col-md-6">
-							<label for="template-contactform-name">예약날짜</label><br>
-							<div class="well well-sm"><fmt:formatDate value="${dto.reservation_data_in}" pattern="yyyy-MM-dd"/> ~ 
-							 <fmt:formatDate value="${dto.reservation_data_out}" pattern="yyyy-MM-dd"/>
-							</div>
-						</div> --%>
 						
 					</div>
 					<div class="row">
@@ -214,26 +209,56 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 							<div class="well well-sm"><fmt:formatNumber value="${dto.price}" pattern="#,###" /></div>
 					</div>
 					
-	               <!-- 비밀번호 입력 ajax 여기다 처리 할 것 임 
-	                  <div class="col_full">
-							<label for="template-contactform-name">결제 확인</label><br>
-							<div class="well well-sm">결제를 진행해 주세요</div>
-					</div> -->
-					
                         <div class="clearfix" style=" text-align:center;" >
                         <c:if test="${confirmation_payment eq '0'}">
                            <button type="button" id="pay" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black; ">
                                 <span >결제하기</span> <i class="icon-angle-right"></i></button>
                                   </c:if>
                                 <c:if test="${confirmation_payment eq '1' || confirmation_payment eq '0'}">
-                                <button type="submit" formaction="<c:out value='/reservation/ReservationCancel'/>" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
+                       
+                                <button type="button" id="cancel" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
                                 <span>예약취소</span> <i class="icon-angle-right"></i></button>
+                                         <div id ="PWconfirm">   </div>
+                                   <div class="col_full">
+							<!-- <label for="template-contactform-name">결제 확인</label> --><br>
+							  <div class="well well-sm" id ="passwordCheck">
+							  
+								<input type="password" id="passwordCheck2" class="well well-sm"  size="90" placeholder="회원님의 비밀번호를 입력해주세요"> 
+								<button type="button" id="cancelOk" onclick="ReservationCancel()" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
+								     확인<i class="icon-angle-right"  ></i></button>
+								</div>
+					       </div> 
                                 </c:if>
-                              
                                 </div>
                         </form>
                          </c:if>
-                       
+                       <script>
+                       $("#passwordCheck").hide();
+                       $("#cancel").click(function(){ //예약취소 버튼을 클릭 시 
+                    	   $("#passwordCheck").show();
+                       });
+
+               	   function ReservationCancel(){ //확인버튼 클릭 시 
+               	    $.ajax({
+       			    type:'POST',
+       			    url:'${pageContext.request.contextPath}/reservation/ReservationPasswordCheck',
+       			    data:{
+       			    	"m_id" : "${dto.m_id}",
+       			    	"m_password" : $("#passwordCheck2").val()
+       			    },
+       			    success: function(result) {
+       		                if(result)  {
+       		                	//alert('예약 취소 성공');
+       		                  $("#passwordCheck").hide();
+       		                  $("#cancel").hide();
+       		                  $("#pay").hide();
+       		                  $("#PWconfirm").html('<span style="color: blue">예약 취소가 완료되었습니다 감사합니다.</span>');
+       		                }
+       		                else  alert('비밀번호를 확인해주세요');
+       		                }
+       		          });//ajax
+               	   }
+	             </script>
 
                     <script type="text/javascript">
                         $("#template-contactform").validate({

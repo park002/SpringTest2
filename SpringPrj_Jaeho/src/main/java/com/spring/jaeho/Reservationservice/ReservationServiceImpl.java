@@ -50,15 +50,21 @@ public class ReservationServiceImpl implements ReservationService {
 
 	}
 	@Override
-	public void ReservationDelete(ReservationDTO dto) {
+	public void ReservationDelete() {
 		// TODO Auto-generated method stub
-	   dao.ReservationDelete(dto);
+	   dao.ReservationDelete();
 		
 	}
 	@Override
 	public ReservationDTO ReservationSelect(ReservationDTO dto) {
 		// TODO Auto-generated method stub
 		return dao.ReservationSelect(dto);
+	}
+	
+	@Override
+	public String SearchPW(String m_id) {
+		// TODO Auto-generated method stub
+		return dao.SearchPW(m_id);
 	}
 
 }
