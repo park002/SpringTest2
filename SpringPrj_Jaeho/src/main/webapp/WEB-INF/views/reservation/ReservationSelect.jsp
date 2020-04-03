@@ -223,6 +223,7 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 							<!-- <label for="template-contactform-name">결제 확인</label> --><br>
 							  <div class="well well-sm" id ="passwordCheck">
 							  
+							  
 								<input type="password" id="passwordCheck2" class="well well-sm"  size="90" placeholder="회원님의 비밀번호를 입력해주세요"> 
 								<button type="button" id="cancelOk" onclick="ReservationCancel()" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black;">
 								     확인<i class="icon-angle-right"  ></i></button>

@@ -61,7 +61,7 @@
                     ============================================= -->
                     <nav id="primary-menu">
                         <ul class="">
-                            <li class="current"><a href="#" onclick="return false;"><div>호텔소개</div></a>
+                            <li><a href="#" onclick="return false;"><div>호텔소개</div></a>
                                         <ul>                                
                                     		<li><a href="hotel-About-Us.html"><div>호텔소개</div></a></li>
                                     		<li><a href="Location.html"><div>호텔위치</div></a></li>
@@ -103,7 +103,7 @@
                             <li><a href="ReservationConfirm.do"><div>예약조회 및 취소</div></a></li>               
                             
                       	 <%--  <c:if test="${customer_id eq null}">    --%>
-                            <li><a href="hewon.jsp"><div>로그인</div></a>
+                            <li class="current"><a href="#"><div>로그인</div></a>
                                 <ul>
                                 	<li><a href="hewon.jsp"><div>로그인</div></a></li>
                                 	<li><a href="searchIdpass.jsp"><div>아이디/비밀번호 찾기</div></a></li>
@@ -131,12 +131,12 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 	data-stellar-background-ratio="0.3">
 
             <div class="container clearfix" style="border-width:3px;">
-                <h1>예약 조회/취소</h1>
-                
+                <h1>Sign Up</h1>
+                 <!--홈/호텔소개/회원가입 이거임  -->
                 <ol class="breadcrumb">
                     <li><a href="index.html">홈</a></li>
-                    <li><a href="hotel-About-Us.html">호텔소개</a></li>
-                    <li class="active">예약 조회/취소</li>
+                    <li><a href="hotel-About-Us.html">로그인</a></li>
+                    <li class="active">회원가입</li>
                 </ol>
             </div>
 
@@ -149,66 +149,81 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
                 <div id="contact-form-overlay" class="clearfix bgcolor-grey">
 
                     <div class="fancy-title title-dotted-border">
-                        <h3>예약 조회 및 취소</h3>
+                        <h3>Sign Up</h3>
                     </div>
                     <div id="contact-form-result" data-notify-type="success" data-notify-msg="<i class=icon-ok-sign></i> Message Sent Successfully!"></div>
-   				 <c:if test="${duplicateFind>=1 }">
-         		<script>
-         			alert('현재 선택하신 방은 이미 예약된 방입니다 죄송합니다. 다른 날짜를 택하여 주십시오');
-         		 location.href="${pageContext.request.contextPath}/reservation/r";
-         		</script>
-         		</c:if>
          		
                     <!-- Contact Form
                     ============================================= -->
                     <form method="post">
+                    
 					<input type="hidden" name="reservation_number" id="reservation_number" value="${reservation_number}">
+					
+					
 					<div class="row">
 						<div class="col-md-6">
-							<label for="template-contactform-name">예약번호</label><br>
-							<div class="well well-sm"><c:out value="${reservation_number}" /></div>
+							<label for="template-contactform-name">아이디
+							<button type="button"  class="btn btn-link" id=""> 중복확인</button>
+							</label>
+							<br>
+						<input type="text" class="well well-sm" name="m_id" id="" size="85" placeholder="ID"> 
 						</div>
-
-						 <div class="col-md-6">
-							<label for="template-contactform-name">룸 번호</label><br>
-							<div class="well well-sm"><c:out value="${room_type}"/></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<label for="template-contactform-name">비밀번호</label>
+							<br>
+							<input type="password" class="well well-sm" id="" size="85" placeholder="Password"> 
 						</div> 
 					</div>
 					
 					<div class="row">
 						<div class="col-md-6">
-							<label for="template-contactform-name">아이디</label><br>
-							<div class="well well-sm"><c:out value="${m_id}" /></div>
+							<label for="template-contactform-name">비밀번호 확인</label>
+							<br>
+							<input type="password" class="well well-sm" name="m_password" id="" size="85" placeholder="Password Check"> 
 						</div> 
-
-						<div class="col-md-6">
-							<label for="template-contactform-name">예약날짜</label><br>
-							<div class="well well-sm"><fmt:formatDate value="${reservation_data_in}" pattern="yyyy-MM-dd"/> ~ 
-							 <fmt:formatDate value="${reservation_data_out}" pattern="yyyy-MM-dd"/>
-							</div>
-						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-6">
-							<label for="template-contactform-name">성인</label><br>
-							<div class="well well-sm"><c:out value="${adult}" /></div>
+							<label for="template-contactform-name">성함</label><br>
+							<input type="text" class="well well-sm" name="m_name" id="" size="35" placeholder="Name">
 						</div>
 
 						<div class="col-md-6">
-							<label for="template-contactform-name">어린이</label><br>
-							<div class="well well-sm"><c:out value="${child}" /></div>
+							<label for="template-contactform-name">전화번호</label><br>
+							 <input type="text" class="well well-sm" name="m_tel" id="" size="35" placeholder="Tel">
 						</div>
 					</div>
 					
 					<div class="col_full">
-							<label for="template-contactform-name">가격</label><br>
-							<div class="well well-sm"><fmt:formatNumber value="${price}" pattern="#,###" /></div>
+							<label for="template-contactform-name">우편번호
+							    <button type="button"  class="btn btn-link" id=""> 우편번호 찾기</button>
+							</label>
+							<br>
+							<input type="text" class="well well-sm" name="m_zip1" id="m_zip1" size="35" readonly="readonly" placeholder="ex)448-xxx">
 					</div>
 					
-					<div class="col_full">
-							<label for="template-contactform-name">결제 확인</label><br>
-							<div class="well well-sm">결제를 진행해 주세요</div>
-					</div>
+					  <div class="col_full">
+							<label for="template-contactform-name">기본주소 </label>
+							<br>
+							<input type="text" class="well well-sm" name="m_zip2" id="m_zip2" size="85"  placeholder="기본주소">
+					 </div>
+					
+						  <div class="col_full">
+							<label for="template-contactform-name">상세주소 </label>
+							<br>
+							<input type="text" class="well well-sm" name="m_zip3" id="m_zip3" size="85"  placeholder="상세주소">
+					 </div>
+					 
+						  <div class="col_full">
+							<label for="template-contactform-name">E-mail</label>
+							<br>
+							<input type="email" class="well well-sm" name="m_userEmail" id="m_userEmail" size="85"  placeholder="Email">
+					 </div>
+				
 	
                         <div class="clearfix" style=" text-align:center;" >
                                 <button type="button" id="pay" class="button button-medium button-reveal button-3d button-rounded tright nomargin" style="color:black; ">
@@ -309,9 +324,6 @@ style="background-image: url('<c:url value="/resources/images/hotel-about/main.j
 
                             <div class="col_half">
                                 <div class="widget subscribe-widget clearfix">
-                               
-                               
-                                     
                                     </form>
                                     <script type="text/javascript">
                                         $("#widget-subscribe-form").validate({

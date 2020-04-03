@@ -21,8 +21,7 @@ import com.spring.Mail.SHA256;
 import com.spring.jaeho.memberdto.MemberDTO;
 import com.spring.jaeho.memberservice.MemberService;
 
-@Controller
-@RequestMapping("/member/")
+
 public class MemberController2 {
 	@Autowired
 	MemberService service;

@@ -28,7 +28,7 @@ public class ReservationController {
 	// 예약하기 링크 누르면!!!!!!!!!!!!!!!여기
 	@RequestMapping(value = "/r", method = RequestMethod.GET)
 	public String reservation(HttpSession session, ReservationDTO dto, Model model) {
-		dto.setM_id("ekem159");
+		dto.setM_id("admin");
 		String confirmation_payment = service.PayCheck(dto.getM_id());
 		System.out.println("null이여야한다...." +confirmation_payment);
 		model.addAttribute("confirmation_payment", confirmation_payment);
@@ -38,7 +38,7 @@ public class ReservationController {
 	// 예약하기 버튼누르면
 	@RequestMapping(value = "/reservation1", method = RequestMethod.POST)
 	public String reservation(ReservationDTO dto, HttpSession session, Model model) throws ParseException {
-		dto.setM_id("ekem159");
+		dto.setM_id("admin");
 
 		int duplicateFind = service.DuplicateFind(dto);
 		if (duplicateFind >= 1) {
@@ -83,7 +83,7 @@ public class ReservationController {
 	@RequestMapping(value = "/ReservationSelect", method = RequestMethod.GET)
 	public String ReservationSelect(HttpSession session, ReservationDTO dto, Model model) {
 		// 일단 세션 가져왔다 치자
-		dto.setM_id("ekem159");
+		dto.setM_id("admin");
 		String confirmation_payment = service.PayCheck(dto.getM_id());
 		System.out.println("결제 했는지 안했는지==>"+confirmation_payment);
 		dto = service.ReservationSelect(dto);
