@@ -32,7 +32,7 @@
 	    <interceptor>
 	       <mapping path="/board/listAll"/>
 	  
-	       <beans:bean class="com.spring.jaeho.memberservice.MemberRemoveInterceptor"></beans:bean>
+	       <beans:bean class="com.spring.jaeho.memberservice.MemberRemoveInterceptor2"></beans:bean>
 	   </interceptor>
 	</interceptors>
 </beans:beans>

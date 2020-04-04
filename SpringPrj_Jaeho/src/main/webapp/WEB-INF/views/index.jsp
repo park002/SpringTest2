@@ -141,20 +141,19 @@
                             <li><a href="<c:url value='/reservation/r'/>"><div>예약하기</div></a></li>     
                             <li><a href="<c:url value='/reservation/ReservationSelect'/>"><div>예약조회 및 취소</div></a></li>  
                             
-                             <%-- 	<c:if test="${customer_id eq null}">                          
-                            <li><a href="hewon.jsp"><div>로그인</div></a>
+                             	<c:if test="${m_id eq null}">                          
+                            <li><a href="<c:url value ='/member/LoginLogOut'/>"><div>로그인</div></a>
                                 <ul>
-                                	<li><a href="hewon.jsp"><div>로그인</div></a></li>
-                                	<li><a href="searchIdpass.jsp"><div>아이디/비밀번호 찾기</div></a></li>
-                                	<li><a href="agreePage.jsp"><div>회원가입</div></a></li>
+                                	<li><a href="<c:url value ='/member/LoginLogOut'/>"><div>로그인</div></a></li>
+                                	<li><a href="<c:url value='/member/MemberInsert'/>"><div>회원가입</div></a></li>
                                 </ul>                
                             </li>
                                      </c:if>
-                            	<c:if test="${customer_id ne null}">
+                            	<c:if test="${m_id ne null}">
                                     <li><a href="memLogout.do"><div>로그아웃</div></a>
                                     </li>
                                     </c:if>
-                        </ul> --%>
+                        </ul> 
                     </nav><!-- #primary-menu end -->
                 </div>
           </div>

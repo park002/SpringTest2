@@ -1,6 +1,5 @@
 package com.spring.jaeho.memberdto;
 
-
 public class MemberDTO {
 	private String m_id;
 	private String m_name;
@@ -9,11 +8,8 @@ public class MemberDTO {
 	private String m_zip3;
 	private String m_password;
 	private String m_userEmail;
-	private String m_userEmailHash;
-	private boolean m_userEmailChecked;
 	private String m_tel;
 
-	
 	public String getM_id() {
 		return m_id;
 	}
@@ -70,22 +66,6 @@ public class MemberDTO {
 		this.m_userEmail = m_userEmail;
 	}
 
-	public String getM_userEmailHash() {
-		return m_userEmailHash;
-	}
-
-	public void setM_userEmailHash(String m_userEmailHash) {
-		this.m_userEmailHash = m_userEmailHash;
-	}
-
-	public boolean isM_userEmailChecked() {
-		return m_userEmailChecked;
-	}
-
-	public void setM_userEmailChecked(boolean m_userEmailChecked) {
-		this.m_userEmailChecked = m_userEmailChecked;
-	}
-
 	public String getM_tel() {
 		return m_tel;
 	}
@@ -97,8 +77,7 @@ public class MemberDTO {
 	@Override
 	public String toString() {
 		return "MemberDTO [m_id=" + m_id + ", m_name=" + m_name + ", m_zip1=" + m_zip1 + ", m_zip2=" + m_zip2
-				+ ", m_zip3=" + m_zip3 + ", m_password=" + m_password + ", m_userEmail=" + m_userEmail
-				+ ", m_userEmailHash=" + m_userEmailHash + ", m_userEmailChecked=" + m_userEmailChecked + ", m_tel="
+				+ ", m_zip3=" + m_zip3 + ", m_password=" + m_password + ", m_userEmail=" + m_userEmail + ", m_tel="
 				+ m_tel + "]";
 	}
 

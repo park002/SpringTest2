@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class MemberRemoveInterceptor extends HandlerInterceptorAdapter {
+public class MemberRemoveInterceptor2 extends HandlerInterceptorAdapter {
 	// preHandler메소드는 Controller 시작전 인터셉터.
 
 	@Override
